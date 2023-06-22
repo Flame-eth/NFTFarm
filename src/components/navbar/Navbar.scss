@@ -1,0 +1,49 @@
+.navbar {
+  width: 100%;
+
+  .navContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+    align-items: center;
+    // padding: 0 2rem;
+    width: 80%;
+
+    .navIcon {
+      h1 {
+        color: #ffa503;
+        font-size: 35.576px;
+        font-family: "Ravi Prakash", cursive;
+        cursor: pointer;
+      }
+    }
+
+    .navLinks {
+      ul {
+        text-decoration: none;
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .navLink {
+        color: #fff;
+        font-size: 20.964px;
+        font-family: "Rubik", sans-serif;
+        font-weight: 600;
+        transition: all 0.3s ease-in-out;
+        list-style: none;
+        text-decoration: none;
+
+        &:hover {
+          color: #ffa503;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
