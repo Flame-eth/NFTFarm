@@ -33,7 +33,7 @@ const BestSeller = () => {
     <>
       <div className="bestSeller">
         <div className="bestSellerCon">
-          <h3>Earn Yeild on the top NFT Market Makers</h3>
+          <h3>Earn Yield on the top NFT Market Makers</h3>
           <div className="bestSellerCards">
             <Slider {...settings}>
               {bestSeller.map((value) => {
