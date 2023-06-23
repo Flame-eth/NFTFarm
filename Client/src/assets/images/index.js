@@ -12,6 +12,12 @@ import avatar9 from "./ava-09.png";
 import avatar10 from "./ava-10.png";
 import avatar11 from "./ava-11.png";
 import avatar12 from "./ava-12.png";
+import stake1 from "./stake1.jpg";
+import stake2 from "./stake2.png";
+import stake3 from "./stake3.png";
+import stake4 from "./stake4.png";
+import stake5 from "./stake5.png";
+import stake6 from "./stake6.jpg";
 
 export {
   Background,
@@ -28,4 +34,10 @@ export {
   avatar10,
   avatar11,
   avatar12,
+  stake1,
+  stake2,
+  stake3,
+  stake4,
+  stake5,
+  stake6,
 };

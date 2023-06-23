@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AboutUs, Hero } from "../../components";
+import { AboutUs, Hero, Stake } from "../../components";
 import { BestSeller } from "../../components";
 
 import RingLoader from "react-spinners/RingLoader";
@@ -26,11 +26,10 @@ const Home = () => {
         </div>
       ) : (
         <div className="home">
-          <div className="homeSec">
-            <Hero />
-            <BestSeller />
-          </div>
+          <Hero />
+          <BestSeller />
           <AboutUs />
+          <Stake />
         </div>
       )}
     </div>
