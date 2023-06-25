@@ -43,14 +43,17 @@
 
     .stakingCards {
       width: 100%;
+      position: relative;
+      //   display: flex;
       .box {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        border: #ffa503 solid 0.5px;
+        border: white solid 0.5px;
         width: 95% !important;
-          // background: linear-gradient(90deg, #0c0c0c 100%, rgba(0, 0, 0, 0) 60%);
-          .product {
+        border-radius: 19px;
+        // background: linear-gradient(90deg, #0c0c0c 100%, rgba(0, 0, 0, 0) 60%);
+        .product {
           //   background: #fff;
           border-radius: 8px;
           box-shadow: 0 1px 3px rgb(3 0 71/9%);
@@ -63,7 +66,7 @@
               background: #ffa503;
               border-radius: 50px;
               color: #fff;
-              font-size: 12px;
+              font-size: 14px;
               left: 0;
               margin: 10px;
               padding: 3px 10px;
@@ -111,12 +114,56 @@
             }
 
             .price {
-              color: #ffa503;
+              //   color: #ffa503;
+              color: white;
               display: flex;
               justify-content: space-between;
+
+              button {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                border-radius: 30px;
+                background-color: #ffa703;
+                color: #fff;
+                font-size: 17px;
+                cursor: pointer;
+
+                i {
+                  margin: 0;
+                  padding: 0;
+                }
+
+                span {
+                  margin: 0;
+                  padding: 0;
+                }
+              }
             }
           }
         }
+      }
+
+      .modal {
+        // position: absolute;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        // width: 60%;
+        // height: 800px;
+        // // margin: 0 auto;
+        // background-color: white;
+        // top: -300px;
+
+        background-color: rgba(7, 7, 7, 0.7);
+        bottom: 0px;
+        height: 100vh;
+        left: 0px;
+        position: fixed;
+        right: 0px;
+        top: 0px;
+        width: 100%;
+        z-index: 300;
       }
     }
   }
@@ -124,6 +171,7 @@
 
 .control-btn {
   .next {
+    cursor: pointer;
     position: absolute;
     top: 40%;
     width: 50px;
@@ -144,6 +192,7 @@
   }
 
   .prev {
+    cursor: pointer;
     position: absolute;
     top: 40%;
     width: 50px;

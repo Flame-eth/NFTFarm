@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Stake.scss";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
+import { stake } from "../../constants/stake";
 
 const SampleNextArrow = (props) => {
   const { onClick } = props;
@@ -27,10 +28,17 @@ const SamplePrevArrow = (props) => {
 };
 
 const Stake = ({ stakeArray }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [stakeID, setStakeID] = useState();
+
+  const handleModal = () => {
+    setShowModal(!showModal);
+    // console.log(stake);
+  };
   let noOfSlides = useRef();
 
   const userWidth = window.innerWidth;
-  console.log(userWidth);
+  //   console.log(userWidth);
 
   if (userWidth >= 1200) {
     noOfSlides.current = 4;
@@ -44,7 +52,7 @@ const Stake = ({ stakeArray }) => {
     noOfSlides.current = 1;
   }
 
-  console.log(noOfSlides.current);
+  //   console.log(noOfSlides.current);
 
   const settings = {
     dots: false,
@@ -74,39 +82,53 @@ const Stake = ({ stakeArray }) => {
         <div className="stakingCards">
           <Slider {...settings}>
             {stakeArray?.map((stake, index) => {
+              const ID = index;
+              //   console.log(ID);
               return (
-                <div className="box" key={index}>
-                  <div className="product">
-                    <div className="img">
-                      <span className="discount">{stake.percent} % </span>
-                      <div className="imageCon">
-                        <img src={stake.imgUrl} alt="" />
+                <>
+                  <div className="box" key={index}>
+                    <div className="product">
+                      <div className="img">
+                        <span className="discount">{stake.percent} % </span>
+                        <div className="imageCon">
+                          <img src={stake.imgUrl} alt="" />
+                        </div>
                       </div>
-                    </div>
-                    <div className="product-details">
-                      <h3>{stake.title}</h3>
-                      {/* <div className="rate">
-                        <i className="fa fa-star"></i>
-                        <i className="fa fa-star"></i>
-                        <i className="fa fa-star"></i>
-                        <i className="fa fa-star"></i>
-                        <i className="fa fa-star"></i>
-                      </div> */}
-                      <div className="price">
-                        <h4>
-                          {stake.min} USDT - {stake.max} USDT
-                        </h4>
+                      <div className="product-details">
+                        <h3>{stake.title}</h3>
 
-                        <button>
-                          <i className="fa fa-plus"></i>
-                        </button>
+                        <div className="price">
+                          <h4>
+                            {stake.min} USDT - {stake.max} USDT
+                          </h4>
+
+                          <button
+                            onClick={() => {
+                              setStakeID(ID);
+                              if (stakeID == index) {
+                                setShowModal(!showModal);
+                              } else {
+                                setShowModal(true);
+                              }
+                            }}>
+                            <i className="fa fa-plus"></i>
+                            <span>Start Using</span>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </>
               );
             })}
           </Slider>
+          {showModal ? (
+            <div className="modal">
+              <img src={stake[stakeID].imgUrl} alt="" />
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>
