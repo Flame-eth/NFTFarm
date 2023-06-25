@@ -23,6 +23,8 @@ export const stake = [
     creatorImg: avatar1,
     currentBid: "4999",
     percent: 1.5,
+    min: 100,
+    max: 249,
   },
 
   {
@@ -34,6 +36,8 @@ export const stake = [
     creatorImg: avatar2,
     currentBid: "19999",
     percent: 2,
+    min: 250,
+    max: 499,
   },
 
   {
@@ -45,6 +49,8 @@ export const stake = [
     creatorImg: avatar3,
     currentBid: "49999",
     percent: 3,
+    min: 500,
+    max: 749,
   },
 
   {
@@ -56,6 +62,8 @@ export const stake = [
     creatorImg: avatar4,
     currentBid: "99999",
     percent: 3.3,
+    min: 750,
+    max: 999,
   },
 
   {
@@ -67,6 +75,8 @@ export const stake = [
     creatorImg: avatar5,
     currentBid: "199999",
     percent: 3.7,
+    min: 1000,
+    max: 2000,
   },
 
   {
@@ -78,5 +88,7 @@ export const stake = [
     creatorImg: avatar6,
     currentBid: "1000000",
     percent: 4.2,
+    min: 2000,
+    max: 4000,
   },
 ];

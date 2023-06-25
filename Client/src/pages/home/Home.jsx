@@ -4,6 +4,7 @@ import { BestSeller } from "../../components";
 
 import RingLoader from "react-spinners/RingLoader";
 import "./Home.scss";
+import { stake } from "../../constants/stake";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -29,7 +30,7 @@ const Home = () => {
           <Hero />
           <BestSeller />
           <AboutUs />
-          <Stake />
+          <Stake stakeArray={stake} />
         </div>
       )}
     </div>
