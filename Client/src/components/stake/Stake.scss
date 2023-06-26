@@ -43,7 +43,7 @@
 
     .stakingCards {
       width: 100%;
-      position: relative;
+      //   position: relative;
       //   display: flex;
       .box {
         box-sizing: border-box;
@@ -113,13 +113,30 @@
               text-transform: capitalize;
             }
 
-            .price {
+            .text {
               //   color: #ffa503;
               color: white;
               display: flex;
-              justify-content: space-between;
+              flex-direction: column;
+              //   justify-content: space-between;
+
+              .price {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                height: 100px;
+
+                .priceTag {
+                  h3 {
+                    font-weight: 200;
+                    font-size: 13px;
+                  }
+                }
+              }
 
               button {
+                margin: 0 auto;
+                padding: 15px;
                 display: flex;
                 align-items: center;
                 gap: 10px;
@@ -132,6 +149,7 @@
                 i {
                   margin: 0;
                   padding: 0;
+                  //   color: #0c0c0c;
                 }
 
                 span {
@@ -164,6 +182,39 @@
         top: 0px;
         width: 100%;
         z-index: 300;
+        // margin: 0 auto;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .modalContainer {
+          background-color: rgb(255, 255, 255);
+          flex-direction: column;
+          position: relative;
+        //   text-align: left;
+          //   width: 450px;
+          border-radius: 30px;
+          padding: 34px 60px;
+          height: 70%;
+          width: 30%;
+
+
+          display: flex;
+          align-items: center;
+          .imageCon {
+            margin: 0 auto;
+            height: 300px;
+            // border-radius: 30px;
+            // top: -50px;
+            position: absolute;
+
+            img {
+              height: 100%;
+              border-radius: 50%;
+            }
+          }
+        }
       }
     }
   }

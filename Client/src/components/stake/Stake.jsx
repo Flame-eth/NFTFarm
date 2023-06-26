@@ -97,10 +97,17 @@ const Stake = ({ stakeArray }) => {
                       <div className="product-details">
                         <h3>{stake.title}</h3>
 
-                        <div className="price">
-                          <h4>
-                            {stake.min} USDT - {stake.max} USDT
-                          </h4>
+                        <div className="text">
+                          <div className="price">
+                            <div className="priceTag">
+                              <h3>MINIMUM</h3>
+                              <h4>{stake.min} USDT</h4>
+                            </div>
+                            <div className="priceTag">
+                              <h3>MAXIMUM</h3>
+                              <h4>{stake.max} USDT</h4>
+                            </div>
+                          </div>
 
                           <button
                             onClick={() => {
@@ -124,7 +131,11 @@ const Stake = ({ stakeArray }) => {
           </Slider>
           {showModal ? (
             <div className="modal">
-              <img src={stake[stakeID].imgUrl} alt="" />
+              <div className="modalContainer">
+                <div className="imageCon">
+                  <img src={stake[stakeID].imgUrl} alt="" />
+                </div>
+              </div>
             </div>
           ) : (
             ""
