@@ -135,6 +135,21 @@ const Stake = ({ stakeArray }) => {
                 <div className="imageCon">
                   <img src={stake[stakeID].imgUrl} alt="" />
                 </div>
+                <div className="content">
+                  <h1>{stake[stakeID].title}</h1>
+                  <p>{stake[stakeID].desc}</p>
+                  <span>{stake[stakeID].percent} % </span>
+                  <div className="price">
+                    <div className="priceTag">
+                      <h3>MINIMUM</h3>
+                      <h4>{stake[stakeID].min} USDT</h4>
+                    </div>
+                    <div className="priceTag">
+                      <h3>MAXIMUM</h3>
+                      <h4>{stake[stakeID].max} USDT</h4>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           ) : (
