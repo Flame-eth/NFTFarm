@@ -106,42 +106,43 @@
             }
           }
 
-          .pledgeHistory {
-            // border-top: 1px solid #ffa503;
-            border-bottom: 1px dashed #ffa503;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            margin-top: 20px;
-
-            width: 100%;
-
-            .record {
-              display: flex;
-              flex-direction: column;
-              gap: 5px;
-              color: #fff;
-
-              h2 {
-                font-size: 13px;
-                font-weight: 400;
-                margin: 0;
-                padding: 0;
-              }
-
-              h3{
-                font-size: 17px;
-                font-weight: 400;
-              }
-            }
-          }
-
           .product-details {
             h3 {
               font-size: 17px;
               font-weight: 400;
               text-transform: capitalize;
               color: #ffa503;
+            }
+
+            .pledgeHistory {
+              // border-top: 1px solid #ffa503;
+              border-bottom: 0.3px solid #ffa503;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              margin-top: 20px;
+
+              width: 100%;
+
+              .record {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                color: #fff;
+
+                h2 {
+                  font-size: 13px;
+                  font-weight: 400;
+                  margin: 0;
+                  padding: 0;
+                }
+
+                h3 {
+                  font-size: 17px;
+                  font-weight: 400;
+                  color: #fff;
+                }
+              }
             }
 
             .text {

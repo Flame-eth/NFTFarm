@@ -163,7 +163,7 @@ const Stake = ({ stakeArray }) => {
                       </div>
                       <div className="input">
                         <label htmlFor="">Daily Return:</label>
-                        <input type="number" placeholder="Daily Return" />
+                        <input disabled type="number" placeholder="Daily Return" />
                       </div>
                     </div>
                     <button type="submit">Stake</button>

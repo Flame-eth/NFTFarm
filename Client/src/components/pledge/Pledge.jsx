@@ -95,18 +95,18 @@ const Pledge = ({ pledgeArray }) => {
                           <img src={pledge.imgUrl} alt="" />
                         </div>
                       </div>
-                      <div className="pledgeHistory">
-                        <div className="record">
-                          <h2>Pledge Duration</h2>
-                          <h3>{pledge.days} days</h3>
-                        </div>
-                        <div className="record">
-                          <h2>Total People</h2>
-                          <h3>{pledge.people}</h3>
-                        </div>
-                      </div>
                       <div className="product-details">
                         <h3>{pledge.title}</h3>
+                        <div className="pledgeHistory">
+                          <div className="record">
+                            <h2>Pledge Duration</h2>
+                            <h3>{pledge.days} days</h3>
+                          </div>
+                          <div className="record">
+                            <h2>Total People</h2>
+                            <h3>{pledge.people}</h3>
+                          </div>
+                        </div>
 
                         <div className="text">
                           <div className="price">
@@ -173,7 +173,11 @@ const Pledge = ({ pledgeArray }) => {
                       </div>
                       <div className="input">
                         <label htmlFor="">Total Return:</label>
-                        <input type="number" placeholder="Daily Return" />
+                        <input
+                          disabled
+                          type="number"
+                          placeholder="Total Return"
+                        />
                       </div>
                     </div>
                     <button type="submit">Pledge</button>
