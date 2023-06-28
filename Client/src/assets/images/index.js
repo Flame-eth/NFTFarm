@@ -18,6 +18,12 @@ import stake3 from "./stake3.png";
 import stake4 from "./stake4.png";
 import stake5 from "./stake5.png";
 import stake6 from "./stake6.jpg";
+import pledge1 from "./pledge1.jpg";
+import pledge2 from "./pledge2.jpg";
+import pledge3 from "./pledge3.jpg";
+import pledge4 from "./pledge4.jpg";
+import pledge5 from "./pledge5.jpg";
+import pledge6 from "./pledge6.jpg";
 
 export {
   Background,
@@ -40,4 +46,10 @@ export {
   stake4,
   stake5,
   stake6,
+  pledge1,
+  pledge2,
+  pledge3,
+  pledge4,
+  pledge5,
+  pledge6,
 };

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./Stake.scss";
+import "./Pledge.scss";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
-import { stake } from "../../constants/stake";
+
 import { AiOutlineClose } from "react-icons/ai";
 
 const SampleNextArrow = (props) => {
@@ -28,13 +28,13 @@ const SamplePrevArrow = (props) => {
   );
 };
 
-const Stake = ({ stakeArray }) => {
+const Pledge = ({ pledgeArray }) => {
   const [showModal, setShowModal] = useState(false);
-  const [stakeID, setStakeID] = useState();
+  const [pledgeID, setPledgeID] = useState();
 
   const handleModal = () => {
     setShowModal(!showModal);
-    // console.log(stake);
+    // console.log(pledge);
   };
   let noOfSlides = useRef();
 
@@ -66,10 +66,10 @@ const Stake = ({ stakeArray }) => {
   };
 
   return (
-    <div className="stake">
-      <div className="stakeContainer">
-        <h1>Get Started With Staking </h1>
-        <div className="stakingDesc">
+    <div className="pledge">
+      <div className="pledgeContainer">
+        <h1>Get Started With Pledging </h1>
+        <div className="pledgingDesc">
           <p>
             In the automated markers(AMM) pool, anyone can add liquidity to any
             NFT transaction in order to earn interest from market making
@@ -80,9 +80,9 @@ const Stake = ({ stakeArray }) => {
             </Link>
           </p>
         </div>
-        <div className="stakingCards">
+        <div className="pledgingCards">
           <Slider {...settings}>
-            {stakeArray?.map((stake, index) => {
+            {pledgeArray?.map((pledge, index) => {
               const ID = index;
               //   console.log(ID);
               return (
@@ -90,30 +90,40 @@ const Stake = ({ stakeArray }) => {
                   <div className="box" key={index}>
                     <div className="product">
                       <div className="img">
-                        <span className="discount">{stake.percent} % </span>
+                        <span className="discount">{pledge.percent} % </span>
                         <div className="imageCon">
-                          <img src={stake.imgUrl} alt="" />
+                          <img src={pledge.imgUrl} alt="" />
+                        </div>
+                      </div>
+                      <div className="pledgeHistory">
+                        <div className="record">
+                          <h2>Pledge Duration</h2>
+                          <h3>{pledge.days} days</h3>
+                        </div>
+                        <div className="record">
+                          <h2>Total People</h2>
+                          <h3>{pledge.people}</h3>
                         </div>
                       </div>
                       <div className="product-details">
-                        <h3>{stake.title}</h3>
+                        <h3>{pledge.title}</h3>
 
                         <div className="text">
                           <div className="price">
                             <div className="priceTag">
                               <h3>MINIMUM</h3>
-                              <h4>{stake.min} USDT</h4>
+                              <h4>{pledge.min} USDT</h4>
                             </div>
                             <div className="priceTag">
                               <h3>MAXIMUM</h3>
-                              <h4>{stake.max} USDT</h4>
+                              <h4>{pledge.max} USDT</h4>
                             </div>
                           </div>
 
                           <button
                             onClick={() => {
-                              setStakeID(ID);
-                              if (stakeID == index) {
+                              setPledgeID(ID);
+                              if (pledgeID == index) {
                                 setShowModal(!showModal);
                               } else {
                                 setShowModal(true);
@@ -137,24 +147,24 @@ const Stake = ({ stakeArray }) => {
                   <AiOutlineClose />
                 </div>
                 <div className="imageCon">
-                  <img src={stakeArray[stakeID].imgUrl} alt="" />
+                  <img src={pledgeArray[pledgeID].imgUrl} alt="" />
                 </div>
                 <div className="content">
-                  <h1>{stakeArray[stakeID].title}</h1>
-                  <p>{stakeArray[stakeID].desc}</p>
-                  <span>{stake[stakeID].percent}% DAILY EARNING </span>
+                  <h1>{pledgeArray[pledgeID].title}</h1>
+                  <p>{pledgeArray[pledgeID].desc}</p>
+                  <span>{pledgeArray[pledgeID].percent}% DAILY EARNING </span>
                   <div className="price">
                     <div className="priceTag">
-                      <h3>Minimum Stake</h3>
-                      <h4>{stakeArray[stakeID].min} USDT</h4>
+                      <h3>Minimum pledge</h3>
+                      <h4>{pledgeArray[pledgeID].min} USDT</h4>
                     </div>
                     <div className="priceTag">
-                      <h3>Maximum Stake</h3>
-                      <h4>{stakeArray[stakeID].max} USDT</h4>
+                      <h3>Maximum pledge</h3>
+                      <h4>{pledgeArray[pledgeID].max} USDT</h4>
                     </div>
                   </div>
                 </div>
-                <div className="stakeForm">
+                <div className="pledgeForm">
                   <form action="">
                     <div className="inputCon">
                       <div className="input">
@@ -162,11 +172,11 @@ const Stake = ({ stakeArray }) => {
                         <input type="number" placeholder="Enter Amount" />
                       </div>
                       <div className="input">
-                        <label htmlFor="">Daily Return:</label>
+                        <label htmlFor="">Total Return:</label>
                         <input type="number" placeholder="Daily Return" />
                       </div>
                     </div>
-                    <button type="submit">Stake</button>
+                    <button type="submit">Pledge</button>
                   </form>
                 </div>
               </div>
@@ -180,4 +190,4 @@ const Stake = ({ stakeArray }) => {
   );
 };
 
-export default Stake;
+export default Pledge;

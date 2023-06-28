@@ -5,6 +5,8 @@ import { BestSeller } from "../../components";
 import RingLoader from "react-spinners/RingLoader";
 import "./Home.scss";
 import { stake } from "../../constants/stake";
+import Pledge from "../../components/pledge/Pledge";
+import { pledge } from "../../constants/pledge";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -31,6 +33,7 @@ const Home = () => {
           <BestSeller />
           <AboutUs />
           <Stake stakeArray={stake} />
+          <Pledge pledgeArray={pledge} />
         </div>
       )}
     </div>

@@ -1,8 +1,8 @@
-.stake {
+.pledge {
   width: 100%;
   background: linear-gradient(90deg, #0c0c0c 100%, rgba(0, 0, 0, 0) 60%);
   padding-bottom: 70px;
-  .stakeContainer {
+  .pledgeContainer {
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -15,7 +15,7 @@
       margin: 0 auto;
     }
 
-    .stakingDesc {
+    .pledgingDesc {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -41,7 +41,7 @@
       }
     }
 
-    .stakingCards {
+    .pledgingCards {
       width: 100%;
       //   position: relative;
       //   display: flex;
@@ -102,6 +102,36 @@
               i {
                 font-size: 20px;
                 margin: 10px 3px;
+              }
+            }
+          }
+
+          .pledgeHistory {
+            // border-top: 1px solid #ffa503;
+            border-bottom: 1px dashed #ffa503;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 20px;
+
+            width: 100%;
+
+            .record {
+              display: flex;
+              flex-direction: column;
+              gap: 5px;
+              color: #fff;
+
+              h2 {
+                font-size: 13px;
+                font-weight: 400;
+                margin: 0;
+                padding: 0;
+              }
+
+              h3{
+                font-size: 17px;
+                font-weight: 400;
               }
             }
           }
@@ -278,7 +308,7 @@
             }
           }
 
-          .stakeForm {
+          .pledgeForm {
             width: 100%;
 
             form {
