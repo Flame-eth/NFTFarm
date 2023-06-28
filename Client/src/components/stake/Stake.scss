@@ -196,11 +196,20 @@
           //   width: 450px;
           border-radius: 30px;
           padding: 34px 60px;
-          height: 70%;
+          height: 80%;
           width: 30%;
 
           display: flex;
           align-items: center;
+
+          .close {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            font-size: 30px;
+            cursor: pointer;
+            color: #ffa503;
+          }
           .imageCon {
             margin: 0 auto;
             height: 250px;
@@ -222,7 +231,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
             h1 {
               font-size: 30px;

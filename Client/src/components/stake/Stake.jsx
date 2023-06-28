@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import { stake } from "../../constants/stake";
+import { AiOutlineClose } from "react-icons/ai";
 
 const SampleNextArrow = (props) => {
   const { onClick } = props;
@@ -132,6 +133,9 @@ const Stake = ({ stakeArray }) => {
           {showModal ? (
             <div className="modal">
               <div className="modalContainer">
+                <div className="close" onClick={handleModal}>
+                  <AiOutlineClose />
+                </div>
                 <div className="imageCon">
                   <img src={stake[stakeID].imgUrl} alt="" />
                 </div>
