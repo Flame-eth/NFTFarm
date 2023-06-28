@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { AboutUs, Hero, Stake } from "../../components";
-import { BestSeller } from "../../components";
+
+import {
+  AboutUs,
+  Hero,
+  Pledge,
+  Stake,
+  BestSeller,
+  YeildCalculator,
+} from "../../components";
 
 import RingLoader from "react-spinners/RingLoader";
 import "./Home.scss";
 import { stake } from "../../constants/stake";
-import Pledge from "../../components/pledge/Pledge";
 import { pledge } from "../../constants/pledge";
 
 const Home = () => {
@@ -34,6 +40,7 @@ const Home = () => {
           <AboutUs />
           <Stake stakeArray={stake} />
           <Pledge pledgeArray={pledge} />
+          <YeildCalculator />
         </div>
       )}
     </div>
