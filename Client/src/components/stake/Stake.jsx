@@ -138,17 +138,32 @@ const Stake = ({ stakeArray }) => {
                 <div className="content">
                   <h1>{stake[stakeID].title}</h1>
                   <p>{stake[stakeID].desc}</p>
-                  <span>{stake[stakeID].percent} % </span>
+                  <span>{stake[stakeID].percent}% DAILY EARNING </span>
                   <div className="price">
                     <div className="priceTag">
-                      <h3>MINIMUM</h3>
+                      <h3>Minimum Stake</h3>
                       <h4>{stake[stakeID].min} USDT</h4>
                     </div>
                     <div className="priceTag">
-                      <h3>MAXIMUM</h3>
+                      <h3>Maximum Stake</h3>
                       <h4>{stake[stakeID].max} USDT</h4>
                     </div>
                   </div>
+                </div>
+                <div className="stakeForm">
+                  <form action="">
+                    <div className="inputCon">
+                      <div className="input">
+                        <label htmlFor="">Amount:</label>
+                        <input type="number" placeholder="Enter Amount" />
+                      </div>
+                      <div className="input">
+                        <label htmlFor="">Daily Return:</label>
+                        <input type="number" placeholder="Daily Return" />
+                      </div>
+                    </div>
+                    <button type="submit">Stake</button>
+                  </form>
                 </div>
               </div>
             </div>
