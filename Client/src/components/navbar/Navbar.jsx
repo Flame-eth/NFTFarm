@@ -7,7 +7,11 @@ const Navbar = () => {
       <div className="navContainer">
         <div className="navIcon">
           <img src="" alt="" />
-          <h1>YieldNFT</h1>
+          <h1>
+            <Link className="navLink" to="/">
+              YieldNFT
+            </Link>
+          </h1>
         </div>
         <div className="navLinks">
           <ul>
