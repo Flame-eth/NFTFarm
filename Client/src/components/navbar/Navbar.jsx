@@ -20,11 +20,11 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link className="navLink" to="/marketplace">
                 Marketplace
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link className="navLink" to="/account">
                 Account
@@ -35,11 +35,11 @@ const Navbar = () => {
                 Referral
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link className="navLink" to="/faq">
                 FAQ
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

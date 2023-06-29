@@ -4,6 +4,8 @@ import { Routes, Route } from "react-router-dom";
 import "./App.scss";
 import Home from "./pages/home/Home";
 import { Account, Footer } from "./components";
+import AccountPage from "./pages/accountPage/AccountPage";
+import ReferralPage from "./pages/referralPage/ReferralPage";
 
 function App() {
   return (
@@ -11,7 +13,8 @@ function App() {
       <div className="app">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/account" element={<Account />} />
+          <Route path="/account" element={<AccountPage />} />
+          <Route path="/referral" element={<ReferralPage />} />
         </Routes>
         <Footer />
       </div>

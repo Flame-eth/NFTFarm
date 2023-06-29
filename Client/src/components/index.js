@@ -7,3 +7,4 @@ export { default as Pledge } from "./pledge/Pledge";
 export { default as YeildCalculator } from "./calculator/Calculator";
 export { default as Footer } from "./footer/Footer";
 export { default as Account } from "./account/Account";
+export { default as Referral } from "./referral/Referral";

@@ -63,3 +63,17 @@
     }
   }
 }
+
+
+
+@media (max-width: 768px) {
+  .hero{
+
+    .heroContainer{
+
+      .heroBg{
+        display: none;
+      }
+    }
+  }
+}

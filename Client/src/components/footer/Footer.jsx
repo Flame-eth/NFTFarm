@@ -37,11 +37,11 @@ const Footer = () => {
                   About
                 </Link>
               </li> */}
-              <li>
+              {/* <li>
                 <Link className="navLink" to="/marketplace">
                   Marketplace
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link className="navLink" to="/account">
                   Account
