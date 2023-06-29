@@ -13,7 +13,6 @@
     display: flex;
     flex-direction: column;
 
-
     .header {
       height: 150px;
       background: url(../../assets/images/banner2.jpg);
@@ -102,7 +101,7 @@
       h1 {
         width: 50%;
         text-align: center;
-        border-left: 1px solid #fff;
+        // border-left: 1px solid #fff;
         font-style: oblique;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
           Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
@@ -116,7 +115,7 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      padding-bottom: 8www0px;
+      padding-bottom: 80px;
 
       h1 {
         font-weight: 700;
@@ -168,6 +167,107 @@
         }
 
         .income {
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .referral {
+    .referralCon {
+      .header {
+        height: 100px;
+        h1 {
+          font-size: 20px;
+        }
+      }
+
+      .code {
+        width: 90%;
+
+        .url {
+          font-size: 12px;
+        }
+        .desc {
+          width: 80%;
+        }
+      }
+
+      .teamSec {
+        // flex-direction: column;
+        h1 {
+          width: 50%;
+          // border-left: none;
+          // border-bottom: 1px solid #fff;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 540px) {
+  .referral {
+    .referralCon {
+      .header {
+        height: 100px;
+        h1 {
+          font-size: 20px;
+        }
+      }
+
+      .code {
+        width: 90%;
+
+        .url {
+          font-size: 10px;
+        }
+        .desc {
+          width: 80%;
+        }
+      }
+
+      .teamSec {
+        // flex-direction: column;
+        h1 {
+          width: 50%;
+          font-size: 25px;
+          // border-left: none;
+          // border-bottom: 1px solid #fff;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .referral {
+    .referralCon {
+      .header {
+        height: 100px;
+        h1 {
+          font-size: 20px;
+        }
+      }
+
+      .code {
+        width: 90%;
+
+        .url {
+          font-size: 10px;
+        }
+        .desc {
+          width: 80%;
+        }
+      }
+
+      .teamSec {
+        // flex-direction: column;
+        h1 {
+          width: 50%;
+          font-size: 20px;
+          // border-left: none;
+          // border-bottom: 1px solid #fff;
         }
       }
     }

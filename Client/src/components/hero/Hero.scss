@@ -1,7 +1,6 @@
 .hero {
   width: 100%;
   height: 100%;
-  
 
   .heroContainer {
     width: 100%;
@@ -58,10 +57,6 @@
           display: flex;
           justify-content: center;
           cursor: pointer;
-          //   align-items: center;
-          h1 {
-            // padding: 20px;
-          }
         }
       }
     }
@@ -114,9 +109,6 @@
     .heroContainer {
       .heroBg {
         .heroContent {
-          .heroTitle {
-          }
-
           .heroButton {
             width: 50%;
             margin: 20px 0;
@@ -126,9 +118,6 @@
               margin: 0;
             }
           }
-        }
-
-        .heroImg {
         }
       }
     }
@@ -163,9 +152,6 @@
               font-size: 19px;
             }
           }
-        }
-
-        .heroImg {
         }
       }
     }

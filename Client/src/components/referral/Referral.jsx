@@ -18,7 +18,7 @@ const Referral = () => {
           {/* <img src="" alt="" /> */}
           <BsQrCode size={150} className="qrcode" />
           <div className="url">
-            https://www.nftsmetapool.com/0xdb339be8e04db248ea2bdd7c308c5589c121c6bb
+            https://www.nftsmetapool.com/0xdb339be8e04db248...
           </div>
           <div className="copy">Copy</div>
           <div className="desc">
@@ -28,7 +28,7 @@ const Referral = () => {
           </div>
         </div>
         <div className="teamSec">
-          <h1>Team Size</h1>
+          <h1 style={{borderRight: "1px solid #fff"}} >Team Size</h1>
           <h1>Team Earning</h1>
         </div>
         <div className="population">
