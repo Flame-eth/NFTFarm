@@ -150,3 +150,48 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .footer {
+    .footerCon {
+      flex-direction: column;
+      .footerTop {
+        flex-direction: column;
+        gap: 20px;
+        .title {
+          h1 {
+            margin-top: 0;
+            margin-bottom: 0;
+          }
+        }
+        .links {
+          ul {
+            padding-left: 0;
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    .footerCon {
+      .footerTop {
+        .title {
+          h1 {
+            margin-top: 0;
+            margin-bottom: 0;
+          }
+        }
+        .links {
+          ul {
+            padding-left: 0;
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

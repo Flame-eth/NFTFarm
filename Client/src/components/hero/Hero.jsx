@@ -24,7 +24,9 @@ const Hero = () => {
                 <h1>White Paper</h1>
               </div>
             </div>
-            <img src={Background} alt="heroBg" className="heroImg" />
+            <div className="heroImg">
+              <img src={Background} alt="heroBg" />
+            </div>
           </div>
         </div>
       </div>

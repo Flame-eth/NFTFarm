@@ -82,3 +82,24 @@
     }
   }
 }
+
+
+@media (max-width: 670px){
+
+  .yield-calculator{
+
+    form{
+      flex-direction: column;
+      gap: 20px;
+      width: 70%;
+
+      label{
+        width: 100%;
+      }
+
+      input{
+        width: 100%;
+      }
+    }
+  }
+}
