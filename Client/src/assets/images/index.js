@@ -24,6 +24,8 @@ import pledge3 from "./pledge3.jpg";
 import pledge4 from "./pledge4.jpg";
 import pledge5 from "./pledge5.jpg";
 import pledge6 from "./pledge6.jpg";
+import sectionBg from "./sectionBg.jpg";
+import sectionBg2 from "./sectionBg2.jpg";
 
 export {
   Background,
@@ -52,4 +54,6 @@ export {
   pledge4,
   pledge5,
   pledge6,
+  sectionBg,
+  sectionBg2,
 };

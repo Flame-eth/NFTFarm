@@ -15,11 +15,15 @@ const Footer = () => {
       <div className="footerCon">
         <div className="footerTop">
           <div className="title">
-            <h1>YieldNFT</h1>
-          </div>
-          <div className="desc">
-            Stake and earn the yield on the most liquidity decentralized NFT
-            marketplace
+            <h1>
+              <Link className="navLink" to="/">
+                YieldNFT
+              </Link>
+            </h1>
+            <div className="desc">
+              Stake and earn the yield on the most liquidity decentralized NFT
+              marketplace
+            </div>
           </div>
           <div className="links">
             <ul>
@@ -53,16 +57,28 @@ const Footer = () => {
           <div className="icons">
             <h1>Newsletter</h1>
             <form action="">
-              <input type="text" placeholder="Enter your email" />
+              <input type="email" placeholder="Enter your email" />
               <input type="submit" value="Subscribe" className="btn" />
             </form>
             <div className="social">
-              <FaFacebookF />
-              <BsInstagram />
-              <AiOutlineTwitter />
-              <CiLinkedin />
-              <BsTelegram />
-              <BsDiscord />
+              <Link className="navLink" to="/">
+                <FaFacebookF size={30} className="icon" />
+              </Link>
+              <Link className="navLink" to="/">
+                <BsInstagram size={30} className="icon" />
+              </Link>
+              <Link className="navLink" to="/">
+                <AiOutlineTwitter size={30} className="icon" />
+              </Link>
+              <Link className="navLink" to="/">
+                <CiLinkedin size={30} className="icon" />
+              </Link>
+              <Link className="navLink" to="/">
+                <BsTelegram size={30} className="icon" />
+              </Link>
+              <Link className="navLink" to="/">
+                <BsDiscord size={30} className="icon" />
+              </Link>
             </div>
           </div>
         </div>

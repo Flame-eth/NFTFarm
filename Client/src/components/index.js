@@ -5,3 +5,5 @@ export { default as AboutUs } from "./aboutUs/AboutUs";
 export { default as Stake } from "./stake/Stake";
 export { default as Pledge } from "./pledge/Pledge";
 export { default as YeildCalculator } from "./calculator/Calculator";
+export { default as Footer } from "./footer/Footer";
+export { default as Account } from "./account/Account";
