@@ -32,15 +32,73 @@ const Account = () => {
             <input
               type="number"
               value={WithdrawAmount}
-              placeholder="0.00000000"
+              placeholder="0.00"
               onChange={(e) => setWithdrawAmount(e.target.value)}
             />
 
             <button type="submit">Withdraw</button>
           </form>
         </div>
-        <div className="stakingRecord"></div>
-        <div className="pledgingRecord"></div>
+        <div className="stakingRecord">
+          <h1>NFT Staking Income</h1>
+          <div className="stakingRecordCon">
+            <div className="section">
+              <h2>On-chain Balance</h2>
+              <p>0.00</p>
+            </div>
+            <div className="section">
+              <h2>Current Yield Percentage</h2>
+              <p>0%</p>
+            </div>
+            <div className="section">
+              <h2>Today&apos;s Income</h2>
+              <p>
+                0
+                <img src={usdt} alt="" />
+              </p>
+            </div>
+            <div className="section">
+              <h2>Cumulative Income</h2>
+              <p>
+                0
+                <img src={usdt} alt="" />
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="pledgingRecord">
+          <h1>NFT Pledging Income</h1>
+          <div className="pledgingRecordCon">
+            <div className="section">
+              <h2>Current Pledge</h2>
+              <p>
+                0
+                <img src={usdt} alt="" />
+              </p>
+            </div>
+            <div className="section">
+              <h2>Current Income</h2>
+              <p>
+                0
+                <img src={usdt} alt="" />
+              </p>
+            </div>
+            <div className="section">
+              <h2>Cumulative Pledge</h2>
+              <p>
+                0
+                <img src={usdt} alt="" />
+              </p>
+            </div>
+            <div className="section">
+              <h2>Cumulative Income</h2>
+              <p>
+                0
+                <img src={usdt} alt="" />
+              </p>
+            </div>
+          </div>
+        </div>
         <div className="changeRecord"></div>
       </div>
     </div>

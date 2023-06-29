@@ -1,7 +1,9 @@
 .account {
   width: 100%;
+  height: 100%;
   background: linear-gradient(90deg, #0c0c0c 100%, rgba(0, 0, 0, 0) 60%);
   color: #fff;
+  padding-bottom:70px ;
   .navbar {
     background-color: black;
   }
@@ -92,13 +94,141 @@
           border: none;
           // background: hsla(0, 0%, 100%, 0.15);
 
-          color: white;
+          color: #ffa503;
           font-size: 20px;
           font-family: "Roboto", sans-serif;
         }
 
         button {
-          
+          width: 60%;
+          margin: 0 auto;
+          border-radius: 10px;
+          border: none;
+          // background: hsla(0, 0%, 100%, 0.15);
+          padding: 10px;
+          color: white;
+          font-size: 20px;
+          font-family: "Roboto", sans-serif;
+          background-color: #ffa503;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .stakingRecord {
+      width: 100%;
+
+      h1 {
+        margin: 0;
+        padding: 0;
+        color: white;
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+        padding: 50px 0;
+        padding-left: 50px;
+        color: #ffa503;
+        // text-align: center;
+      }
+
+      .stakingRecordCon {
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        // background-color: grey;
+        background: hsla(0, 0%, 100%, 0.05);
+        margin: 0 auto;
+        justify-content: center;
+        // align-items: center;
+        padding: 50px 0;
+        margin: 50px auto;
+        border-radius: 90px;
+        margin-top: 0;
+
+        .section {
+          display: flex;
+          justify-content: space-between;
+          padding: 0 40px;
+          font-size: 14px;
+
+          h2 {
+            color: hsla(0, 0%, 100%, 0.4);
+          }
+          p {
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+
+            img {
+              font-size: 16px;
+              height: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    .pledgingRecord {
+      width: 100%;
+
+      h1 {
+        margin: 0;
+        padding: 0;
+        color: white;
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+        padding: 50px 0;
+        padding-left: 50px;
+        color: #ffa503;
+        // text-align: center;
+      }
+
+      .pledgingRecordCon {
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        // background-color: grey;
+        background: hsla(0, 0%, 100%, 0.05);
+        margin: 0 auto;
+        justify-content: center;
+        // align-items: center;
+        padding: 50px 0;
+        margin: 50px auto;
+        border-radius: 90px;
+        margin-top: 0;
+
+        .section {
+          display: flex;
+          justify-content: space-between;
+          padding: 0 40px;
+          font-size: 14px;
+
+          h2 {
+            color: hsla(0, 0%, 100%, 0.4);
+          }
+          p {
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+
+            img {
+              font-size: 16px;
+              height: 20px;
+            }
+          }
         }
       }
     }
