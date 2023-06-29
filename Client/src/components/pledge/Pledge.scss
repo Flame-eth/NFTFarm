@@ -412,12 +412,10 @@
   }
 }
 
-
-
 @media (max-width: 768px) {
-  .stake {
-    .stakeContainer {
-      .stakingCards {
+  .pledge {
+    .pledgeContainer {
+      .pledgingCards {
         .modal {
           .modalContainer {
             width: 60%;
@@ -445,9 +443,9 @@
 }
 
 @media (max-width: 550px) {
-  .stake {
-    .stakeContainer {
-      .stakingCards {
+  .pledge {
+    .pledgeContainer {
+      .pledgingCards {
         .modal {
           .modalContainer {
             width: 60%;
@@ -470,7 +468,7 @@
               }
             }
 
-            .stakeForm {
+            .pledgeForm {
               form {
                 .inputCon {
                   .input {
@@ -487,9 +485,9 @@
 }
 
 @media (max-width: 420px) {
-  .stake {
-    .stakeContainer {
-      .stakingCards {
+  .pledge {
+    .pledgeContainer {
+      .pledgingCards {
         .modal {
           .modalContainer {
             width: 60%;
@@ -512,13 +510,13 @@
               }
             }
 
-            .stakeForm {
+            .pledgeForm {
               form {
                 .inputCon {
                   .input {
                     justify-content: space-between;
 
-                    input{
+                    input {
                       width: 40%;
                     }
                   }
