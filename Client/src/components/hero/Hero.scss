@@ -13,6 +13,9 @@
       background: linear-gradient(90deg, #0c0c0c 58.19%, rgba(0, 0, 0, 0) 80%),
         url("../../assets/images/background.svg") top right/contain, no-repeat;
 
+      .heroImg {
+        display: none;
+      }
       .heroNavbar {
         // position: sticky;
         z-index: 1000;
@@ -64,15 +67,38 @@
   }
 }
 
-
-
 @media (max-width: 768px) {
-  .hero{
+  .hero {
+    .heroContainer {
 
-    .heroContainer{
+      height: 100%;
+      .heroBg {
+        // display: none;
+        background: linear-gradient(
+          90deg,
+          #0c0c0c 100.19%,
+          rgba(0, 0, 0, 0) 80%
+        );
 
-      .heroBg{
-        display: none;
+        .heroContent {
+          width: 100%;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+
+          .heroTitle {
+            // font-size: 35.576px;
+            width: 90%;
+            text-align: center;
+          }
+        }
+
+        .heroImg {
+          display: flex;
+          width: 100%;
+          height: 4%;
+          // position: absolute;
+        }
       }
     }
   }

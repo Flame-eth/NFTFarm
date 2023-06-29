@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar } from "..";
 import "./Hero.scss";
+import { Background } from "../../assets/images";
 
 const Hero = () => {
   return (
@@ -23,6 +24,7 @@ const Hero = () => {
                 <h1>White Paper</h1>
               </div>
             </div>
+            <img src={Background} alt="heroBg" className="heroImg" />
           </div>
         </div>
       </div>
