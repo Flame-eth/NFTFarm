@@ -11,6 +11,8 @@
 .home {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  font-family: Rubik, sans-serif;
   // justify-content: flex-end;
 
   .homeSec {

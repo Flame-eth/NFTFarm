@@ -63,8 +63,12 @@
   }
 }
 
-
-
-@media (max-width: 768px) {
-  
+@media (max-width: 550px) {
+  .navbar {
+    .navContainer {
+      .navLinks {
+        display: none;
+      }
+    }
+  }
 }
