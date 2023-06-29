@@ -411,3 +411,123 @@
     }
   }
 }
+
+
+
+@media (max-width: 768px) {
+  .stake {
+    .stakeContainer {
+      .stakingCards {
+        .modal {
+          .modalContainer {
+            width: 60%;
+
+            .imageCon {
+              height: 170px;
+            }
+            .content {
+              h1 {
+                font-size: 20px;
+              }
+              p {
+                font-size: 11px;
+              }
+            }
+
+            .price {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .stake {
+    .stakeContainer {
+      .stakingCards {
+        .modal {
+          .modalContainer {
+            width: 60%;
+            padding: 24px 40px;
+            height: auto;
+
+            .imageCon {
+              height: 170px;
+            }
+            .content {
+              h1 {
+                font-size: 20px;
+              }
+              p {
+                font-size: 11px;
+              }
+
+              .price {
+                font-size: 13px;
+              }
+            }
+
+            .stakeForm {
+              form {
+                .inputCon {
+                  .input {
+                    justify-content: space-between;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .stake {
+    .stakeContainer {
+      .stakingCards {
+        .modal {
+          .modalContainer {
+            width: 60%;
+            padding: 24px 40px;
+            height: auto;
+
+            .imageCon {
+              height: 150px;
+            }
+            .content {
+              h1 {
+                font-size: 17px;
+              }
+              p {
+                font-size: 10px;
+              }
+
+              .price {
+                font-size: 10px;
+              }
+            }
+
+            .stakeForm {
+              form {
+                .inputCon {
+                  .input {
+                    justify-content: space-between;
+
+                    input{
+                      width: 40%;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
