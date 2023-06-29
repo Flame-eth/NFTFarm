@@ -43,22 +43,26 @@
         justify-content: space-around;
         align-items: center;
         gap: 20px;
-      }
 
-      .navLink {
-        color: #fff;
-        font-size: 20.964px;
-        font-family: "Rubik", sans-serif;
-        font-weight: 600;
-        transition: all 0.3s ease-in-out;
-        list-style: none;
-        text-decoration: none;
+        .navLink {
+          color: #fff;
+          font-size: 20.964px;
+          font-family: "Rubik", sans-serif;
+          font-weight: 600;
+          transition: all 0.3s ease-in-out;
+          list-style: none;
+          text-decoration: none;
 
-        &:hover {
-          color: #ffa503;
-          text-decoration: underline;
+          &:hover {
+            color: #ffa503;
+            text-decoration: underline;
+          }
         }
       }
+    }
+
+    .sidebar {
+      display: none;
     }
   }
 }
@@ -68,6 +72,17 @@
     .navContainer {
       .navLinks {
         display: none;
+      }
+
+      .sidebar {
+        color: #fff;
+        display: flex;
+
+        .sidebarIcon {
+          color: #fff;
+          font-size: 30px;
+          cursor: pointer;
+        }
       }
     }
   }
