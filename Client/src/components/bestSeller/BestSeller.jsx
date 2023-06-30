@@ -20,7 +20,7 @@ const BestSeller = () => {
   } else if (userWidth >= 500) {
     noOfSlides = 2;
   } else if (userWidth >= 320) {
-    noOfSlides = 1;
+    noOfSlides = 2;
   }
   const settings = {
     dots: false,
