@@ -2,6 +2,8 @@ import React from "react";
 import { Navbar } from "..";
 import "./Hero.scss";
 import { Background } from "../../assets/images";
+import { AiOutlineRocket } from "react-icons/ai";
+import { FaRegNewspaper } from "react-icons/fa";
 
 const Hero = () => {
   return (
@@ -18,10 +20,12 @@ const Hero = () => {
                 decentralized NFT marketplace
               </div>
               <div className="heroButton">
-                <h1>Explore</h1>
+                <AiOutlineRocket size={20} className="icon" />
+                Explore
               </div>
               <div className="heroButton">
-                <h1>White Paper</h1>
+                <FaRegNewspaper size={20} className="icon" />
+                White Paper
               </div>
             </div>
             <div className="heroImg">
