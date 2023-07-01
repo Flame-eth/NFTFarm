@@ -20,6 +20,7 @@
         align-items: center;
         justify-content: center;
         gap: 10px;
+        text-decoration: none;
 
         img {
           object-fit: contain;
@@ -29,7 +30,7 @@
         h1 {
           .navLink {
             color: #fff;
-            font-size: 20.964px;
+
             font-family: "Rubik", sans-serif;
             font-weight: 600;
             transition: all 0.3s ease-in-out;
@@ -99,9 +100,46 @@
     position: relative;
     .navbar {
       .navContainer {
-        .navIcon{
-          h1{
-            font-size: 15px;
+        .navIcon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          text-decoration: none;
+
+            img {
+              object-fit: contain;
+              width: 30px;
+            height: 50px;
+          }
+          h1 {
+            .navLink {
+              color: #fff;
+
+              font-family: "Rubik", sans-serif;
+              font-weight: 600;
+              transition: all 0.3s ease-in-out;
+              list-style: none;
+              text-decoration: none;
+
+              // color: #ffa503;
+              font-size: 15.576px;
+              // font-family: "Ravi Prakash", cursive;
+              font-family: Rowdies, cursive;
+              cursor: pointer;
+
+              // &:hover {
+              //   color: #ffa503;
+              //   text-decoration: underline;
+              // }
+
+              background: linear-gradient(to right, #ffa503, #fff);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              animation: gradientAnimation 1s linear infinite;
+              background-size: 200% 100%;
+              animation-direction: alternate;
+            }
           }
         }
         .navLinks {

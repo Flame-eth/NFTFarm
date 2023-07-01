@@ -11,14 +11,14 @@ const Navbar = () => {
     <div className="Container">
       <div className="navbar">
         <div className="navContainer">
-          <div className="navIcon">
+          <Link className="navIcon">
             <img src={logo} alt="" />
             <h1>
-              <Link className="navLink" to="/">
+              <div className="navLink" to="/">
                 YieldNFT
-              </Link>
+              </div>
             </h1>
-          </div>
+          </Link>
           <div className="navLinks">
             <ul>
               <li>
