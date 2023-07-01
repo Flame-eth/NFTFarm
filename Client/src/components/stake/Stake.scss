@@ -374,6 +374,11 @@
 @media (max-width: 768px) {
   .stake {
     .stakeContainer {
+      h1{
+        font-size: 35px;
+        text-align: center;
+        padding: 20px 0;
+      }
       .stakingCards {
         .modal {
           .modalContainer {
