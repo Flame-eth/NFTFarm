@@ -35,7 +35,7 @@ import bs4 from "./elemental.png";
 import bs5 from "./Hv.png";
 import bs6 from "./koda.png";
 import bs7 from "./Mutant.png";
-import bs8 from "./naka.png";
+import bs8 from "./Naka.png";
 import bs9 from "./Valhalla.png";
 import bs10 from "./deep.png";
 
