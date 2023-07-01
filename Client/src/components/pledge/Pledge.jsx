@@ -163,11 +163,17 @@ const Pledge = ({ pledgeArray }) => {
                   <div className="price">
                     <div className="priceTag">
                       <h3>Minimum pledge</h3>
-                      <h4>{pledgeArray[pledgeID].min} USDT</h4>
+                      <h4>
+                        {pledgeArray[pledgeID].min}
+                        <img src={usdt} alt="" />
+                      </h4>
                     </div>
                     <div className="priceTag">
                       <h3>Maximum pledge</h3>
-                      <h4>{pledgeArray[pledgeID].max} USDT</h4>
+                      <h4>
+                        {pledgeArray[pledgeID].max}
+                        <img src={usdt} alt="" />
+                      </h4>
                     </div>
                   </div>
                 </div>

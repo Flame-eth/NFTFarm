@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Calculator.scss";
+import { usdt } from "../../assets/images";
 
 const YieldCalculator = () => {
   const [amountInvested, setAmountInvested] = useState("");
@@ -62,6 +63,7 @@ const YieldCalculator = () => {
         <label>
           Earning
           <input type="text" value={result} readOnly />
+          {/* <img src={usdt} alt="" /> */}
         </label>
       </div>
     </div>
