@@ -2,6 +2,8 @@
   width: 100%;
   .navbar {
     width: 100%;
+    height: 120px;
+    padding-top: 10px;
 
     .navContainer {
       display: flex;
@@ -96,6 +98,11 @@
     position: relative;
     .navbar {
       .navContainer {
+        .navIcon{
+          h1{
+            font-size: 15px;
+          }
+        }
         .navLinks {
           display: none;
         }
