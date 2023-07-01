@@ -28,6 +28,16 @@ import sectionBg from "./sectionBg.jpg";
 import sectionBg2 from "./sectionBg2.jpg";
 import usdt from "./usdt.svg";
 import logo from "./logo.png";
+import bs1 from "./azuki.png";
+import bs2 from "./Bean.png";
+import bs3 from "./Clone.png";
+import bs4 from "./elemental.png";
+import bs5 from "./Hv.png";
+import bs6 from "./koda.png";
+import bs7 from "./Mutant.png";
+import bs8 from "./naka.png";
+import bs9 from "./Valhalla.png";
+import bs10 from "./deep.png";
 
 export {
   Background,
@@ -60,4 +70,14 @@ export {
   sectionBg2,
   usdt,
   logo,
+  bs1,
+  bs2,
+  bs3,
+  bs4,
+  bs5,
+  bs6,
+  bs7,
+  bs8,
+  bs9,
+  bs10,
 };
