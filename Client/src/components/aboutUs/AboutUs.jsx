@@ -17,14 +17,14 @@ const AboutUs = () => {
           We believe that financial opportunities should be accessible to
           everyone, regardless of their background or expertise.
         </p>
-        <p>
+        {/* <p>
           Join YieldNFT today and unlock the potential of DeFi staking and yield
           farming with NFTs. Whether you are a seasoned investor or a curious
           newcomer, we invite you to embark on a rewarding journey with us.
           Start earning attractive rewards on your USDT without the need to own
           an NFT or possess prior knowledge of NFTs. Together, we can redefine
           the future of decentralized finance.
-        </p>
+        </p> */}
       </div>
     </div>
   );

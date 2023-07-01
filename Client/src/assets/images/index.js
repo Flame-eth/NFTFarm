@@ -27,6 +27,7 @@ import pledge6 from "./pledge6.jpg";
 import sectionBg from "./sectionBg.jpg";
 import sectionBg2 from "./sectionBg2.jpg";
 import usdt from "./usdt.svg";
+import logo from "./logo.png";
 
 export {
   Background,
@@ -58,4 +59,5 @@ export {
   sectionBg,
   sectionBg2,
   usdt,
+  logo,
 };

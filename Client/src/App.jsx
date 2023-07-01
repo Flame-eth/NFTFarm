@@ -8,6 +8,7 @@ import AccountPage from "./pages/accountPage/AccountPage";
 import ReferralPage from "./pages/referralPage/ReferralPage";
 
 function App() {
+  window.scrollTo(0, 0);
   return (
     <>
       <div className="app">

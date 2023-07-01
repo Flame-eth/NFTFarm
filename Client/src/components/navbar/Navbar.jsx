@@ -3,6 +3,7 @@ import "./Navbar.scss";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
+import { logo } from "../../assets/images";
 
 const Navbar = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -11,7 +12,7 @@ const Navbar = () => {
       <div className="navbar">
         <div className="navContainer">
           <div className="navIcon">
-            <img src="" alt="" />
+            <img src={logo} alt="" />
             <h1>
               <Link className="navLink" to="/">
                 YieldNFT

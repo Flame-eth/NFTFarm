@@ -6,7 +6,9 @@ import { AiOutlineRocket } from "react-icons/ai";
 import { FaRegNewspaper } from "react-icons/fa";
 
 const Hero = () => {
+  window.scrollTo(0, 0);
   return (
+
     <>
       <div className="hero">
         <div className="heroContainer">
