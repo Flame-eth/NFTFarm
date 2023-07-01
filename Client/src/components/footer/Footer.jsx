@@ -8,6 +8,7 @@ import { BsTelegram } from "react-icons/bs";
 import { BsDiscord } from "react-icons/bs";
 
 import "./Footer.scss";
+import { logo } from "../../assets/images";
 
 const Footer = () => {
   return (
@@ -16,6 +17,7 @@ const Footer = () => {
         <div className="footerTop">
           <div className="title">
             <h1>
+              <img src={logo} alt="" />
               <Link className="navLink" to="/">
                 YieldNFT
               </Link>

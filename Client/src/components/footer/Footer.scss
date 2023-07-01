@@ -21,7 +21,22 @@
       margin: 0 auto;
 
       .title {
+        display: flex;
+        // align-items: center;
+        // justify-content: center;
+        gap: 10px;
+        flex-direction: column;
+
         h1 {
+          display: flex;
+          align-items: center;
+          // justify-content: center;
+          gap: 10px;
+          img {
+            object-fit: contain;
+            width: 50px;
+            height: 50px;
+          }
           .navLink {
             text-decoration: none;
             font-size: 20px;
