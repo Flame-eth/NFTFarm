@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 
 import { AiOutlineClose } from "react-icons/ai";
+import { usdt } from "../../assets/images";
 
 const SampleNextArrow = (props) => {
   const { onClick } = props;
@@ -112,11 +113,17 @@ const Pledge = ({ pledgeArray }) => {
                           <div className="price">
                             <div className="priceTag">
                               <h3>MINIMUM</h3>
-                              <h4>{pledge.min} USDT</h4>
+                              <h4>
+                                {pledge.min}
+                                <img src={usdt} alt="" />
+                              </h4>
                             </div>
                             <div className="priceTag">
                               <h3>MAXIMUM</h3>
-                              <h4>{pledge.max} USDT</h4>
+                              <h4>
+                                {pledge.max}
+                                <img src={usdt} alt="" />
+                              </h4>
                             </div>
                           </div>
 

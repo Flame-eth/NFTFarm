@@ -135,6 +135,19 @@
                     font-size: 13px;
                     color: #fff;
                   }
+
+                  h4{
+                    display: flex;
+                    align-items: center;
+                    font-size: 15px;
+                    font-weight: 900;
+
+                    img{
+                      width: 20px;
+                      height: 20px;
+                      margin: 0 5px;
+                    }
+                  }
                 }
               }
 
@@ -190,7 +203,7 @@
           //   width: 450px;
           border-radius: 30px;
           padding: 34px 60px;
-          height: 80%;
+          // height: 80%;
           width: 30%;
 
           display: flex;
@@ -250,7 +263,7 @@
 
             span {
               font-size: 14px;
-              font-weight: 300;
+              font-weight: 800;
               text-transform: capitalize;
               text-align: justify;
               align-items: flex-start;
@@ -267,6 +280,29 @@
               margin: 0;
               display: flex;
               justify-content: space-between;
+              padding-top: 20px;
+
+              .priceTag{
+                h3{
+                  font-weight: 200;
+                  font-size: 15px;
+                  color: #0c0c0c;
+                  margin: 0;
+                }
+                h4{
+                  display: flex;
+                  align-items: center;
+                  font-size: 18px;
+                  font-weight: 900;
+                  margin: 5px 0;
+
+                  img{
+                    width: 20px;
+                    height: 20px;
+                    margin: 0 5px;
+                  }
+                }
+              }
             }
           }
 

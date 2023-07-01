@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import { stake } from "../../constants/stake";
 import { AiOutlineClose } from "react-icons/ai";
+import { usdt } from "../../assets/images";
 
 const SampleNextArrow = (props) => {
   const { onClick } = props;
@@ -102,11 +103,17 @@ const Stake = ({ stakeArray }) => {
                           <div className="price">
                             <div className="priceTag">
                               <h3>MINIMUM</h3>
-                              <h4>{stake.min} USDT</h4>
+                              <h4>
+                                {stake.min}
+                                <img src={usdt} alt="" />
+                              </h4>
                             </div>
                             <div className="priceTag">
                               <h3>MAXIMUM</h3>
-                              <h4>{stake.max} USDT</h4>
+                              <h4>
+                                {stake.max}
+                                <img src={usdt} alt="" />
+                              </h4>
                             </div>
                           </div>
 
@@ -146,11 +153,17 @@ const Stake = ({ stakeArray }) => {
                   <div className="price">
                     <div className="priceTag">
                       <h3>Minimum Stake</h3>
-                      <h4>{stakeArray[stakeID].min} USDT</h4>
+                      <h4>
+                        {stakeArray[stakeID].min}
+                        <img src={usdt} alt="" />
+                      </h4>
                     </div>
                     <div className="priceTag">
                       <h3>Maximum Stake</h3>
-                      <h4>{stakeArray[stakeID].max} USDT</h4>
+                      <h4>
+                        {stakeArray[stakeID].max}
+                        <img src={usdt} alt="" />
+                      </h4>
                     </div>
                   </div>
                 </div>
@@ -163,7 +176,11 @@ const Stake = ({ stakeArray }) => {
                       </div>
                       <div className="input">
                         <label htmlFor="">Daily Return:</label>
-                        <input disabled type="number" placeholder="Daily Return" />
+                        <input
+                          disabled
+                          type="number"
+                          placeholder="Daily Return"
+                        />
                       </div>
                     </div>
                     <button type="submit">Stake</button>
