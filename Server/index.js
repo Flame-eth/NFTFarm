@@ -7,6 +7,17 @@ const app = express();
 dotenv.config();
 const port = process.env.PORT || 3000;
 
+const connectDB = async () => {
+  // console.log(process.env.MONGO_URI);
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("MongoDB connected");
+  } catch (error) {
+    console.log(error);
+    // process.exit(1);
+  }
+};
+
 app.use(cors());
 app.use(express.json());
 
@@ -48,5 +59,6 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, () => {
+  connectDB();
   console.log(`Server is running on port ${port}`);
 });
