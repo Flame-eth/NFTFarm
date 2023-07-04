@@ -38,6 +38,7 @@ import bs7 from "./Mutant.png";
 import bs8 from "./Naka.png";
 import bs9 from "./Valhalla.png";
 import bs10 from "./deep.png";
+import bs11 from "./pirate.png";
 
 export {
   Background,
@@ -80,4 +81,5 @@ export {
   bs8,
   bs9,
   bs10,
+  bs11,
 };
