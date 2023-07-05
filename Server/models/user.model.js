@@ -27,6 +27,9 @@ const UserSchema = new Schema({
   totalPledge: {
     type: Number,
   },
+  balance: {
+    type: Number,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

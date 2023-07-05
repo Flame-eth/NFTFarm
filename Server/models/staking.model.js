@@ -18,10 +18,6 @@ const StakingSchema = new Schema({
     type: Number,
     required: true,
   },
-  stakingDate: {
-    type: Date,
-    required: true,
-  },
   hourlyEarning: {
     type: Number,
     required: true,
@@ -30,17 +26,16 @@ const StakingSchema = new Schema({
     type: Number,
     required: true,
   },
-  targetEarning: {
-    type: Number,
-    required: true,
-  },
   amountEarned: {
     type: Number,
-    required: true,
   },
   stakingStatus: {
     type: Boolean,
     required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 
