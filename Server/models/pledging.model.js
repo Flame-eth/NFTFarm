@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const PledgeSchema = new Schema({
@@ -48,5 +48,4 @@ const PledgeSchema = new Schema({
   },
 });
 
-
-
+export { PledgeSchema };
