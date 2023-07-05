@@ -9,21 +9,25 @@ import {
   getUserStakingRecord,
   getUserTotalPledgingIncome,
   getUserTotalStakingIncome,
+  updatePledgingRecord,
+  updateStakingRecord,
   updateUser,
 } from "../controllers/user.controller.js";
 
 const router = express.Router();
 
-router.get("/:walledID", getUser);
+router.get("/:walletID", getUser);
 // router.get("/user/:walledID", createUser);
-router.post("/user/:walledID", createUser);
-router.patch("/user/update/:walledID", updateUser);
-router.delete("/user/delete/:walledID", deleteUser);
-router.get("/all", getAllUser);
+router.post("/create", createUser);
+router.patch("/update/:walletID", updateUser);
+router.delete("/delete/:walletID", deleteUser);
+router.get("/", getAllUser);
 router.get("/top", getTopUser);
-router.get("/user/staking/:walledID", getUserStakingRecord);
-router.get("/user/pledging/:walledID", getUserPledgingRecord);
-router.get("/user/staking/income/:walledID", getUserTotalStakingIncome);
-router.get("/user/pledging/income/:walledID", getUserTotalPledgingIncome);
+router.get("/staking/record/:walletID", getUserStakingRecord);
+router.get("/pledging/record/:walletID", getUserPledgingRecord);
+router.get("/staking/income/:walletID", getUserTotalStakingIncome);
+router.get("/pledging/income/:walletID", getUserTotalPledgingIncome);
+router.post("/staking/new/:walletID", updateStakingRecord);
+router.post("/pledging/new/:walletID", updatePledgingRecord);
 
 export default router;

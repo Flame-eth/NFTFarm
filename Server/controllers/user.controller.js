@@ -9,6 +9,7 @@ export const getUser = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
+    // res.status(400).error(error);
   }
 };
 
@@ -73,6 +74,7 @@ export const updateUser = async (req, res, next) => {
 export const deleteUser = async (req, res, next) => {
   try {
     const user = await User.findOneAndDelete({ walletID: req.params.walletID });
+
     res.status(200).json({
       success: true,
       data: user,
@@ -106,7 +108,6 @@ export const getTopUser = async (req, res, next) => {
   }
 };
 
-
 export const getUserStakingRecord = async (req, res, next) => {
   try {
     const user = await User.findOne({ walletID: req.params.walletID });
@@ -117,8 +118,7 @@ export const getUserStakingRecord = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
-
+};
 
 export const getUserPledgingRecord = async (req, res, next) => {
   try {
@@ -130,8 +130,7 @@ export const getUserPledgingRecord = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
-
+};
 
 export const getUserTotalStakingIncome = async (req, res, next) => {
   try {
@@ -143,8 +142,7 @@ export const getUserTotalStakingIncome = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
-
+};
 
 export const getUserTotalPledgingIncome = async (req, res, next) => {
   try {
@@ -156,4 +154,44 @@ export const getUserTotalPledgingIncome = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
+
+export const getUserTotalPledge = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ walletID: req.params.walletID });
+    res.status(200).json({
+      success: true,
+      data: user.totalPledge,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updatePledgingRecord = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ walletID: req.params.walletID });
+    user.pledgingRecord.push(req.body);
+    await user.save();
+    res.status(200).json({
+      success: true,
+      data: user.pledgingRecord,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateStakingRecord = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ walletID: req.params.walletID });
+    user.stakingRecord.push(req.body);
+    await user.save();
+    res.status(200).json({
+      success: true,
+      data: user.stakingRecord,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
