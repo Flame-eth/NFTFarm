@@ -57,7 +57,7 @@ const Stake = ({ stakeArray }) => {
   //   console.log(noOfSlides.current);
 
   const settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: noOfSlides.current,

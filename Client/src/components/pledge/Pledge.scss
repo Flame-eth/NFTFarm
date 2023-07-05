@@ -51,7 +51,7 @@
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        border: white solid 0.5px;
+        border: white solid 0.1px;
         width: 95% !important;
         border-radius: 19px;
         // background: linear-gradient(90deg, #0c0c0c 100%, rgba(0, 0, 0, 0) 60%);
@@ -529,14 +529,77 @@
   .pledge {
     .pledgeContainer {
       .pledgingCards {
+        width: 95%;
+        margin: 0 auto;
+
+        .box {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          border: white solid 0.5px;
+          width: 65% !important;
+          border-radius: 19px;
+          margin: 0 auto;
+
+          .product {
+            padding: 5px;
+            .img {
+              .imageCon {
+                height: 150px;
+
+                img {
+                  height: 100%;
+                  border-radius: 10px;
+                  // object-fit: contain;
+                }
+              }
+              .product-like {
+                i {
+                  font-size: 15px;
+                }
+              }
+            }
+
+            .product-details {
+              .pledgeHistory {
+                .record {
+                  h2 {
+                    font-size: 11px;
+                  }
+                  h3 {
+                    font-size: 13px;
+                  }
+                }
+              }
+              .text {
+                .price {
+                  .priceTag {
+                    h3 {
+                      font-size: 11px;
+                      font-weight: 800;
+                    }
+                    h4 {
+                      font-size: 12px;
+                    }
+                  }
+                }
+
+                button {
+                  font-size: 15px;
+                }
+              }
+            }
+          }
+        }
         .modal {
           .modalContainer {
-            width: 60%;
-            padding: 24px 40px;
+            width: 70%;
+            padding: 14px 20px;
             height: auto;
 
             .imageCon {
-              height: 150px;
+              height: 90px;
+              // border-radius: 50px;
             }
             .content {
               h1 {
@@ -568,5 +631,32 @@
         }
       }
     }
+  }
+}
+
+// Carousel.scss
+
+.slick-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  bottom: -60px;
+
+  li {
+    margin: 0 4px;
+    list-style: none;
+
+    button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #ccc;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  li.slick-active button {
+    background-color: #ffa503;
   }
 }

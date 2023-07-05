@@ -515,16 +515,14 @@
           .product {
             padding: 5px;
             .img {
-
-              .imageCon{
+              .imageCon {
                 height: 150px;
 
-                img{
+                img {
                   height: 100%;
+                  border-radius: 10px;
                   // object-fit: contain;
                 }
-
-
               }
               .product-like {
                 i {
@@ -576,17 +574,16 @@
               p {
                 font-size: 10px;
               }
-             
 
               .price {
                 font-size: 10px;
                 padding-top: 10px;
 
-                .priceTag{
-                  h3{
+                .priceTag {
+                  h3 {
                     font-size: 12px;
                   }
-                  h4{
+                  h4 {
                     font-size: 15px;
                   }
                 }
