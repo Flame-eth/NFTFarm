@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import userRoute from "./routes/user.route.js";
 
 const app = express();
 dotenv.config();
@@ -57,6 +58,8 @@ app.use((err, req, res, next) => {
 
   next();
 });
+
+app.use("/api/users", userRoute);
 
 app.listen(port, () => {
   connectDB();
