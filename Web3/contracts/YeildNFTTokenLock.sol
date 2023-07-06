@@ -1,85 +1,193 @@
+// //SPDX License Identifier: MIT
+// pragma solidity ^0.8.0;
+
+// import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+// // import "@openzeppelin/contracts/access/Ownable.sol";
+
+// // interface IERC20 {
+// //     function transfer(address recipient, uint256 amount) external returns (bool);
+// //     function transferFrom(address sender, address recipient, uint256 amount) external returns(bool);
+// // }
+
+
+// contract YeildNftTokenLock  {
+  
+
+//     IERC20 public token;
+//     address public _admin;
+
+//     struct Withdrawal {
+//         address user;
+//         uint256 amount;
+//         uint256 timestamp;
+//         string txType;
+//     }
+
+//     Withdrawal public withdrawalRecord;
+
+
+//     event TokensTransferred(address indexed to, uint256 amount);
+
+//     modifier _onlyAdmin() {
+//         require(msg.sender == _admin, "Only _admin can call this function");
+//         _;
+//     }
+
+//     constructor(address _tokenAddress, address adminAddress) {
+//         token = IERC20(_tokenAddress);
+//         _admin = adminAddress;
+//     }
+
+//     function setAdmin(address adminAddress) external _onlyAdmin {
+//         _admin = adminAddress;
+//     }
+
+//     function getAdmin() external view returns (address) {
+//         return _admin;
+//     }
+
+//     function relinquishOwnership() external _onlyAdmin {
+//         _admin = address(0);
+//     }
+
+
+
+
+//     function getBalance() external view _onlyAdmin() returns (uint256)  {
+//         return token.balanceOf(address(this));
+//     }
+   
+
+//     function transferTokens(address _to, uint256 _amount) external _onlyAdmin {
+//         require(_to != address(0), "Invalid address");
+//         require(_amount > 0, "Amount must be greater than zero");
+
+//         // Transfer tokens to the specified address
+//         require(token.transfer(_to, _amount), "Token transfer failed");
+
+//         emit TokensTransferred(_to, _amount);
+//     }
+
+//     function withdrawLock (address _to, uint256 _amount, string memory _txType) external returns (bool) {
+//         require(_to != address(0), "Invalid address");
+//         require(_amount > 0, "Amount must be greater than zero");
+
+//         bool success = false;
+
+//         Withdrawal memory newWithdrawal = Withdrawal({
+//             user: _to,
+//             amount: _amount,
+//             timestamp: block.timestamp,
+//             txType: _txType
+//         });
+//       withdrawalRecord.push(newWithdrawal);
+
+
+//       if (msg.sender != _admin) {
+
+
+//         require(token.transfer(_to, _amount), "Token transfer failed");
+
+//         emit TokensTransferred(_to, _amount);
+//         success = true;
+
+//       }
+//         return success;
+
+     
+//     }
+
+//     function getWithdrawalRecord() external view returns (Withdrawal[] memory) {
+//         return withdrawalRecord;
+//     }
+// }
+
+
+
+// SPDX License Identifier: MIT
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
 
-
-contract YeildNFTTokenLock {
-  
-
+contract YieldNftTokenLock {
     IERC20 public token;
-    address public admin;
+    address public _admin;
 
-    event StakeLocked(address indexed user, uint256 amount);
-    event PledgeLocked(address indexed user, uint256 amount, uint256 lockDuration);
+    struct Withdrawal {
+        address user;
+        uint256 amount;
+        uint256 timestamp;
+        string txType;
+    }
+
+    Withdrawal[] public withdrawalRecord;
+
     event TokensTransferred(address indexed to, uint256 amount);
 
     modifier onlyAdmin() {
-        require(msg.sender == admin, "Only admin can call this function");
+        require(msg.sender == _admin, "Only admin can call this function");
         _;
     }
 
-    constructor(address _tokenAddress) {
+    constructor(address _tokenAddress, address adminAddress) {
         token = IERC20(_tokenAddress);
-        admin = msg.sender;
+        _admin = adminAddress;
     }
 
-    function stakeLock(uint256 _amount) external {
-        require(_amount > 0, "Amount must be greater than zero");
-        require(stakeLocks[msg.sender].isLocked == false, "Tokens are already locked");
-
-        // Transfer tokens to the contract
-        require(token.transferFrom(msg.sender, address(this), _amount), "Token transfer failed");
-
-        // Store the lock details
-        StakeLock memory newLock = StakeLock({
-            amount: _amount,
-            isLocked: true
-        });
-        stakeLocks[msg.sender] = newLock;
-
-        emit StakeLocked(msg.sender, _amount);
+    function setAdmin(address adminAddress) external onlyAdmin {
+        _admin = adminAddress;
     }
 
-    function pledgeLock(uint256 _amount, uint256 _lockDuration) external {
-        require(_amount > 0, "Amount must be greater than zero");
-        require(_lockDuration > 0, "Lock duration must be greater than zero");
-
-        // Transfer tokens to the contract
-        require(token.transferFrom(msg.sender, address(this), _amount), "Token transfer failed");
-
-        // Store the lock details
-        PledgeLock memory newLock = PledgeLock({
-            amount: _amount,
-            lockDuration: _lockDuration,
-            releaseTime: block.timestamp + _lockDuration,
-            isLocked: true
-        });
-        pledgeLocks[msg.sender].push(newLock);
-
-        emit PledgeLocked(msg.sender, _amount, _lockDuration);
+    function getAdmin() external view returns (address) {
+        return _admin;
     }
 
-    function releasePledgeLock(uint256 _index) external {
-        require(_index < pledgeLocks[msg.sender].length, "Invalid index");
-        PledgeLock storage lock = pledgeLocks[msg.sender][_index];
-        require(lock.isLocked, "Tokens are already released");
-        require(lock.releaseTime <= block.timestamp, "Tokens are still locked");
+    function relinquishOwnership() external onlyAdmin {
+        _admin = address(0);
+    }
 
-        // Transfer the tokens back to the user
-        require(token.transfer(msg.sender, lock.amount), "Token transfer failed");
-
-        // Update the lock status
-        lock.isLocked = false;
+    function getBalance() external view onlyAdmin returns (uint256) {
+        return token.balanceOf(address(this));
     }
 
     function transferTokens(address _to, uint256 _amount) external onlyAdmin {
         require(_to != address(0), "Invalid address");
         require(_amount > 0, "Amount must be greater than zero");
 
-        // Transfer tokens to the specified address
         require(token.transfer(_to, _amount), "Token transfer failed");
 
         emit TokensTransferred(_to, _amount);
+    }
+
+    function withdrawLock(
+        address _to,
+        uint256 _amount,
+        string memory _txType
+    ) external returns (bool) {
+        require(_to != address(0), "Invalid address");
+        require(_amount > 0, "Amount must be greater than zero");
+
+        bool success = false;
+
+        Withdrawal memory newWithdrawal = Withdrawal({
+            user: _to,
+            amount: _amount,
+            timestamp: block.timestamp,
+            txType: _txType
+        });
+        withdrawalRecord.push(newWithdrawal);
+
+        if (msg.sender != _admin) {
+            require(token.transfer(_to, _amount), "Token transfer failed");
+
+            emit TokensTransferred(_to, _amount);
+            success = true;
+        }
+
+        return success;
+    }
+
+    function getWithdrawalRecord() external view returns (Withdrawal[] memory) {
+        return withdrawalRecord;
     }
 }
