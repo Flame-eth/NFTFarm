@@ -3,20 +3,7 @@ pragma solidity ^0.8.0;
 import "./IERC20.sol";
 
 contract YeildNFTTokenLock {
-    struct StakeLock {
-        uint256 amount;
-        bool isLocked;
-    }
-
-    struct PledgeLock {
-        uint256 amount;
-        uint256 lockDuration;
-        uint256 releaseTime;
-        bool isLocked;
-    }
-
-    mapping(address => StakeLock) public stakeLocks;
-    mapping(address => PledgeLock[]) public pledgeLocks;
+  
 
     IERC20 public token;
     address public admin;
