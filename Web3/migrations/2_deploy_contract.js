@@ -1,5 +1,5 @@
-const YeildNftTokenLock = artifacts.require("YeildNftTokenLock");
+const YieldNftTokenLock = artifacts.require("YieldNftTokenLock");
 
 module.exports = function (deployer) {
-  deployer.deploy(YeildNftTokenLock);
+  deployer.deploy(YieldNftTokenLock);
 };
