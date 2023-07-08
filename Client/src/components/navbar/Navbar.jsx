@@ -1,22 +1,39 @@
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 import { logo } from "../../assets/images";
 import { ConnectWallet } from "@thirdweb-dev/react";
 import { Web3Button } from "@web3modal/react";
 import { useAccount } from "wagmi";
+import newRequest from "../../utils/newRequest";
+import axios from "axios";
 
 const Navbar = () => {
   const [sidebar, setSidebar] = useState(false);
 
-  const account = useAccount({
-    onConnect({ address, connector, isReconnected }) {
-      console.log("Connected", { address, connector, isReconnected });
-    },
-  });
+  // const account = useAccount({
+  //   onConnect({ address, connector, isReconnected }) {
+  //     console.log("Connected", { address, connector, isReconnected });
+  //     const data = newRequest.post("/users/create", { address });
+  //     console.log(data);
+  //   },
+  // });
 
+  const { address, isConnecting, isDisconnected } = useAccount();
+
+  useEffect(() => {
+    if (address) {
+      // const data = newRequest.post("users/create", { walletID: address });
+      // console.log(data.data);
+      axios
+        .post("http://localhost:3000/api/users/create", { walletID: address })
+        .then((res) => {
+          console.log(res.data.data);
+        });
+    }
+  }, [address]);
 
   return (
     <div className="Container">

@@ -14,13 +14,6 @@ export const getUser = async (req, res, next) => {
 };
 
 export const createUser = async (req, res, next) => {
-  //   try {
-  //     const user = new User({
-  //       walletID: req.body.walletID,
-  //       password: req.body.password,
-  //       email: req.body.email,
-  //     });
-  //     await user.save();
   try {
     const findUser = await User.findOne({ walletID: req.body.walletID });
     if (findUser) {
@@ -29,7 +22,14 @@ export const createUser = async (req, res, next) => {
         data: findUser,
       });
     } else {
-      const user = await User.create(req.body);
+      // const user = await User.create(req.body);
+
+      const user = new User({
+        walletID: req.body.walletID,
+        hasStaked: false,
+        hasPledged: false,
+      });
+      await user.save();
       res.status(201).json({
         success: true,
         data: user,

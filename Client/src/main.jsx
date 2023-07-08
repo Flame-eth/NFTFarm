@@ -3,6 +3,9 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.scss";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import { Web3NetworkSwitch } from "@web3modal/react";
 
 import {
   EthereumClient,
@@ -27,9 +30,11 @@ const ethereumClient = new EthereumClient(wagmiConfig, chains);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
     <WagmiConfig config={wagmiConfig}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
     </WagmiConfig>
 
     <Web3Modal
@@ -45,5 +50,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         "--w3m-color-overlay": "#1a1a1a",
       }}
     />
+    <Web3NetworkSwitch />
   </>
 );
