@@ -32,6 +32,17 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </BrowserRouter>
     </WagmiConfig>
 
-    <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+    <Web3Modal
+      projectId={projectId}
+      ethereumClient={ethereumClient}
+      themeMode="dark"
+      themeVariables={{
+        "--w3m-font-family": "Roboto, sans-serif",
+        "--w3m-accent-color": "#ffa503",
+        "--w3m-background-color": "#1a1a1a",
+        "--w3m-z-index": "99999999999999999999999",
+        "--w3m-logo-image-url": "../logo.png",
+      }}
+    />
   </>
 );

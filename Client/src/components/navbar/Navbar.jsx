@@ -5,9 +5,19 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 import { logo } from "../../assets/images";
 import { ConnectWallet } from "@thirdweb-dev/react";
+import { Web3Button } from "@web3modal/react";
+import { useAccount } from "wagmi";
 
 const Navbar = () => {
   const [sidebar, setSidebar] = useState(false);
+
+  const account = useAccount({
+    onConnect({ address, connector, isReconnected }) {
+      console.log("Connected", { address, connector, isReconnected });
+    },
+  });
+
+
   return (
     <div className="Container">
       <div className="navbar">
@@ -23,6 +33,7 @@ const Navbar = () => {
           {/* <ConnectWallet /> */}
           <div className="navLinks">
             <ul>
+              <Web3Button icon="hide" label="Connect Wallet" balance="show" />
               <li>
                 <Link className="navLink" to="/">
                   Home
@@ -64,6 +75,7 @@ const Navbar = () => {
       {sidebar ? (
         <div className="sideLinks">
           <ul>
+            <Web3Button icon="hide" label="Connect Wallet" balance="show" />
             <li>
               <Link className="sideLink" to="/">
                 Home
