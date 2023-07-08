@@ -4,6 +4,7 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 import { logo } from "../../assets/images";
+import { ConnectWallet } from "@thirdweb-dev/react";
 
 const Navbar = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -19,6 +20,7 @@ const Navbar = () => {
               </div>
             </h1>
           </Link>
+          <ConnectWallet />
           <div className="navLinks">
             <ul>
               <li>
