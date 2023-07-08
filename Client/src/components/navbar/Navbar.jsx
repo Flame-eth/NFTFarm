@@ -20,7 +20,7 @@ const Navbar = () => {
               </div>
             </h1>
           </Link>
-          <ConnectWallet />
+          {/* <ConnectWallet /> */}
           <div className="navLinks">
             <ul>
               <li>
