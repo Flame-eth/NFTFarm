@@ -66,6 +66,24 @@ const Stake = ({ stakeArray }) => {
     prevArrow: <SamplePrevArrow />,
   };
 
+  const [amount, setAmount] = useState();
+  const [dailyReturn, setDailyReturn] = useState();
+
+  const handleAmount = (e, percentage) => {
+    setAmount(e.target.value);
+    setDailyReturn((e.target.value * percentage) / 100);
+  };
+
+  const handleSubmit = (e, min, max) => {
+    e.preventDefault();
+  };
+
+  useEffect(() => {
+    if (!showModal) {
+      setAmount(0);
+      setDailyReturn(0);
+    }
+  }, [showModal]);
   return (
     <div className="stake">
       <div className="stakeContainer">
@@ -172,18 +190,27 @@ const Stake = ({ stakeArray }) => {
                     <div className="inputCon">
                       <div className="input">
                         <label htmlFor="">Amount:</label>
-                        <input type="number" placeholder="Enter Amount" />
+                        <input
+                          type="number"
+                          placeholder="Enter Amount"
+                          onChange={(e) =>
+                            handleAmount(e, stake[stakeID].percent)
+                          }
+                        />
                       </div>
                       <div className="input">
                         <label htmlFor="">Daily Return:</label>
                         <input
                           disabled
+                          value={dailyReturn}
                           type="number"
                           placeholder="Daily Return"
                         />
                       </div>
                     </div>
-                    <button type="submit">Stake</button>
+                    <button onClick={(e) => handleSubmit} type="submit">
+                      Stake
+                    </button>
                   </form>
                 </div>
               </div>
