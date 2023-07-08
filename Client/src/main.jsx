@@ -42,6 +42,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         "--w3m-background-color": "#1a1a1a",
         "--w3m-z-index": "99999999999999999999999",
         "--w3m-logo-image-url": "../logo.png",
+        "--w3m-color-overlay": "#1a1a1a",
       }}
     />
   </>
