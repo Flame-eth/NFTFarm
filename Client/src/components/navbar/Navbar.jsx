@@ -9,8 +9,10 @@ import { Web3Button } from "@web3modal/react";
 import { useAccount } from "wagmi";
 import newRequest from "../../utils/newRequest";
 import axios from "axios";
+import { connect } from "react-redux";
+import { setCurrentUser } from "../../redux/user/user.actions.js";
 
-const Navbar = () => {
+const Navbar = ({ user, setCurrentUser }) => {
   const [sidebar, setSidebar] = useState(false);
 
   // const account = useAccount({
@@ -30,10 +32,11 @@ const Navbar = () => {
       axios
         .post("http://localhost:3000/api/users/create", { walletID: address })
         .then((res) => {
-          console.log(res.data.data);
+          // console.log(res.data.data);
+          setCurrentUser(res.data.data);
         });
     }
-  }, [address]);
+  }, [address, setCurrentUser]);
 
   return (
     <div className="Container">
@@ -127,4 +130,12 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+  user: state.user.currentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

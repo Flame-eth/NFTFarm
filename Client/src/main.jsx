@@ -50,6 +50,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         "--w3m-color-overlay": "#1a1a1a",
       }}
     />
-    <Web3NetworkSwitch />
+    {/* <Web3NetworkSwitch /> */}
   </>
 );
