@@ -160,7 +160,7 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
 
   const handleSubmit = async (e, min, max) => {
     e.preventDefault();
-    if (amount > min) {
+    if (amount < min) {
       // alert("Enter amount greater than minimum");
       showToast("Enter amount greater than minimum", "error");
     } else if (amount > max) {
@@ -174,12 +174,10 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
           showToast("You have already staked", "error");
         } else if (user.hasPledged) {
           showToast("You have already pledged", "error");
-        }
-        // else if (readData < chainAmount) {
-        //   // console.log(chainAmount - readData)
-        //   showToast("You don't have sufficient balance", "error");
-        // }
-        else {
+        } else if (readData < chainAmount) {
+          // console.log(chainAmount - readData)
+          showToast("You don't have sufficient balance", "error");
+        } else {
           setLoadingState(true);
           write();
 
