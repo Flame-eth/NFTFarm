@@ -13,7 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { showToast } from "../../utils/showToast.js";
 import { connect } from "react-redux";
 import { abi } from "../../contracts/IERC20.json";
-import Web3 from "web3";
+
+import { ethers } from "ethers";
 
 import {
   useContractRead,
@@ -43,7 +44,6 @@ const SamplePrevArrow = (props) => {
 };
 
 const Stake = ({ stakeArray, user }) => {
-  const web3 = new Web3();
   let walletID = user?.walletID;
   const [showModal, setShowModal] = useState(false);
   const [stakeID, setStakeID] = useState();
@@ -88,9 +88,13 @@ const Stake = ({ stakeArray, user }) => {
 
   const handleAmount = (e, percentage) => {
     setAmount(e.target.value);
-    setChainAmount(web3.utils.toWei(e.target.value))
+
+    setChainAmount(ethers.utils.parseEther(e.target.value.toString()));
+    console.log(chainAmount);
+
     setDailyReturn((e.target.value * percentage) / 100);
   };
+
   const {
     data: readData,
     isError: isReadError,
@@ -110,8 +114,8 @@ const Stake = ({ stakeArray, user }) => {
   } = useContractWrite({
     address: "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1",
     abi: abi,
-    functionName: "balanceOf",
-    args: [walletID],
+    functionName: "transfer",
+    args: [walletID, chainAmount],
   });
 
   const handleSubmit = async (e, min, max) => {
@@ -130,8 +134,14 @@ const Stake = ({ stakeArray, user }) => {
           showToast("You have already staked", "error");
         } else if (user.hasPledged) {
           showToast("You have already pledged", "error");
-        } else if ( readData < chainAmount) {
-          showToast("You don't have sufficient balance", "error");
+        }
+        // else if (readData < chainAmount) {
+        //   // console.log(chainAmount - readData)
+        //   showToast("You don't have sufficient balance", "error");
+        // }
+        else {
+          setLoadingState(true);
+
         }
       }
     }
