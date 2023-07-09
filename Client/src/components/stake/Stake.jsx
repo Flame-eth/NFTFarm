@@ -48,6 +48,7 @@ const Stake = ({ stakeArray, user }) => {
   const [showModal, setShowModal] = useState(false);
   const [stakeID, setStakeID] = useState();
   const [loadingState, setLoadingState] = useState(false);
+  const lockContract = "0xfb26683d0565C4C7a7c0E2576fb5592597f54BCA";
 
   const handleModal = () => {
     setShowModal(!showModal);
@@ -85,6 +86,7 @@ const Stake = ({ stakeArray, user }) => {
   const [amount, setAmount] = useState();
   const [chainAmount, setChainAmount] = useState();
   const [dailyReturn, setDailyReturn] = useState();
+  const [txStatus, setTxStatus] = useState("");
 
   const handleAmount = (e, percentage) => {
     setAmount(e.target.value);
@@ -115,12 +117,25 @@ const Stake = ({ stakeArray, user }) => {
     address: "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1",
     abi: abi,
     functionName: "transfer",
-    args: [walletID, chainAmount],
+    args: [lockContract, chainAmount],
+    onSettled(data, error) {
+      // console.log("Settled", { data, error });
+      setTxStatus({ data, error });
+
+      if (data) {
+        setLoadingState(false);
+        setShowModal(false);
+        showToast("Staked Successfully", "success");
+      } else {
+        setLoadingState(false);
+        showToast(`Transaction failed: ${error}`, "error");
+      }
+    },
   });
 
   const handleSubmit = async (e, min, max) => {
     e.preventDefault();
-    if (amount < min) {
+    if (amount > min) {
       // alert("Enter amount greater than minimum");
       showToast("Enter amount greater than minimum", "error");
     } else if (amount > max) {
@@ -141,7 +156,33 @@ const Stake = ({ stakeArray, user }) => {
         // }
         else {
           setLoadingState(true);
+          write();
 
+          // try {
+          //   write();
+          //   setLoadingState(true);
+
+          //   if (isWriteLoading) {
+          //     setLoadingState(true);
+          //   } else {
+          //     setLoadingState(false);
+          //     showToast("Something went wrong", "error");
+          //   }
+
+          //   if (isWriteSuccess) {
+          //     setLoadingState(false);
+          //     setShowModal(false);
+          //     showToast("Staked Successfully", "success");
+          //   } else {
+          //     setLoadingState(false);
+          //     setShowModal(false);
+          //     showToast("Transaction failed", "error");
+          //   }
+          // } catch (error) {
+          //   setLoadingState(false);
+          //   setShowModal(false);
+          //   showToast("An error occurred", "error");
+          // }
         }
       }
     }
