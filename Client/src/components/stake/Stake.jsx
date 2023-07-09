@@ -7,6 +7,11 @@ import { Link } from "react-router-dom";
 import { stake } from "../../constants/stake";
 import { AiOutlineClose } from "react-icons/ai";
 import { usdt } from "../../assets/images";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { showToast } from "../../utils/showToast.js";
+import { connect } from "react-redux";
 
 const SampleNextArrow = (props) => {
   const { onClick } = props;
@@ -29,7 +34,8 @@ const SamplePrevArrow = (props) => {
   );
 };
 
-const Stake = ({ stakeArray }) => {
+const Stake = ({ stakeArray, user }) => {
+  console.log(user);
   const [showModal, setShowModal] = useState(false);
   const [stakeID, setStakeID] = useState();
 
@@ -76,6 +82,25 @@ const Stake = ({ stakeArray }) => {
 
   const handleSubmit = (e, min, max) => {
     e.preventDefault();
+    if (amount < min) {
+      // alert("Enter amount greater than minimum");
+      showToast("Enter amount greater than minimum", "error");
+    } else if (amount > max) {
+      // alert("Enter amount less than maximum");
+      showToast("Enter amount less than maximum", "error");
+    } else {
+      if (!user) {
+        showToast("Please connect your wallet", "error");
+      } else {
+        if (user.hasStaked) {
+          showToast("You have already staked", "error");
+        } else if (user.hasPledged) {
+          showToast("You have already pledged", "error");
+        } else {
+          showToast("Staked Successfully", "success");
+        }
+      }
+    }
   };
 
   useEffect(() => {
@@ -208,7 +233,11 @@ const Stake = ({ stakeArray }) => {
                         />
                       </div>
                     </div>
-                    <button onClick={(e) => handleSubmit} type="submit">
+                    <button
+                      onClick={(e) =>
+                        handleSubmit(e, stake[stakeID].min, stake[stakeID].max)
+                      }
+                      type="submit">
                       Stake
                     </button>
                   </form>
@@ -224,4 +253,8 @@ const Stake = ({ stakeArray }) => {
   );
 };
 
-export default Stake;
+const mapStateToProps = (state) => ({
+  user: state.user.currentUser,
+});
+
+export default connect(mapStateToProps)(Stake);

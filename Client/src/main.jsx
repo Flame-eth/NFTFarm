@@ -6,6 +6,8 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { Web3NetworkSwitch } from "@web3modal/react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   EthereumClient,
@@ -50,6 +52,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         "--w3m-color-overlay": "#1a1a1a",
       }}
     />
+
+    <ToastContainer />
     {/* <Web3NetworkSwitch /> */}
   </>
 );
