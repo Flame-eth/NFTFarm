@@ -21,6 +21,7 @@ import {
   useContractWrite,
   usePrepareContractWrite,
 } from "wagmi";
+import axios from "axios";
 
 const SampleNextArrow = (props) => {
   const { onClick } = props;
@@ -123,12 +124,13 @@ const Stake = ({ stakeArray, user }) => {
       setTxStatus({ data, error });
 
       if (data) {
+        axios.post("http://localhost:3000/api/users/pledge", )
         setLoadingState(false);
         setShowModal(false);
         showToast("Staked Successfully", "success");
       } else {
         setLoadingState(false);
-        showToast(`Transaction failed: ${error}`, "error");
+        showToast("Transaction execution failed", "error");
       }
     },
   });
