@@ -87,7 +87,6 @@ const Stake = ({ stakeArray, user }) => {
   const [amount, setAmount] = useState();
   const [chainAmount, setChainAmount] = useState();
   const [dailyReturn, setDailyReturn] = useState();
-  const [txStatus, setTxStatus] = useState("");
 
   const handleAmount = (e, percentage) => {
     setAmount(e.target.value);
@@ -95,7 +94,7 @@ const Stake = ({ stakeArray, user }) => {
     setChainAmount(ethers.utils.parseEther(e.target.value.toString()));
     console.log(chainAmount);
 
-    setDailyReturn((e.target.value * percentage) / 100);
+    setDailyReturn(e.target.value * (percentage / 100));
   };
 
   const {
@@ -121,10 +120,22 @@ const Stake = ({ stakeArray, user }) => {
     args: [lockContract, chainAmount],
     onSettled(data, error) {
       // console.log("Settled", { data, error });
-      setTxStatus({ data, error });
 
       if (data) {
-        axios.post("http://localhost:3000/api/users/pledge", )
+        axios
+          .post(`http://localhost:3000/api/users/staking/new/${walletID}`, {
+            walletID: walletID,
+            stakingID: stakeID,
+            stakingAmount: amount,
+            stakingPercentage: stake[stakeID].percent,
+            hourlyEarning: dailyReturn / 24,
+            dailyEarning: dailyReturn,
+            stakingStatus: true,
+          })
+          .then((res) => {
+            console.log(res.data);
+          });
+
         setLoadingState(false);
         setShowModal(false);
         showToast("Staked Successfully", "success");
@@ -252,9 +263,10 @@ const Stake = ({ stakeArray, user }) => {
                               setStakeID(ID);
                               if (stakeID == index) {
                                 setShowModal(!showModal);
-                              } else {
-                                setShowModal(true);
                               }
+                              // else {
+                              //   setShowModal(true);
+                              // }
                             }}>
                             <i className="fa fa-plus"></i>
                             <span>Start Using</span>
