@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { showToast } from "../../utils/showToast.js";
 import { connect } from "react-redux";
+import { setCurrentUser } from "../../redux/user/user.actions.js";
 import { abi } from "../../contracts/IERC20.json";
 
 import { ethers } from "ethers";
@@ -44,7 +45,7 @@ const SamplePrevArrow = (props) => {
   );
 };
 
-const Stake = ({ stakeArray, user }) => {
+const Stake = ({ stakeArray, user, setCurrentUser }) => {
   let walletID = user?.walletID;
   const [showModal, setShowModal] = useState(false);
   const [stakeID, setStakeID] = useState();
@@ -135,13 +136,21 @@ const Stake = ({ stakeArray, user }) => {
             stakingStatus: true,
           })
           .then((res) => {
-            console.log(res.data);
+            axios
+              .patch(`http://localhost:3000/api/users/update/${walletID}`, {
+                hasStaked: true,
+              })
+              .then((res) => {
+                setCurrentUser(res.data.data);
+              });
           });
 
         setLoadingState(false);
         setShowModal(false);
         showToast("Staked Successfully. Redirecting...", "success");
-        navigate("/account");
+        setTimeout(() => {
+          navigate("/account");
+        }, 2500);
       } else {
         setLoadingState(false);
         showToast("Transaction execution failed", "error");
@@ -366,4 +375,8 @@ const mapStateToProps = (state) => ({
   user: state.user.currentUser,
 });
 
-export default connect(mapStateToProps)(Stake);
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Stake);
