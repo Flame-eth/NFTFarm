@@ -9,6 +9,7 @@ import { Web3NetworkSwitch } from "@web3modal/react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 import {
   EthereumClient,
   w3mConnectors,

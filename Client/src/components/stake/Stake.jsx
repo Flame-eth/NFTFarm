@@ -6,12 +6,20 @@ import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import { stake } from "../../constants/stake";
 import { AiOutlineClose } from "react-icons/ai";
-import { usdt } from "../../assets/images";
+import { spinner, usdt } from "../../assets/images";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { showToast } from "../../utils/showToast.js";
 import { connect } from "react-redux";
+import { abi } from "../../contracts/IERC20.json";
+import Web3 from "web3";
+
+import {
+  useContractRead,
+  useContractWrite,
+  usePrepareContractWrite,
+} from "wagmi";
 
 const SampleNextArrow = (props) => {
   const { onClick } = props;
@@ -35,9 +43,11 @@ const SamplePrevArrow = (props) => {
 };
 
 const Stake = ({ stakeArray, user }) => {
-  console.log(user);
+  const web3 = new Web3();
+  let walletID = user?.walletID;
   const [showModal, setShowModal] = useState(false);
   const [stakeID, setStakeID] = useState();
+  const [loadingState, setLoadingState] = useState(false);
 
   const handleModal = () => {
     setShowModal(!showModal);
@@ -73,14 +83,38 @@ const Stake = ({ stakeArray, user }) => {
   };
 
   const [amount, setAmount] = useState();
+  const [chainAmount, setChainAmount] = useState();
   const [dailyReturn, setDailyReturn] = useState();
 
   const handleAmount = (e, percentage) => {
     setAmount(e.target.value);
+    setChainAmount(web3.utils.toWei(e.target.value))
     setDailyReturn((e.target.value * percentage) / 100);
   };
+  const {
+    data: readData,
+    isError: isReadError,
+    isLoading: isReadLoading,
+  } = useContractRead({
+    address: "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1",
+    abi: abi,
+    functionName: "balanceOf",
+    args: [walletID],
+  });
 
-  const handleSubmit = (e, min, max) => {
+  const {
+    data: writeData,
+    isLoading: isWriteLoading,
+    isSuccess: isWriteSuccess,
+    write,
+  } = useContractWrite({
+    address: "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1",
+    abi: abi,
+    functionName: "balanceOf",
+    args: [walletID],
+  });
+
+  const handleSubmit = async (e, min, max) => {
     e.preventDefault();
     if (amount < min) {
       // alert("Enter amount greater than minimum");
@@ -96,8 +130,8 @@ const Stake = ({ stakeArray, user }) => {
           showToast("You have already staked", "error");
         } else if (user.hasPledged) {
           showToast("You have already pledged", "error");
-        } else {
-          showToast("Staked Successfully", "success");
+        } else if ( readData < chainAmount) {
+          showToast("You don't have sufficient balance", "error");
         }
       }
     }
@@ -242,6 +276,13 @@ const Stake = ({ stakeArray, user }) => {
                     </button>
                   </form>
                 </div>
+                {loadingState ? (
+                  <div className="loader">
+                    <img src={spinner} alt="" />
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           ) : (

@@ -39,6 +39,7 @@ import bs8 from "./Naka.png";
 import bs9 from "./Valhalla.png";
 import bs10 from "./deep.png";
 import bs11 from "./pirate.png";
+import spinner from "./spinner-small.gif";
 
 export {
   Background,
@@ -82,4 +83,5 @@ export {
   bs9,
   bs10,
   bs11,
+  spinner,
 };
