@@ -3,7 +3,7 @@ import "./Stake.scss";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { stake } from "../../constants/stake";
 import { AiOutlineClose } from "react-icons/ai";
 import { spinner, usdt } from "../../assets/images";
@@ -50,6 +50,8 @@ const Stake = ({ stakeArray, user }) => {
   const [stakeID, setStakeID] = useState();
   const [loadingState, setLoadingState] = useState(false);
   const lockContract = "0xfb26683d0565C4C7a7c0E2576fb5592597f54BCA";
+
+  const navigate = useNavigate();
 
   const handleModal = () => {
     setShowModal(!showModal);
@@ -138,7 +140,8 @@ const Stake = ({ stakeArray, user }) => {
 
         setLoadingState(false);
         setShowModal(false);
-        showToast("Staked Successfully", "success");
+        showToast("Staked Successfully. Redirecting...", "success");
+        navigate("/account");
       } else {
         setLoadingState(false);
         showToast("Transaction execution failed", "error");
