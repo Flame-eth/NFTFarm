@@ -93,26 +93,35 @@ const Account = ({ user, setCurrentUser }) => {
                 {readData
                   ? ethers.utils.formatEther(readData).toString().slice(0, 5)
                   : "0"}
+                <img src={usdt} alt="" />
               </p>
             </div>
             {user.stakingRecord.length > 0 ? (
-              
               <>
                 <div className="section">
                   <h2>Current Yield Percentage</h2>
-                  <p>0%</p>
+                  <p>
+                    {
+                      user.stakingRecord[user.stakingRecord.length - 1]
+                        .stakingPercentage
+                    }{" "}
+                    %
+                  </p>
                 </div>
                 <div className="section">
-                  <h2>Today&apos;s Income</h2>
+                  <h2>Daily Income</h2>
                   <p>
-                    0
+                    {
+                      user.stakingRecord[user.stakingRecord.length - 1]
+                        .dailyEarning
+                    }
                     <img src={usdt} alt="" />
                   </p>
                 </div>
                 <div className="section">
                   <h2>Cumulative Income</h2>
                   <p>
-                    0
+                    {user.totalStakingIncome}
                     <img src={usdt} alt="" />
                   </p>
                 </div>
@@ -144,34 +153,71 @@ const Account = ({ user, setCurrentUser }) => {
         <div className="pledgingRecord">
           <h1>NFT Pledging Income</h1>
           <div className="pledgingRecordCon">
-            <div className="section">
-              <h2>Current Pledge</h2>
-              <p>
-                0
-                <img src={usdt} alt="" />
-              </p>
-            </div>
-            <div className="section">
-              <h2>Current Income</h2>
-              <p>
-                0
-                <img src={usdt} alt="" />
-              </p>
-            </div>
-            <div className="section">
-              <h2>Cumulative Pledge</h2>
-              <p>
-                0
-                <img src={usdt} alt="" />
-              </p>
-            </div>
-            <div className="section">
-              <h2>Cumulative Income</h2>
-              <p>
-                0
-                <img src={usdt} alt="" />
-              </p>
-            </div>
+            {user.pledgingRecord.length > 0 ? (
+              <>
+                <div className="section">
+                  <h2>Current Pledge</h2>
+                  <p>
+                    {
+                      user.pledgingRecord[user.pledgingRecord.length - 1]
+                    }
+                    <img src={usdt} alt="" />
+                  </p>
+                </div>
+                <div className="section">
+                  <h2>Current Income</h2>
+                  <p>
+                    0
+                    <img src={usdt} alt="" />
+                  </p>
+                </div>
+                <div className="section">
+                  <h2>Cumulative Pledge</h2>
+                  <p>
+                    0
+                    <img src={usdt} alt="" />
+                  </p>
+                </div>
+                <div className="section">
+                  <h2>Cumulative Income</h2>
+                  <p>
+                    0
+                    <img src={usdt} alt="" />
+                  </p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="section">
+                  <h2>Current Pledge</h2>
+                  <p>
+                    0
+                    <img src={usdt} alt="" />
+                  </p>
+                </div>
+                <div className="section">
+                  <h2>Current Income</h2>
+                  <p>
+                    0
+                    <img src={usdt} alt="" />
+                  </p>
+                </div>
+                <div className="section">
+                  <h2>Cumulative Pledge</h2>
+                  <p>
+                    0
+                    <img src={usdt} alt="" />
+                  </p>
+                </div>
+                <div className="section">
+                  <h2>Cumulative Income</h2>
+                  <p>
+                    0
+                    <img src={usdt} alt="" />
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
         <div className="changeRecord"></div>
