@@ -129,17 +129,25 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
         axios
           .post(`http://localhost:3000/api/users/pledging/new/${walletID}`, {
             walletID: walletID,
-            stakingID: pledgeID,
-            stakingAmount: amount,
-            stakingPercentage: pledgeArray[pledgeID].percent,
-            hourlyEarning: totalReturn / 24,
-            dailyEarning: totalReturn,
-            stakingStatus: true,
+            pledgeID: pledgeID,
+            pledgeAmount: amount,
+            pledgePercentage: pledgeArray[pledgeID].percent,
+            pledgeDuration: pledgeArray[pledgeID].days,
+            pledgeDate: new Date(),
+            yeildDate: new Date(
+              new Date().setDate(
+                new Date().getDate() + pledgeArray[pledgeID].days
+              )
+            ),
+            dailyEarning: totalReturn / pledgeArray[pledgeID].days,
+            targetEarning: totalReturn,
+            amountEarned: 0,
+            pledgeStatus: true,
           })
           .then((res) => {
             axios
               .patch(`http://localhost:3000/api/users/update/${walletID}`, {
-                hasStaked: true,
+                hasPledged: true,
               })
               .then((res) => {
                 setCurrentUser(res.data.data);
