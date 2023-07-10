@@ -13,6 +13,7 @@ import { ethers } from "ethers";
 
 const Account = ({ user, setCurrentUser }) => {
   const { address, isConnecting, isDisconnected } = useAccount();
+  // console.log(user.stakingRecord);
 
   useEffect(() => {
     if (address) {
@@ -32,7 +33,10 @@ const Account = ({ user, setCurrentUser }) => {
     if (!user) {
       showToast("Wallet must be connected to view account records", "warning");
     }
-  }, [user]);
+    if (user?.stakingRecord.length == 0 && user?.pledgingRecord.length == 0) {
+      showToast("You have no staking or pledging record", "warning");
+    }
+  }, []);
 
   const [WithdrawAmount, setWithdrawAmount] = useState("");
   let walletID = user?.walletID;
@@ -91,24 +95,50 @@ const Account = ({ user, setCurrentUser }) => {
                   : "0"}
               </p>
             </div>
-            <div className="section">
-              <h2>Current Yield Percentage</h2>
-              <p>0%</p>
-            </div>
-            <div className="section">
-              <h2>Today&apos;s Income</h2>
-              <p>
-                0
-                <img src={usdt} alt="" />
-              </p>
-            </div>
-            <div className="section">
-              <h2>Cumulative Income</h2>
-              <p>
-                0
-                <img src={usdt} alt="" />
-              </p>
-            </div>
+            {user.stakingRecord.length > 0 ? (
+              
+              <>
+                <div className="section">
+                  <h2>Current Yield Percentage</h2>
+                  <p>0%</p>
+                </div>
+                <div className="section">
+                  <h2>Today&apos;s Income</h2>
+                  <p>
+                    0
+                    <img src={usdt} alt="" />
+                  </p>
+                </div>
+                <div className="section">
+                  <h2>Cumulative Income</h2>
+                  <p>
+                    0
+                    <img src={usdt} alt="" />
+                  </p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="section">
+                  <h2>Current Yield Percentage</h2>
+                  <p>0%</p>
+                </div>
+                <div className="section">
+                  <h2>Today&apos;s Income</h2>
+                  <p>
+                    0
+                    <img src={usdt} alt="" />
+                  </p>
+                </div>
+                <div className="section">
+                  <h2>Cumulative Income</h2>
+                  <p>
+                    0
+                    <img src={usdt} alt="" />
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
         <div className="pledgingRecord">
