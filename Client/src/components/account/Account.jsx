@@ -96,7 +96,7 @@ const Account = ({ user, setCurrentUser }) => {
                 <img src={usdt} alt="" />
               </p>
             </div>
-            {user.stakingRecord.length > 0 ? (
+            {user?.stakingRecord.length > 0 ? (
               <>
                 <div className="section">
                   <h2>Current Yield Percentage</h2>
@@ -153,13 +153,14 @@ const Account = ({ user, setCurrentUser }) => {
         <div className="pledgingRecord">
           <h1>NFT Pledging Income</h1>
           <div className="pledgingRecordCon">
-            {user.pledgingRecord.length > 0 ? (
+            {user?.pledgingRecord.length > 0 ? (
               <>
                 <div className="section">
                   <h2>Current Pledge</h2>
                   <p>
                     {
                       user.pledgingRecord[user.pledgingRecord.length - 1]
+                        .pledgeAmount
                     }
                     <img src={usdt} alt="" />
                   </p>
@@ -167,21 +168,24 @@ const Account = ({ user, setCurrentUser }) => {
                 <div className="section">
                   <h2>Current Income</h2>
                   <p>
-                    0
+                    {
+                      user.pledgingRecord[user.pledgingRecord.length - 1]
+                        .amountEarned
+                    }
                     <img src={usdt} alt="" />
                   </p>
                 </div>
                 <div className="section">
                   <h2>Cumulative Pledge</h2>
                   <p>
-                    0
+                    {user.totalPledgeIncome}
                     <img src={usdt} alt="" />
                   </p>
                 </div>
                 <div className="section">
                   <h2>Cumulative Income</h2>
                   <p>
-                    0
+                    {user.balance}
                     <img src={usdt} alt="" />
                   </p>
                 </div>
