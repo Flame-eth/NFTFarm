@@ -335,20 +335,44 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
                     <div className="inputCon">
                       <div className="input">
                         <label htmlFor="">Amount:</label>
-                        <input type="number" placeholder="Enter Amount" />
+                        <input
+                          type="number"
+                          placeholder="Enter Amount"
+                          onChange={(e) =>
+                            handleAmount(e, pledgeArray[pledgeID].percent)
+                          }
+                        />
                       </div>
                       <div className="input">
                         <label htmlFor="">Total Return:</label>
                         <input
                           disabled
                           type="number"
+                          value={dailyReturn}
                           placeholder="Total Return"
                         />
                       </div>
                     </div>
-                    <button type="submit">Pledge</button>
+                    <button
+                      onClick={(e) =>
+                        handleSubmit(
+                          e,
+                          pledgeArray[pledgeID].min,
+                          pledgeArray[pledgeID].max
+                        )
+                      }
+                      type="submit">
+                      Pledge
+                    </button>
                   </form>
                 </div>
+                {loadingState ? (
+                  <div className="loader">
+                    <img src={spinner} alt="" />
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           ) : (
