@@ -3,10 +3,20 @@ import "./Pledge.scss";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { AiOutlineClose } from "react-icons/ai";
-import { usdt } from "../../assets/images";
+import { spinner, usdt } from "../../assets/images";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { showToast } from "../../utils/showToast.js";
+import { connect } from "react-redux";
+import { setCurrentUser } from "../../redux/user/user.actions.js";
+import { abi } from "../../contracts/IERC20.json";
+
+import { ethers } from "ethers";
 
 const SampleNextArrow = (props) => {
   const { onClick } = props;
