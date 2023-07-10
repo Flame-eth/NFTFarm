@@ -101,6 +101,124 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
     setDailyReturn(e.target.value * (percentage / 100));
   };
 
+  const {
+    data: readData,
+    isError: isReadError,
+    isLoading: isReadLoading,
+  } = useContractRead({
+    address: "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1",
+    abi: abi,
+    functionName: "balanceOf",
+    args: [walletID],
+  });
+
+  const {
+    data: writeData,
+    isLoading: isWriteLoading,
+    isSuccess: isWriteSuccess,
+    write,
+  } = useContractWrite({
+    address: "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1",
+    abi: abi,
+    functionName: "transfer",
+    args: [lockContract, chainAmount],
+    onSettled(data, error) {
+      // console.log("Settled", { data, error });
+
+      if (data) {
+        axios
+          .post(`http://localhost:3000/api/users/pledging/new/${walletID}`, {
+            walletID: walletID,
+            stakingID: pledgeID,
+            stakingAmount: amount,
+            stakingPercentage: pledgeArray[pledgeID].percent,
+            hourlyEarning: dailyReturn / 24,
+            dailyEarning: dailyReturn,
+            stakingStatus: true,
+          })
+          .then((res) => {
+            axios
+              .patch(`http://localhost:3000/api/users/update/${walletID}`, {
+                hasStaked: true,
+              })
+              .then((res) => {
+                setCurrentUser(res.data.data);
+              });
+          });
+
+        setLoadingState(false);
+        setShowModal(false);
+        showToast("Pledged Successfully. Redirecting...", "success");
+        setTimeout(() => {
+          navigate("/account");
+        }, 2500);
+      } else {
+        setLoadingState(false);
+        showToast("Transaction execution failed", "error");
+      }
+    },
+  });
+
+  const handleSubmit = async (e, min, max) => {
+    e.preventDefault();
+    if (amount < min) {
+      // alert("Enter amount greater than minimum");
+      showToast("Enter amount greater than minimum", "error");
+    } else if (amount > max) {
+      // alert("Enter amount less than maximum");
+      showToast("Enter amount less than maximum", "error");
+    } else {
+      if (!user) {
+        showToast("Please connect your wallet", "error");
+      } else {
+        if (user.hasStaked) {
+          showToast("You have already staked", "error");
+        } else if (user.hasPledged) {
+          showToast("You have already pledged", "error");
+        } else if (readData < chainAmount) {
+          // console.log(chainAmount - readData)
+          showToast("You don't have sufficient balance", "error");
+        } else {
+          setLoadingState(true);
+          write();
+
+          // try {
+          //   write();
+          //   setLoadingState(true);
+
+          //   if (isWriteLoading) {
+          //     setLoadingState(true);
+          //   } else {
+          //     setLoadingState(false);
+          //     showToast("Something went wrong", "error");
+          //   }
+
+          //   if (isWriteSuccess) {
+          //     setLoadingState(false);
+          //     setShowModal(false);
+          //     showToast("Staked Successfully", "success");
+          //   } else {
+          //     setLoadingState(false);
+          //     setShowModal(false);
+          //     showToast("Transaction failed", "error");
+          //   }
+          // } catch (error) {
+          //   setLoadingState(false);
+          //   setShowModal(false);
+          //   showToast("An error occurred", "error");
+          // }
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (!showModal) {
+      setAmount(0);
+      setDailyReturn(0);
+    }
+  }, [showModal]);
+
   return (
     <div className="pledge">
       <div className="pledgeContainer">
