@@ -86,7 +86,9 @@ const Account = ({ user, setCurrentUser }) => {
             <div className="section">
               <h2>On-chain Balance</h2>
               <p>
-                {readData ? ethers.utils.formatEther(readData).toString() : "0"}
+                {readData
+                  ? ethers.utils.formatEther(readData).toString().slice(0, 5)
+                  : "0"}
               </p>
             </div>
             <div className="section">
