@@ -404,4 +404,4 @@ const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
-export default connect(mapDispatchToProps, mapStateToProps)(Pledge);
+export default connect(mapStateToProps, mapDispatchToProps)(Pledge);
