@@ -90,15 +90,15 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
 
   const [amount, setAmount] = useState();
   const [chainAmount, setChainAmount] = useState();
-  const [dailyReturn, setDailyReturn] = useState();
+  const [totalReturn, setTotalReturn] = useState();
 
-  const handleAmount = (e, percentage) => {
+  const handleAmount = (e, percentage, duration) => {
     setAmount(e.target.value);
 
     setChainAmount(ethers.utils.parseEther(e.target.value.toString()));
     // console.log(chainAmount);
 
-    setDailyReturn(e.target.value * (percentage / 100));
+    setTotalReturn(e.target.value * (percentage / 100) * duration);
   };
 
   const {
@@ -132,8 +132,8 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
             stakingID: pledgeID,
             stakingAmount: amount,
             stakingPercentage: pledgeArray[pledgeID].percent,
-            hourlyEarning: dailyReturn / 24,
-            dailyEarning: dailyReturn,
+            hourlyEarning: totalReturn / 24,
+            dailyEarning: totalReturn,
             stakingStatus: true,
           })
           .then((res) => {
@@ -215,7 +215,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
   useEffect(() => {
     if (!showModal) {
       setAmount(0);
-      setDailyReturn(0);
+      setTotalReturn(0);
     }
   }, [showModal]);
 
@@ -339,7 +339,11 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
                           type="number"
                           placeholder="Enter Amount"
                           onChange={(e) =>
-                            handleAmount(e, pledgeArray[pledgeID].percent)
+                            handleAmount(
+                              e,
+                              pledgeArray[pledgeID].percent,
+                              pledgeArray[pledgeID].days
+                            )
                           }
                         />
                       </div>
@@ -348,7 +352,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
                         <input
                           disabled
                           type="number"
-                          value={dailyReturn}
+                          value={totalReturn}
                           placeholder="Total Return"
                         />
                       </div>
