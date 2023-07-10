@@ -5,15 +5,48 @@ import { usdt } from "../../assets/images";
 import { CgSandClock } from "react-icons/cg";
 import { connect } from "react-redux";
 import { showToast } from "../../utils/showToast";
+import { useAccount, useContractRead } from "wagmi";
+import axios from "axios";
+import { setCurrentUser } from "../../redux/user/user.actions";
+import { abi } from "../../contracts/IERC20.json";
+import { ethers } from "ethers";
 
-const Account = ({ user }) => {
-  console.log(user);
+const Account = ({ user, setCurrentUser }) => {
+  const { address, isConnecting, isDisconnected } = useAccount();
+
   useEffect(() => {
+    if (address) {
+      // const data = newRequest.post("users/create", { walletID: address });
+      // console.log(data.data);
+      axios
+        .post("http://localhost:3000/api/users/create", { walletID: address })
+        .then((res) => {
+          // console.log(res.data.data);
+          setCurrentUser(res.data.data);
+        });
+    }
+  }, [address, setCurrentUser]);
+
+  useEffect(() => {
+    console.log(user);
     if (!user) {
-      showToast("Connect your wallet to see account records", "error");
+      showToast("Wallet must be connected to view account records", "warning");
     }
   }, [user]);
+
   const [WithdrawAmount, setWithdrawAmount] = useState("");
+  let walletID = user?.walletID;
+
+  const {
+    data: readData,
+    isError: isReadError,
+    isLoading: isReadLoading,
+  } = useContractRead({
+    address: "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1",
+    abi: abi,
+    functionName: "balanceOf",
+    args: [walletID],
+  });
   return (
     <div className="account">
       <div className="navbar">
@@ -25,7 +58,7 @@ const Account = ({ user }) => {
         </div>
         <div className="balance">
           <h1>
-            0.00
+            {user ? user.balance : "0.00"}
             <span>
               <img src={usdt} alt="" />
             </span>
@@ -52,7 +85,9 @@ const Account = ({ user }) => {
           <div className="stakingRecordCon">
             <div className="section">
               <h2>On-chain Balance</h2>
-              <p>0.00</p>
+              <p>
+                {readData ? ethers.utils.formatEther(readData).toString() : "0"}
+              </p>
             </div>
             <div className="section">
               <h2>Current Yield Percentage</h2>
@@ -117,4 +152,8 @@ const mapStateToProps = (state) => ({
   user: state.user.currentUser,
 });
 
-export default connect(mapStateToProps)(Account);
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Account);

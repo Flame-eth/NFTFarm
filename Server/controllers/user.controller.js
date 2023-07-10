@@ -28,6 +28,12 @@ export const createUser = async (req, res, next) => {
         walletID: req.body.walletID,
         hasStaked: false,
         hasPledged: false,
+        stakingRecord: [],
+        pledgingRecord: [],
+        totalStakingIncome: 0.0,
+        totalPledgingIncome: 0.0,
+        totalPledge: 0.0,
+        balance: 0.0,
       });
       await user.save();
       res.status(201).json({
