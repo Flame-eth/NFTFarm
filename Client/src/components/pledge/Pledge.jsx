@@ -18,6 +18,13 @@ import { abi } from "../../contracts/IERC20.json";
 
 import { ethers } from "ethers";
 
+import {
+  useContractRead,
+  useContractWrite,
+  usePrepareContractWrite,
+} from "wagmi";
+import axios from "axios";
+
 const SampleNextArrow = (props) => {
   const { onClick } = props;
   return (
@@ -39,7 +46,7 @@ const SamplePrevArrow = (props) => {
   );
 };
 
-const Pledge = ({ pledgeArray }) => {
+const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
   const [showModal, setShowModal] = useState(false);
   const [pledgeID, setPledgeID] = useState();
 
@@ -217,4 +224,12 @@ const Pledge = ({ pledgeArray }) => {
   );
 };
 
-export default Pledge;
+const mapStateToProps = (state) => ({
+  user: state.user.currentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(mapDispatchToProps, mapStateToProps)(Pledge);
