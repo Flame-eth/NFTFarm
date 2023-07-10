@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Account.scss";
 import Navbar from "../navbar/Navbar";
 import { usdt } from "../../assets/images";
 import { CgSandClock } from "react-icons/cg";
+import { connect } from "react-redux";
+import { showToast } from "../../utils/showToast";
 
-const Account = () => {
+const Account = ({ user }) => {
+  console.log(user);
+  useEffect(() => {
+    if (!user) {
+      showToast("Connect your wallet to see account records", "error");
+    }
+  }, [user]);
   const [WithdrawAmount, setWithdrawAmount] = useState("");
   return (
     <div className="account">
@@ -105,4 +113,8 @@ const Account = () => {
   );
 };
 
-export default Account;
+const mapStateToProps = (state) => ({
+  user: state.user.currentUser,
+});
+
+export default connect(mapStateToProps)(Account);

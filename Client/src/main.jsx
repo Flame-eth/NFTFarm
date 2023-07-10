@@ -9,7 +9,6 @@ import { Web3NetworkSwitch } from "@web3modal/react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 import {
   EthereumClient,
   w3mConnectors,
@@ -19,7 +18,9 @@ import { Web3Modal } from "@web3modal/react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { arbitrum, celoAlfajores, mainnet, polygon } from "wagmi/chains";
 
-const chains = [arbitrum, mainnet, polygon, celoAlfajores];
+// const chains = [arbitrum, mainnet, polygon, celoAlfajores];
+const chains = [celoAlfajores];
+
 const projectId = "2d4b2b6ec24103bfa7cba5ecb1368e4e";
 
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
