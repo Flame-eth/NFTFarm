@@ -53,6 +53,8 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
   const [loadingState, setLoadingState] = useState(false);
   const lockContract = "0xfb26683d0565C4C7a7c0E2576fb5592597f54BCA";
 
+  const navigate = useNavigate();
+
   const handleModal = () => {
     setShowModal(!showModal);
     // console.log(pledge);
@@ -84,6 +86,19 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+  };
+
+  const [amount, setAmount] = useState();
+  const [chainAmount, setChainAmount] = useState();
+  const [dailyReturn, setDailyReturn] = useState();
+
+  const handleAmount = (e, percentage) => {
+    setAmount(e.target.value);
+
+    setChainAmount(ethers.utils.parseEther(e.target.value.toString()));
+    // console.log(chainAmount);
+
+    setDailyReturn(e.target.value * (percentage / 100));
   };
 
   return (

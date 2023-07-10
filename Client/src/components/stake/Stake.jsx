@@ -95,7 +95,7 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
     setAmount(e.target.value);
 
     setChainAmount(ethers.utils.parseEther(e.target.value.toString()));
-    console.log(chainAmount);
+    // console.log(chainAmount);
 
     setDailyReturn(e.target.value * (percentage / 100));
   };
