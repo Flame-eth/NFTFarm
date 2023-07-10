@@ -47,8 +47,11 @@ const SamplePrevArrow = (props) => {
 };
 
 const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
+  let walletID = user?.walletID;
   const [showModal, setShowModal] = useState(false);
   const [pledgeID, setPledgeID] = useState();
+  const [loadingState, setLoadingState] = useState(false);
+  const lockContract = "0xfb26683d0565C4C7a7c0E2576fb5592597f54BCA";
 
   const handleModal = () => {
     setShowModal(!showModal);
