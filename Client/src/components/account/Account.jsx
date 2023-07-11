@@ -29,7 +29,7 @@ const Account = ({ user, setCurrentUser }) => {
   }, [address, setCurrentUser]);
 
   useEffect(() => {
-    console.log(user);
+    // console.log(user);
     if (!user) {
       showToast("Wallet must be connected to view account records", "warning");
     }
@@ -37,6 +37,10 @@ const Account = ({ user, setCurrentUser }) => {
       showToast("You have no staking or pledging record", "warning");
     }
   }, []);
+
+  setTimeout(() => {
+    console.log(user);
+  }, 5000);
 
   const [WithdrawAmount, setWithdrawAmount] = useState("");
   let walletID = user?.walletID;
@@ -178,14 +182,14 @@ const Account = ({ user, setCurrentUser }) => {
                 <div className="section">
                   <h2>Cumulative Pledge</h2>
                   <p>
-                    {user.totalPledgeIncome}
+                    {user.totalPledge}
                     <img src={usdt} alt="" />
                   </p>
                 </div>
                 <div className="section">
-                  <h2>Cumulative Income</h2>
+                  <h2>Cumulative Pledge Income</h2>
                   <p>
-                    {user.balance}
+                    {user.totalPledgeIncome}
                     <img src={usdt} alt="" />
                   </p>
                 </div>
