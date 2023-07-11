@@ -77,7 +77,11 @@ const Account = ({ user, setCurrentUser }) => {
           });
         showToast("Withdraw successful", "success");
       } else {
-        showToast("Withdraw failed", "error");
+        console.error(error);
+        showToast(
+          "Withdraw failed, ensure you have sufficient balance!",
+          "error"
+        );
       }
     },
   });
