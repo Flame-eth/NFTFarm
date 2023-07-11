@@ -122,6 +122,11 @@ const Account = ({ user, setCurrentUser }) => {
       Math.floor((remainingTime % (1000 * 60)) / 1000)
     ).padStart(2, "0");
 
+    if (calculatedSeconds === "00") {
+      // Reload the page to fetch the updated timer
+      window.location.reload();
+    }
+
     setHours(calculatedHours);
     setMinutes(calculatedMinutes);
     setSeconds(calculatedSeconds);
@@ -170,6 +175,14 @@ const Account = ({ user, setCurrentUser }) => {
       const nextProfitTime = new Date(ProfitTime).getTime();
       const currentTime = new Date().getTime();
       const remainingTime = nextProfitTime - currentTime;
+
+      if (remainingTime <= 0) {
+        // Stop the timer and reload the page
+        clearInterval(interval);
+        window.location.reload();
+        return;
+      }
+
       updateTimer(remainingTime);
     };
 
