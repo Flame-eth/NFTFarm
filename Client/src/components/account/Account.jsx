@@ -13,6 +13,7 @@ import { abi as lockAbi } from "../../contracts/YieldNftTokenLock.json";
 import { ethers } from "ethers";
 
 const Account = ({ user, setCurrentUser }) => {
+  // console.log("user", user);
   const { address, isConnecting, isDisconnected } = useAccount();
 
   const [hours, setHours] = useState(0);
@@ -20,23 +21,24 @@ const Account = ({ user, setCurrentUser }) => {
   const [seconds, setSeconds] = useState(0);
   // console.log(user.stakingRecord);
 
-  useEffect(() => {
-    if (address) {
-      // const data = newRequest.post("users/create", { walletID: address });
-      // console.log(data.data);
-      axios
-        .post("http://localhost:3000/api/users/create", { walletID: address })
-        .then((res) => {
-          // console.log(res.data.data);
-          setCurrentUser(res.data.data);
-        });
-    }
-  }, [address, setCurrentUser]);
+  // useEffect(() => {
+  //   if (address) {
+  //     // const data = newRequest.post("users/create", { walletID: address });
+  //     // console.log(data.data);
+  //     axios
+  //       .post("http://localhost:3000/api/users/create", { walletID: address })
+  //       .then((res) => {
+  //         // console.log(res.data.data);
+  //         setCurrentUser(res.data.data);
+  //       });
+  //   }
+  // }, [address, setCurrentUser]);
 
   useEffect(() => {
-    // console.log(user);
-    if (!user) {
-      showToast("Wallet must be connected to view account records", "warning");
+    console.log(user);
+    if (user === null) {
+      // console.log(user);
+      // showToast("Wallet must be connected to view account records", "warning");
     }
     if (user?.stakingRecord.length == 0 && user?.pledgingRecord.length == 0) {
       showToast("You have no staking or pledging record", "warning");
@@ -49,7 +51,7 @@ const Account = ({ user, setCurrentUser }) => {
   let walletID = user?.walletID;
   const [WithdrawAmount, setWithdrawAmount] = useState("");
   const [chainAmount, setChainAmount] = useState(0);
-  console.log(chainAmount);
+  // console.log(chainAmount);
   const {
     data: writeData,
     isLoading: isWriteLoading,
