@@ -74,6 +74,19 @@ const Account = ({ user, setCurrentUser }) => {
     }
   }, [user]);
 
+  const updateTimer = (remainingTime) => {
+    const calculatedHours = Math.floor(
+      (remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const calculatedMinutes = Math.floor(
+      (remainingTime % (1000 * 60 * 60)) / (1000 * 60)
+    );
+    const calculatedSeconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+    setHours(calculatedHours);
+    setMinutes(calculatedMinutes);
+    setSeconds(calculatedSeconds);
+  };
   const countdownTimer = (nextProfitTime) => {
     const profitTime = new Date(nextProfitTime.current).getTime();
     // Get the current time
@@ -84,17 +97,11 @@ const Account = ({ user, setCurrentUser }) => {
     const timeRemaining = profitTime - currentTime;
     // console.log(timeRemaining);
 
-    // Calculate the hours, minutes, and seconds remaining
-    const hours = Math.floor(
-      (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor(
-      (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
-    );
-    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+    // Update the timer every second
+    updateTimer(timeRemaining);
 
     // Display the remaining time
-    console.log(`Next profit in: ${hours}h ${minutes}m ${seconds}s`);
+    // console.log(`Next profit in: ${hours}h ${minutes}m ${seconds}s`);
 
     // Update the countdown every second
     if (timeRemaining > 0) {
