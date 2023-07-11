@@ -46,6 +46,18 @@ const PledgeSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  nextProfitTime: {
+    type: Date,
+    default: () => {
+      const nextProfitTime = new Date();
+      nextProfitTime.setHours(nextProfitTime.getHours() + 1);
+      return nextProfitTime;
+    },
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 export { PledgeSchema };

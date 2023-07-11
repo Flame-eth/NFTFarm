@@ -41,6 +41,11 @@ const StakingSchema = new Schema({
 
   nextProfitTime: {
     type: Date,
+    default: () => {
+      const nextProfitTime = new Date();
+      nextProfitTime.setHours(nextProfitTime.getHours() + 1);
+      return nextProfitTime;
+    },
   },
 });
 

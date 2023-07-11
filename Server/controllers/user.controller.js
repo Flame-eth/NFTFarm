@@ -201,3 +201,50 @@ export const updateStakingRecord = async (req, res, next) => {
     next(error);
   }
 };
+
+export const updateBalance = async (req, res, next) => {
+  try {
+    const users = await User.find({});
+
+    users.forEach(async (user) => {
+      const currentTime = new Date();
+
+      if (user.hasStaked) {
+        const lastStake = user.stakingRecord[user.stakingRecord.length - 1];
+
+        if (currentTime >= lastStake.nextProfitTime) {
+          const nextProfitTime = new Date();
+          nextProfitTime.setHours(nextProfitTime.getHours() + 1);
+          lastStake.nextProfitTime = nextProfitTime;
+
+          user.balance += lastStake.hourlyEarning;
+          user.totalStakingIncome += lastStake.hourlyEarning;
+          lastStake.amountEarned += lastStake.hourlyEarning;
+
+          await user.save();
+        }
+      }
+
+      if (user.hasPledged) {
+        const lastPledge = user.pledgingRecord[user.pledgingRecord.length - 1];
+
+        if (
+          currentTime >= lastPledge.nextProfitTime &&
+          currentTime >= lastPledge.yieldDate
+        ) {
+          const nextProfitTime = new Date();
+          nextProfitTime.setHours(nextProfitTime.getHours() + 1);
+          lastPledge.nextProfitTime = nextProfitTime;
+
+          user.balance += lastPledge.dailyEarning;
+          user.totalPledgingIncome += lastPledge.dailyEarning;
+          lastPledge.amountEarned += lastPledge.dailyEarning;
+
+          await user.save();
+        }
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+};
