@@ -125,6 +125,8 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
       // console.log("Settled", { data, error });
 
       if (data) {
+        const nextProfitTime = new Date();
+        nextProfitTime.setHours(nextProfitTime.getHours() + 1);
         axios
           .post(`http://localhost:3000/api/users/staking/new/${walletID}`, {
             walletID: walletID,
@@ -134,6 +136,7 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
             hourlyEarning: dailyReturn / 24,
             dailyEarning: dailyReturn,
             stakingStatus: true,
+            nextProfitTime: nextProfitTime,
           })
           .then((res) => {
             axios

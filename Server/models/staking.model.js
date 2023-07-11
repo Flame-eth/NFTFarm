@@ -28,6 +28,7 @@ const StakingSchema = new Schema({
   },
   amountEarned: {
     type: Number,
+    default: 0,
   },
   stakingStatus: {
     type: Boolean,
@@ -36,6 +37,10 @@ const StakingSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+
+  nextProfitTime: {
+    type: Date,
   },
 });
 

@@ -18,6 +18,7 @@ const UserSchema = new Schema({
   },
   stakingRecord: [StakingSchema],
   pledgingRecord: [PledgeSchema],
+
   totalStakingIncome: {
     type: Number,
   },
