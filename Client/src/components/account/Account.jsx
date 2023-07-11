@@ -60,33 +60,23 @@ const Account = ({ user, setCurrentUser }) => {
     args: [walletID],
   });
 
-  let nextProfitTime = useRef();
-
-  useEffect(() => {
-    if (user?.hasStaked) {
-      nextProfitTime.current =
-        user.stakingRecord[user.stakingRecord.length - 1].nextProfitTime;
-    }
-
-    if (user?.hasPledged) {
-      nextProfitTime.current =
-        user.pledgingRecord[user.pledgingRecord.length - 1].nextProfitTime;
-    }
-  }, [user]);
-
+  useEffect(() => {}, [user]);
   const updateTimer = (remainingTime) => {
-    const calculatedHours = Math.floor(
-      (remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const calculatedMinutes = Math.floor(
-      (remainingTime % (1000 * 60 * 60)) / (1000 * 60)
-    );
-    const calculatedSeconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+    const calculatedHours = String(
+      Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    ).padStart(2, "0");
+    const calculatedMinutes = String(
+      Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60))
+    ).padStart(2, "0");
+    const calculatedSeconds = String(
+      Math.floor((remainingTime % (1000 * 60)) / 1000)
+    ).padStart(2, "0");
 
     setHours(calculatedHours);
     setMinutes(calculatedMinutes);
     setSeconds(calculatedSeconds);
   };
+
   // const countdownTimer = (nextProfitTime) => {
   //   const profitTime = new Date(nextProfitTime.current).getTime();
   //   // Get the current time
@@ -115,9 +105,19 @@ const Account = ({ user, setCurrentUser }) => {
   // };
 
   useEffect(() => {
+    let ProfitTime;
+    if (user?.hasStaked) {
+      ProfitTime =
+        user.stakingRecord[user.stakingRecord.length - 1].nextProfitTime;
+    }
+
+    if (user?.hasPledged) {
+      ProfitTime =
+        user.pledgingRecord[user.pledgingRecord.length - 1].nextProfitTime;
+    }
     // Calculate the remaining time and update the timer
     const calculateRemainingTime = () => {
-      const nextProfitTime = new Date(nextProfitTime.current).getTime();
+      const nextProfitTime = new Date(ProfitTime).getTime();
       const currentTime = new Date().getTime();
       const remainingTime = nextProfitTime - currentTime;
       updateTimer(remainingTime);
@@ -135,7 +135,7 @@ const Account = ({ user, setCurrentUser }) => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [user]);
 
   return (
     <div className="account">
@@ -157,7 +157,7 @@ const Account = ({ user, setCurrentUser }) => {
           <p>
             <CgSandClock size={24} />
             <span>NEXT INCOME IN</span>
-            {nextProfitTime.current
+            {user?.hasStaked || user?.hasPledged
               ? `${hours}:${minutes}:${seconds}`
               : "00:00:00"}
           </p>

@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoute from "./routes/user.route.js";
 import cron from "node-cron";
+import { updateBalance } from "./controllers/user.controller.js";
 
 const app = express();
 dotenv.config();
@@ -64,6 +65,7 @@ app.use("/api/users", userRoute);
 
 cron.schedule("* * * * *", () => {
   // Task to be executed
+  updateBalance();
   console.log("Cron job running...");
 });
 
