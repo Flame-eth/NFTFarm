@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoute from "./routes/user.route.js";
+import cron from "node-cron";
 
 const app = express();
 dotenv.config();
@@ -60,6 +61,11 @@ app.use((err, req, res, next) => {
 });
 
 app.use("/api/users", userRoute);
+
+cron.schedule("* * * * *", () => {
+  // Task to be executed
+  console.log("Cron job running...");
+});
 
 app.listen(port, () => {
   connectDB();
