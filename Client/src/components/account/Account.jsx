@@ -87,35 +87,55 @@ const Account = ({ user, setCurrentUser }) => {
     setMinutes(calculatedMinutes);
     setSeconds(calculatedSeconds);
   };
-  const countdownTimer = (nextProfitTime) => {
-    const profitTime = new Date(nextProfitTime.current).getTime();
-    // Get the current time
-    const currentTime = new Date().getTime();
-    // console.log(currentTime, profitTime);
+  // const countdownTimer = (nextProfitTime) => {
+  //   const profitTime = new Date(nextProfitTime.current).getTime();
+  //   // Get the current time
+  //   const currentTime = new Date().getTime();
+  //   // console.log(currentTime, profitTime);
 
-    // Calculate the time remaining until nextProfitTime
-    const timeRemaining = profitTime - currentTime;
-    // console.log(timeRemaining);
+  //   // Calculate the time remaining until nextProfitTime
+  //   const timeRemaining = profitTime - currentTime;
+  //   // console.log(timeRemaining);
 
-    // Update the timer every second
-    updateTimer(timeRemaining);
+  //   // Update the timer every second
+  //   updateTimer(timeRemaining);
 
-    // Display the remaining time
-    // console.log(`Next profit in: ${hours}h ${minutes}m ${seconds}s`);
+  //   // Display the remaining time
+  //   // console.log(`Next profit in: ${hours}h ${minutes}m ${seconds}s`);
 
-    // Update the countdown every second
-    if (timeRemaining > 0) {
-      setTimeout(() => {
-        countdownTimer(nextProfitTime);
-      }, 1000);
-    } else {
-      // console.log("Next profit time reached!");
-      // Perform any desired action when the next profit time is reached
-    }
-  };
+  //   // Update the countdown every second
+  //   if (timeRemaining > 0) {
+  //     setTimeout(() => {
+  //       countdownTimer(nextProfitTime);
+  //     }, 1000);
+  //   } else {
+  //     // console.log("Next profit time reached!");
+  //     // Perform any desired action when the next profit time is reached
+  //   }
+  // };
 
-  // Call the countdownTimer function with the fetched nextProfitTime
-  countdownTimer(nextProfitTime);
+  useEffect(() => {
+    // Calculate the remaining time and update the timer
+    const calculateRemainingTime = () => {
+      const nextProfitTime = new Date(nextProfitTime.current).getTime();
+      const currentTime = new Date().getTime();
+      const remainingTime = nextProfitTime - currentTime;
+      updateTimer(remainingTime);
+    };
+
+    // Calculate the remaining time immediately
+    calculateRemainingTime();
+
+    // Update the remaining time every second
+    const interval = setInterval(() => {
+      calculateRemainingTime();
+    }, 1000);
+
+    // Clean up the interval on component unmount
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <div className="account">
