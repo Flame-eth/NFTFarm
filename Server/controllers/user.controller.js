@@ -230,15 +230,16 @@ export const updateBalance = async (req, res, next) => {
 
         if (
           currentTime >= lastPledge.nextProfitTime &&
-          currentTime >= lastPledge.yieldDate
+          currentTime <= lastPledge.yieldDate
         ) {
+          const hourlyEarning = lastPledge.dailyEarning / 24;
           const nextProfitTime = new Date();
           nextProfitTime.setHours(nextProfitTime.getHours() + 1);
           lastPledge.nextProfitTime = nextProfitTime;
 
-          user.balance += lastPledge.dailyEarning;
-          user.totalPledgingIncome += lastPledge.dailyEarning;
-          lastPledge.amountEarned += lastPledge.dailyEarning;
+          user.balance += hourlyEarning;
+          user.totalPledgingIncome += dailyEarning;
+          lastPledge.amountEarned += dailyEarning;
 
           await user.save();
         }
