@@ -213,13 +213,18 @@ export const updateBalance = async (req, res) => {
         const lastStake = user.stakingRecord[user.stakingRecord.length - 1];
 
         if (currentTime >= lastStake.nextProfitTime) {
-          const nextProfitTime = new Date();
-          nextProfitTime.setHours(nextProfitTime.getHours() + 1);
+          const hoursPassed = Math.floor(
+            (currentTime - lastStake.nextProfitTime) / (1000 * 60 * 60)
+          );
+          const nextProfitTime = new Date(lastStake.nextProfitTime);
+          nextProfitTime.setHours(nextProfitTime.getHours() + hoursPassed + 1);
           lastStake.nextProfitTime = nextProfitTime;
 
-          user.balance += lastStake.hourlyEarning;
-          user.totalStakingIncome += lastStake.hourlyEarning;
-          lastStake.amountEarned += lastStake.hourlyEarning;
+          const earningToBeAdded = lastStake.hourlyEarning * hoursPassed;
+
+          user.balance += earningToBeAdded;
+          user.totalStakingIncome += earningToBeAdded;
+          lastStake.amountEarned += earningToBeAdded;
 
           await user.save();
         }
@@ -232,14 +237,19 @@ export const updateBalance = async (req, res) => {
           currentTime >= lastPledge.nextProfitTime &&
           currentTime <= lastPledge.yieldDate
         ) {
-          const hourlyEarning = lastPledge.dailyEarning / 24;
-          const nextProfitTime = new Date();
-          nextProfitTime.setHours(nextProfitTime.getHours() + 1);
+          const hoursPassed = Math.floor(
+            (currentTime - lastPledge.nextProfitTime) / (1000 * 60 * 60)
+          );
+          const nextProfitTime = new Date(lastPledge.nextProfitTime);
+          nextProfitTime.setHours(nextProfitTime.getHours() + hoursPassed + 1);
           lastPledge.nextProfitTime = nextProfitTime;
 
-          user.balance += hourlyEarning;
-          user.totalPledgingIncome += dailyEarning;
-          lastPledge.amountEarned += dailyEarning;
+          const hourlyEarning = lastPledge.dailyEarning / 24;
+          const earningToAdd = hourlyEarning * hoursPassed;
+
+          user.balance += earningToAdd;
+          user.totalPledgingIncome += earningToAdd;
+          lastPledge.amountEarned += earningToAdd;
 
           await user.save();
         }
