@@ -5,10 +5,11 @@ import { usdt } from "../../assets/images";
 import { CgSandClock } from "react-icons/cg";
 import { connect } from "react-redux";
 import { showToast } from "../../utils/showToast";
-import { useAccount, useContractRead } from "wagmi";
+import { useAccount, useContractRead, useContractWrite } from "wagmi";
 import axios from "axios";
 import { setCurrentUser } from "../../redux/user/user.actions";
 import { abi } from "../../contracts/IERC20.json";
+import { abi as lockAbi } from "../../contracts/YieldNftTokenLock.json";
 import { ethers } from "ethers";
 
 const Account = ({ user, setCurrentUser }) => {
@@ -45,8 +46,34 @@ const Account = ({ user, setCurrentUser }) => {
   setTimeout(() => {
     // console.log(user);
   }, 5000);
-
+  let walletID = user?.walletID;
   const [WithdrawAmount, setWithdrawAmount] = useState("");
+  const [chainAmount, setChainAmount] = useState(0);
+  const {
+    data: writeData,
+    isLoading: isWriteLoading,
+    isSuccess: isWriteSuccess,
+    write,
+  } = useContractWrite({
+    address: "0xfb26683d0565C4C7a7c0E2576fb5592597f54BCA",
+    abi: lockAbi,
+    functionName: "withdrawLock",
+    args: [walletID, chainAmount, "withdrawal"],
+    onSettled(data, error) {
+      // console.log("Settled", { data, error });
+      axios
+        .patch(`http://localhost:3000/api/users/update/${walletID}`, {
+          balance: user.balance - WithdrawAmount,
+          hasStaked: false,
+          hasPledged: false,
+        })
+        .then((res) => {
+          // console.log(res.data.data);
+          setCurrentUser(res.data.data);
+        });
+      showToast("Withdraw successful", "success");
+    },
+  });
 
   const handleWithdraw = async (e) => {
     e.preventDefault();
@@ -55,20 +82,9 @@ const Account = ({ user, setCurrentUser }) => {
     } else if (WithdrawAmount > user.balance) {
       showToast("Insufficient balance", "warning");
     } else {
-      const data = await axios.post(
-        "http://localhost:3000/api/users/withdraw",
-        {
-          walletID: user.walletID,
-          amount: WithdrawAmount,
-        }
-      );
-      // console.log(data.data);
-      setCurrentUser(data.data.data);
-      showToast("Withdraw successful", "success");
+      write();
     }
   };
-
-  let walletID = user?.walletID;
 
   const {
     data: readData,
@@ -187,7 +203,10 @@ const Account = ({ user, setCurrentUser }) => {
               type="number"
               value={WithdrawAmount}
               placeholder="0.00"
-              onChange={(e) => setWithdrawAmount(e.target.value)}
+              onChange={(e) => {
+                setWithdrawAmount(e.target.value);
+                setChainAmount(e.target.value * 10 ** 6);
+              }}
             />
 
             <button type="submit">Withdraw</button>
