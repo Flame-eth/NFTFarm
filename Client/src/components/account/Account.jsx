@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Account.scss";
 import Navbar from "../navbar/Navbar";
 import { usdt } from "../../assets/images";
@@ -13,6 +13,10 @@ import { ethers } from "ethers";
 
 const Account = ({ user, setCurrentUser }) => {
   const { address, isConnecting, isDisconnected } = useAccount();
+
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
   // console.log(user.stakingRecord);
 
   useEffect(() => {
@@ -39,7 +43,7 @@ const Account = ({ user, setCurrentUser }) => {
   }, []);
 
   setTimeout(() => {
-    console.log(user);
+    // console.log(user);
   }, 5000);
 
   const [WithdrawAmount, setWithdrawAmount] = useState("");
@@ -55,6 +59,57 @@ const Account = ({ user, setCurrentUser }) => {
     functionName: "balanceOf",
     args: [walletID],
   });
+
+  let nextProfitTime = useRef();
+
+  useEffect(() => {
+    if (user?.hasStaked) {
+      nextProfitTime.current =
+        user.stakingRecord[user.stakingRecord.length - 1].nextProfitTime;
+    }
+
+    if (user?.hasPledged) {
+      nextProfitTime.current =
+        user.pledgingRecord[user.pledgingRecord.length - 1].nextProfitTime;
+    }
+  }, [user]);
+
+  const countdownTimer = (nextProfitTime) => {
+    const profitTime = new Date(nextProfitTime.current).getTime();
+    // Get the current time
+    const currentTime = new Date().getTime();
+    // console.log(currentTime, profitTime);
+
+    // Calculate the time remaining until nextProfitTime
+    const timeRemaining = profitTime - currentTime;
+    // console.log(timeRemaining);
+
+    // Calculate the hours, minutes, and seconds remaining
+    const hours = Math.floor(
+      (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutes = Math.floor(
+      (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
+    );
+    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+    // Display the remaining time
+    console.log(`Next profit in: ${hours}h ${minutes}m ${seconds}s`);
+
+    // Update the countdown every second
+    if (timeRemaining > 0) {
+      setTimeout(() => {
+        countdownTimer(nextProfitTime);
+      }, 1000);
+    } else {
+      // console.log("Next profit time reached!");
+      // Perform any desired action when the next profit time is reached
+    }
+  };
+
+  // Call the countdownTimer function with the fetched nextProfitTime
+  countdownTimer(nextProfitTime);
+
   return (
     <div className="account">
       <div className="navbar">
@@ -75,7 +130,9 @@ const Account = ({ user, setCurrentUser }) => {
           <p>
             <CgSandClock size={24} />
             <span>NEXT INCOME IN</span>
-            00:00:00
+            {nextProfitTime.current
+              ? `${hours}:${minutes}:${seconds}`
+              : "00:00:00"}
           </p>
           <form action="">
             <input
