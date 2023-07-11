@@ -276,10 +276,9 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
                               setStakeID(ID);
                               if (stakeID == index) {
                                 setShowModal(!showModal);
+                              } else {
+                                setShowModal(true);
                               }
-                              // else {
-                              //   setShowModal(true);
-                              // }
                             }}>
                             <i className="fa fa-plus"></i>
                             <span>Start Using</span>

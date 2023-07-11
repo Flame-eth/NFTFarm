@@ -42,7 +42,7 @@ const Navbar = ({ user, setCurrentUser }) => {
     <div className="Container">
       <div className="navbar">
         <div className="navContainer">
-          <Link className="navIcon">
+          <Link to="/" className="navIcon">
             <img src={logo} alt="" />
             <h1>
               <div className="navLink" to="/">

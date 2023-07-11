@@ -47,6 +47,27 @@ const Account = ({ user, setCurrentUser }) => {
   }, 5000);
 
   const [WithdrawAmount, setWithdrawAmount] = useState("");
+
+  const handleWithdraw = async (e) => {
+    e.preventDefault();
+    if (WithdrawAmount === "") {
+      showToast("Please enter an amount", "warning");
+    } else if (WithdrawAmount > user.balance) {
+      showToast("Insufficient balance", "warning");
+    } else {
+      const data = await axios.post(
+        "http://localhost:3000/api/users/withdraw",
+        {
+          walletID: user.walletID,
+          amount: WithdrawAmount,
+        }
+      );
+      // console.log(data.data);
+      setCurrentUser(data.data.data);
+      showToast("Withdraw successful", "success");
+    }
+  };
+
   let walletID = user?.walletID;
 
   const {

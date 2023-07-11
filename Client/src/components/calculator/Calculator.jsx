@@ -25,7 +25,7 @@ const YieldCalculator = () => {
 
       <form onSubmit={handleSubmit}>
         <label>
-          Investment Amount
+          Stake/Pledge Amount
           <input
             type="number"
             value={amountInvested}
