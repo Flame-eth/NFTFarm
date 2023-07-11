@@ -49,6 +49,7 @@ const Account = ({ user, setCurrentUser }) => {
   let walletID = user?.walletID;
   const [WithdrawAmount, setWithdrawAmount] = useState("");
   const [chainAmount, setChainAmount] = useState(0);
+  console.log(chainAmount);
   const {
     data: writeData,
     isLoading: isWriteLoading,
@@ -61,17 +62,23 @@ const Account = ({ user, setCurrentUser }) => {
     args: [walletID, chainAmount, "withdrawal"],
     onSettled(data, error) {
       // console.log("Settled", { data, error });
-      axios
-        .patch(`http://localhost:3000/api/users/update/${walletID}`, {
-          balance: user.balance - WithdrawAmount,
-          hasStaked: false,
-          hasPledged: false,
-        })
-        .then((res) => {
-          // console.log(res.data.data);
-          setCurrentUser(res.data.data);
-        });
-      showToast("Withdraw successful", "success");
+
+      if (data) {
+        console.log(data);
+        axios
+          .patch(`http://localhost:3000/api/users/update/${walletID}`, {
+            balance: user.balance - WithdrawAmount,
+            hasStaked: false,
+            hasPledged: false,
+          })
+          .then((res) => {
+            // console.log(res.data.data);
+            setCurrentUser(res.data.data);
+          });
+        showToast("Withdraw successful", "success");
+      } else {
+        showToast("Withdraw failed", "error");
+      }
     },
   });
 
@@ -205,11 +212,13 @@ const Account = ({ user, setCurrentUser }) => {
               placeholder="0.00"
               onChange={(e) => {
                 setWithdrawAmount(e.target.value);
-                setChainAmount(e.target.value * 10 ** 6);
+                setChainAmount(ethers.utils.parseEther(e.target.value));
               }}
             />
 
-            <button type="submit">Withdraw</button>
+            <button onClick={(e) => handleWithdraw(e)} type="submit">
+              Withdraw
+            </button>
           </form>
         </div>
         <div className="stakingRecord">

@@ -202,7 +202,7 @@ export const updateStakingRecord = async (req, res, next) => {
   }
 };
 
-export const updateBalance = async (req, res, next) => {
+export const updateBalance = async (req, res) => {
   try {
     const users = await User.find({});
 
@@ -246,6 +246,6 @@ export const updateBalance = async (req, res, next) => {
       }
     });
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 };
