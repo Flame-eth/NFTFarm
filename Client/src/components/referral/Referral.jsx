@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../navbar/Navbar";
 import "./Referral.scss";
 import { BsPeopleFill, BsQrCode } from "react-icons/bs";
 import { usdt } from "../../assets/images";
 import { connect } from "react-redux";
-import { setCurrentUser } from "../../redux/user/user.actions.js";
+import {
+  setCurrentUser,
+  setReferralLink,
+} from "../../redux/user/user.actions.js";
 
 const Referral = ({ user, setCurrentUser }) => {
+  const [copied, setCopied] = useState(false);
+
+  const userLink = `https://www.yeildnft.com/${user.walletID}`;
+  const [shortLink, setShortLink] = useState(userLink);
+
+  const getShortLink = async () => {};
   return (
     <div className="referral">
       <div className="navbar">
@@ -99,10 +108,12 @@ const Referral = ({ user, setCurrentUser }) => {
 
 const mapStateToProps = (state) => ({
   user: state.user.currentUser,
+  referralLink: state.user.referralLink,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  setReferralLink: (link) => dispatch(setReferralLink(link)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Referral);
