@@ -31,6 +31,27 @@ const UserSchema = new Schema({
   balance: {
     type: Number,
   },
+  referrer: {
+    type: String,
+  },
+  firstPopulationCount: {
+    type: Number,
+  },
+  secondPopulationCount: {
+    type: Number,
+  },
+  thirdPopulationCount: {
+    type: Number,
+  },
+  firstPopulationIncome: {
+    type: Number,
+  },
+  secondPopulationIncome: {
+    type: Number,
+  },
+  thirdPopulationIncome: {
+    type: Number,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

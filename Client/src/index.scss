@@ -1,0 +1,23 @@
+/* For WebKit based browsers (Chrome, Safari, Opera) */
+::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+
+  //   display: none;
+}
+
+::-webkit-scrollbar-track {
+  //   background-color: #f1f1f1; /* Background color of the scrollbar track */
+  background-color: black; /* Background color of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ffa500; /* Color of the scrollbar thumb */
+  border-radius: 50px;
+  // border: 1.5px solid white;
+}
+
+/* For Firefox */
+/* Note: Firefox does not support customizing the scrollbar color directly */
+
+/* For Internet Explorer and Microsoft Edge */
+/* Note: Internet Explorer and Microsoft Edge do not support customizing the scrollbar color directly */

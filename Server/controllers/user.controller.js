@@ -259,3 +259,23 @@ export const updateBalance = async (req, res) => {
     console.log(error);
   }
 };
+
+export const updateReferral = async (req, res) => {
+  try {
+    const findUser = await User.findOne({ walletID: req.body.walletID });
+
+    if (!findUser.referrer) {
+      findUser.referrer = req.body.referrer;
+      await findUser.save();
+    }
+
+    
+
+    
+
+    res.status(200).json({
+      success: true,
+      data: findUser,
+    });
+  } catch (error) {}
+};
