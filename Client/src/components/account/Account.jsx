@@ -179,7 +179,13 @@ const Account = ({ user, setCurrentUser }) => {
       if (remainingTime <= 0) {
         // Stop the timer and reload the page
         clearInterval(interval);
-        window.location.reload();
+        axios
+          .post("http://localhost:3000/api/users/create", { walletID: address })
+          .then((res) => {
+            // console.log(res.data.data);
+            setCurrentUser(res.data.data);
+          });
+
         return;
       }
 
