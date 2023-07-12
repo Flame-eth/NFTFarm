@@ -3,8 +3,10 @@ import Navbar from "../navbar/Navbar";
 import "./Referral.scss";
 import { BsPeopleFill, BsQrCode } from "react-icons/bs";
 import { usdt } from "../../assets/images";
+import { connect } from "react-redux";
+import { setCurrentUser } from "../../redux/user/user.actions.js";
 
-const Referral = () => {
+const Referral = ({ user, setCurrentUser }) => {
   return (
     <div className="referral">
       <div className="navbar">
@@ -28,7 +30,7 @@ const Referral = () => {
           </div>
         </div>
         <div className="teamSec">
-          <h1 style={{borderRight: "1px solid #fff"}} >Team Size</h1>
+          <h1 style={{ borderRight: "1px solid #fff" }}>Team Size</h1>
           <h1>Team Earning</h1>
         </div>
         <div className="population">
@@ -95,4 +97,12 @@ const Referral = () => {
   );
 };
 
-export default Referral;
+const mapStateToProps = (state) => ({
+  user: state.user.currentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Referral);

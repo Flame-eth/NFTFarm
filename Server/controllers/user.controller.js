@@ -269,13 +269,71 @@ export const updateReferral = async (req, res) => {
       await findUser.save();
     }
 
-    
+    const firstPopulation = await User.find({ walletID: findUser.referrer });
 
-    
+    if (firstPopulation) {
+      firstPopulation.firstPopulationCount += 1;
+      await firstPopulation.save();
+    }
+
+    const secondPopulation = await User.find({
+      walletID: firstPopulation.referrer,
+    });
+
+    if (secondPopulation) {
+      secondPopulation.secondPopulationCount += 1;
+      await secondPopulation.save();
+    }
+
+    const thirdPopulation = await User.find({
+      walletID: secondPopulation.referrer,
+    });
+
+    if (thirdPopulation) {
+      thirdPopulation.thirdPopulationCount += 1;
+      await thirdPopulation.save();
+    }
 
     res.status(200).json({
       success: true,
       data: findUser,
     });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const payReferral = async (req, res) => {
+  try {
+    const findUser = await User.findOne({ walletID: req.body.walletID });
+    const amount = req.body.amount;
+
+    const firstPopulation = await User.find({ walletID: findUser.referrer });
+
+    if (firstPopulation) {
+      const earningToAdd = (amount * 30) / 100;
+      firstPopulation.firstPopulationIncome += earningToAdd;
+      await firstPopulation.save();
+    }
+
+    const secondPopulation = await User.find({
+      walletID: firstPopulation.referrer,
+    });
+
+    if (secondPopulation) {
+      const earningToAdd = (amount * 20) / 100;
+      secondPopulation.secondPopulationIncome += earningToAdd;
+      await secondPopulation.save();
+    }
+
+    const thirdPopulation = await User.find({
+      walletID: secondPopulation.referrer,
+    });
+
+    if (thirdPopulation) {
+      const earningToAdd = (amount * 10) / 100;
+      thirdPopulation.thirdPopulationIncome += earningToAdd;
+      await thirdPopulation.save();
+    }
   } catch (error) {}
 };

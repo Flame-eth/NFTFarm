@@ -36,21 +36,27 @@ const UserSchema = new Schema({
   },
   firstPopulationCount: {
     type: Number,
+    default: 0,
   },
   secondPopulationCount: {
     type: Number,
+    default: 0,
   },
   thirdPopulationCount: {
     type: Number,
+    default: 0,
   },
   firstPopulationIncome: {
     type: Number,
+    default: 0,
   },
   secondPopulationIncome: {
     type: Number,
+    default: 0,
   },
   thirdPopulationIncome: {
     type: Number,
+    default: 0,
   },
   createdAt: {
     type: Date,
