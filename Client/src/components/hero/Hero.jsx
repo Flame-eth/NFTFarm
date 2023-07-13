@@ -1,14 +1,13 @@
 import React from "react";
 import { Navbar } from "..";
 import "./Hero.scss";
-import { Background } from "../../assets/images";
+import { Background, bggif } from "../../assets/images";
 import { AiOutlineRocket } from "react-icons/ai";
 import { FaRegNewspaper } from "react-icons/fa";
 
 const Hero = () => {
   window.scrollTo(0, 0);
   return (
-
     <>
       <div className="hero">
         <div className="heroContainer">
@@ -31,7 +30,7 @@ const Hero = () => {
               </div>
             </div>
             <div className="heroImg">
-              <img src={Background} alt="heroBg" />
+              <img src={bggif} alt="heroBg" />
             </div>
           </div>
         </div>

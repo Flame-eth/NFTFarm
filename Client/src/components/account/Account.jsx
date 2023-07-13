@@ -124,10 +124,17 @@ const Account = ({ user, setCurrentUser }) => {
 
     if (calculatedSeconds === "00") {
       // Reload the page to fetch the updated timer
-      window.location.reload();
+      // window.location.reload();
+      axios
+        .post("http://localhost:3000/api/users/create", { walletID: address })
+        .then((res) => {
+          // console.log(res.data.data);
+          setCurrentUser(res.data.data);
+        });
     }
 
     setHours(calculatedHours);
+
     setMinutes(calculatedMinutes);
     setSeconds(calculatedSeconds);
   };

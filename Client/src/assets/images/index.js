@@ -40,6 +40,7 @@ import bs9 from "./Valhalla.png";
 import bs10 from "./deep.png";
 import bs11 from "./pirate.png";
 import spinner from "./spinner-small.gif";
+import bggif from "./bgGif.gif";
 
 export {
   Background,
@@ -84,4 +85,5 @@ export {
   bs10,
   bs11,
   spinner,
+  bggif,
 };
