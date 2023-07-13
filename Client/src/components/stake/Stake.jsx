@@ -18,11 +18,13 @@ import { abi } from "../../contracts/IERC20.json";
 import { ethers } from "ethers";
 
 import {
+  useAccount,
   useContractRead,
   useContractWrite,
   usePrepareContractWrite,
 } from "wagmi";
 import axios from "axios";
+import { Web3Button } from "@web3modal/react";
 
 const SampleNextArrow = (props) => {
   const { onClick } = props;
@@ -52,11 +54,25 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
   const [loadingState, setLoadingState] = useState(false);
   const lockContract = "0xfb26683d0565C4C7a7c0E2576fb5592597f54BCA";
 
+  const [showConnect, setShowConnect] = useState(false);
+
+  const [amount, setAmount] = useState();
+  const [chainAmount, setChainAmount] = useState();
+  const [dailyReturn, setDailyReturn] = useState();
+
   const navigate = useNavigate();
 
   const handleModal = () => {
     setShowModal(!showModal);
+    setShowConnect(false);
     // console.log(stake);
+  };
+
+  const handleConnectClose = () => {
+    setShowConnect(!showConnect);
+    setAmount(0);
+    setChainAmount(0);
+    setDailyReturn(0);
   };
   let noOfSlides = useRef();
 
@@ -86,10 +102,6 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-
-  const [amount, setAmount] = useState();
-  const [chainAmount, setChainAmount] = useState();
-  const [dailyReturn, setDailyReturn] = useState();
 
   const handleAmount = (e, percentage) => {
     setAmount(e.target.value);
@@ -172,6 +184,8 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
     } else {
       if (!user) {
         showToast("Please connect your wallet", "error");
+        setShowConnect(true);
+        // setShowModal(false);
       } else {
         if (user.hasStaked) {
           showToast("You have already staked", "error");
@@ -220,6 +234,28 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
       setDailyReturn(0);
     }
   }, [showModal]);
+
+  const { address, isConnecting, isDisconnected } = useAccount();
+
+  useEffect(() => {
+    if (address) {
+      // const data = newRequest.post("users/create", { walletID: address });
+      // console.log(data.data);
+      axios
+        .post("http://localhost:3000/api/users/create", { walletID: address })
+        .then((res) => {
+          // console.log(res.data.data);
+          setCurrentUser(res.data.data);
+        });
+      showToast("Wallet Connected", "success");
+
+      setShowConnect(false);
+      setAmount(0);
+      setDailyReturn(0);
+      setChainAmount(0);
+    }
+  }, [address, setCurrentUser]);
+
   return (
     <div className="stake">
       <div className="stakeContainer">
@@ -293,74 +329,95 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
           </Slider>
           {showModal ? (
             <div className="modal">
-              <div className="modalContainer">
-                <div className="close" onClick={handleModal}>
-                  <AiOutlineClose />
-                </div>
-                <div className="imageCon">
-                  <img src={stakeArray[stakeID].imgUrl} alt="" />
-                </div>
-                <div className="content">
-                  <h1>{stakeArray[stakeID].title}</h1>
-                  <p>{stakeArray[stakeID].desc}</p>
-                  <span>{stake[stakeID].percent}% DAILY EARNING </span>
-                  <div className="price">
-                    <div className="priceTag">
-                      <h3>Minimum Stake</h3>
-                      <h4>
-                        {stakeArray[stakeID].min}
-                        <img src={usdt} alt="" />
-                      </h4>
-                    </div>
-                    <div className="priceTag">
-                      <h3>Maximum Stake</h3>
-                      <h4>
-                        {stakeArray[stakeID].max}
-                        <img src={usdt} alt="" />
-                      </h4>
-                    </div>
+              {showConnect ? (
+                <div className="showConnect">
+                  <div className="close" onClick={handleConnectClose}>
+                    <AiOutlineClose />
+                  </div>
+                  <div className="connect">
+                    <Web3Button
+                      icon="hide"
+                      label="Connect Wallet"
+                      balance="show"
+                    />
                   </div>
                 </div>
-                <div className="stakeForm">
-                  <form action="">
-                    <div className="inputCon">
-                      <div className="input">
-                        <label htmlFor="">Amount:</label>
-                        <input
-                          type="number"
-                          placeholder="Enter Amount"
-                          onChange={(e) =>
-                            handleAmount(e, stake[stakeID].percent)
-                          }
-                        />
+              ) : (
+                <div className="modalContainer">
+                  <div className="close" onClick={handleModal}>
+                    <AiOutlineClose />
+                  </div>
+
+                  <div className="imageCon">
+                    <img src={stakeArray[stakeID].imgUrl} alt="" />
+                  </div>
+                  <div className="content">
+                    <h1>{stakeArray[stakeID].title}</h1>
+                    <p>{stakeArray[stakeID].desc}</p>
+                    <span>{stake[stakeID].percent}% DAILY EARNING </span>
+                    <div className="price">
+                      <div className="priceTag">
+                        <h3>Minimum Stake</h3>
+                        <h4>
+                          {stakeArray[stakeID].min}
+                          <img src={usdt} alt="" />
+                        </h4>
                       </div>
-                      <div className="input">
-                        <label htmlFor="">Daily Return:</label>
-                        <input
-                          disabled
-                          value={dailyReturn}
-                          type="number"
-                          placeholder="Daily Return"
-                        />
+                      <div className="priceTag">
+                        <h3>Maximum Stake</h3>
+                        <h4>
+                          {stakeArray[stakeID].max}
+                          <img src={usdt} alt="" />
+                        </h4>
                       </div>
                     </div>
-                    <button
-                      onClick={(e) =>
-                        handleSubmit(e, stake[stakeID].min, stake[stakeID].max)
-                      }
-                      type="submit">
-                      Stake
-                    </button>
-                  </form>
-                </div>
-                {loadingState ? (
-                  <div className="loader">
-                    <img src={spinner} alt="" />
                   </div>
-                ) : (
-                  ""
-                )}
-              </div>
+                  <div className="stakeForm">
+                    <form action="">
+                      <div className="inputCon">
+                        <div className="input">
+                          <label htmlFor="">Amount:</label>
+                          <input
+                            type="number"
+                            placeholder="Enter Amount"
+                            onChange={(e) =>
+                              handleAmount(e, stake[stakeID].percent)
+                            }
+                          />
+                        </div>
+                        <div className="input">
+                          <label htmlFor="">Daily Return:</label>
+                          <input
+                            disabled
+                            value={dailyReturn}
+                            type="number"
+                            placeholder="Daily Return"
+                          />
+                        </div>
+                      </div>
+                      <button
+                        onClick={(e) =>
+                          handleSubmit(
+                            e,
+                            stake[stakeID].min,
+                            stake[stakeID].max
+                          )
+                        }
+                        type="submit">
+                        Stake
+                      </button>
+                    </form>
+                  </div>
+
+                  {loadingState ? (
+                    <div className="loader">
+                      <img src={spinner} alt="" />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )}
             </div>
           ) : (
             ""
