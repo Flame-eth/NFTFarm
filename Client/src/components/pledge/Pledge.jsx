@@ -19,6 +19,7 @@ import { abi } from "../../contracts/IERC20.json";
 import { ethers } from "ethers";
 
 import {
+  useAccount,
   useContractRead,
   useContractWrite,
   usePrepareContractWrite,
@@ -190,6 +191,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
     } else {
       if (!user) {
         showToast("Please connect your wallet", "error");
+        setShowConnect(true);
       } else {
         if (user.hasStaked) {
           showToast("You have already staked", "error");
@@ -238,6 +240,27 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
       setTotalReturn(0);
     }
   }, [showModal]);
+
+  const { address, isConnecting, isDisconnected } = useAccount();
+
+  useEffect(() => {
+    if (address) {
+      // const data = newRequest.post("users/create", { walletID: address });
+      // console.log(data.data);
+      axios
+        .post("http://localhost:3000/api/users/create", { walletID: address })
+        .then((res) => {
+          // console.log(res.data.data);
+          setCurrentUser(res.data.data);
+        });
+      showToast("Wallet Connected", "success");
+
+      setShowConnect(false);
+      setAmount(0);
+      setTotalReturn(0);
+      setChainAmount(0);
+    }
+  }, [address, setCurrentUser]);
 
   return (
     <div className="pledge">
@@ -322,82 +345,97 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
           </Slider>
           {showModal ? (
             <div className="modal">
-              <div className="modalContainer">
-                <div className="close" onClick={handleModal}>
-                  <AiOutlineClose />
-                </div>
-                <div className="imageCon">
-                  <img src={pledgeArray[pledgeID].imgUrl} alt="" />
-                </div>
-                <div className="content">
-                  <h1>{pledgeArray[pledgeID].title}</h1>
-                  <p>{pledgeArray[pledgeID].desc}</p>
-                  <span>{pledgeArray[pledgeID].percent}% DAILY EARNING </span>
-                  <div className="price">
-                    <div className="priceTag">
-                      <h3>Minimum pledge</h3>
-                      <h4>
-                        {pledgeArray[pledgeID].min}
-                        <img src={usdt} alt="" />
-                      </h4>
-                    </div>
-                    <div className="priceTag">
-                      <h3>Maximum pledge</h3>
-                      <h4>
-                        {pledgeArray[pledgeID].max}
-                        <img src={usdt} alt="" />
-                      </h4>
-                    </div>
+              {showConnect ? (
+                <div className="showConnect">
+                  <div className="close" onClick={handleConnectClose}>
+                    <AiOutlineClose />
+                  </div>
+                  <div className="connect">
+                    <Web3Button
+                      icon="hide"
+                      label="Connect Wallet"
+                      balance="show"
+                    />
                   </div>
                 </div>
-                <div className="pledgeForm">
-                  <form action="">
-                    <div className="inputCon">
-                      <div className="input">
-                        <label htmlFor="">Amount:</label>
-                        <input
-                          type="number"
-                          placeholder="Enter Amount"
-                          onChange={(e) =>
-                            handleAmount(
-                              e,
-                              pledgeArray[pledgeID].percent,
-                              pledgeArray[pledgeID].days
-                            )
-                          }
-                        />
+              ) : (
+                <div className="modalContainer">
+                  <div className="close" onClick={handleModal}>
+                    <AiOutlineClose />
+                  </div>
+                  <div className="imageCon">
+                    <img src={pledgeArray[pledgeID].imgUrl} alt="" />
+                  </div>
+                  <div className="content">
+                    <h1>{pledgeArray[pledgeID].title}</h1>
+                    <p>{pledgeArray[pledgeID].desc}</p>
+                    <span>{pledgeArray[pledgeID].percent}% DAILY EARNING </span>
+                    <div className="price">
+                      <div className="priceTag">
+                        <h3>Minimum pledge</h3>
+                        <h4>
+                          {pledgeArray[pledgeID].min}
+                          <img src={usdt} alt="" />
+                        </h4>
                       </div>
-                      <div className="input">
-                        <label htmlFor="">Total Return:</label>
-                        <input
-                          disabled
-                          type="number"
-                          value={totalReturn}
-                          placeholder="Total Return"
-                        />
+                      <div className="priceTag">
+                        <h3>Maximum pledge</h3>
+                        <h4>
+                          {pledgeArray[pledgeID].max}
+                          <img src={usdt} alt="" />
+                        </h4>
                       </div>
                     </div>
-                    <button
-                      onClick={(e) =>
-                        handleSubmit(
-                          e,
-                          pledgeArray[pledgeID].min,
-                          pledgeArray[pledgeID].max
-                        )
-                      }
-                      type="submit">
-                      Pledge
-                    </button>
-                  </form>
-                </div>
-                {loadingState ? (
-                  <div className="loader">
-                    <img src={spinner} alt="" />
                   </div>
-                ) : (
-                  ""
-                )}
-              </div>
+                  <div className="pledgeForm">
+                    <form action="">
+                      <div className="inputCon">
+                        <div className="input">
+                          <label htmlFor="">Amount:</label>
+                          <input
+                            type="number"
+                            placeholder="Enter Amount"
+                            onChange={(e) =>
+                              handleAmount(
+                                e,
+                                pledgeArray[pledgeID].percent,
+                                pledgeArray[pledgeID].days
+                              )
+                            }
+                          />
+                        </div>
+                        <div className="input">
+                          <label htmlFor="">Total Return:</label>
+                          <input
+                            disabled
+                            type="number"
+                            value={totalReturn}
+                            placeholder="Total Return"
+                          />
+                        </div>
+                      </div>
+                      <button
+                        onClick={(e) =>
+                          handleSubmit(
+                            e,
+                            pledgeArray[pledgeID].min,
+                            pledgeArray[pledgeID].max
+                          )
+                        }
+                        type="submit">
+                        Pledge
+                      </button>
+                    </form>
+                  </div>
+                  {loadingState ? (
+                    <div className="loader">
+                      <img src={spinner} alt="" />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )}
             </div>
           ) : (
             ""
