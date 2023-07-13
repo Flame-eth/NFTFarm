@@ -54,12 +54,23 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
   const [loadingState, setLoadingState] = useState(false);
   const lockContract = "0xfb26683d0565C4C7a7c0E2576fb5592597f54BCA";
 
+  const [showConnect, setShowConnect] = useState(false);
+
   const navigate = useNavigate();
 
   const handleModal = () => {
     setShowModal(!showModal);
+    setShowConnect(false);
     // console.log(pledge);
   };
+
+  const handleConnectClose = () => {
+    setShowConnect(!showConnect);
+    setAmount(0);
+    setChainAmount(0);
+    setTotalReturn(0);
+  };
+
   let noOfSlides = useRef();
 
   const userWidth = window.innerWidth;
