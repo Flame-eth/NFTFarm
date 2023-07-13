@@ -409,8 +409,8 @@
     cursor: pointer;
     position: absolute;
     top: 40%;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     // line-height: 60px;
     background: #ffa503;
     border-radius: 50%;
@@ -420,7 +420,7 @@
     right: -20px;
 
     i {
-      font-size: 20px;
+      font-size: 15px;
       transition: 0.5s;
       color: white;
     }
@@ -430,8 +430,8 @@
     cursor: pointer;
     position: absolute;
     top: 40%;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     // line-height: 60px;
     background: #ffa503;
     border-radius: 50%;
@@ -441,7 +441,7 @@
     left: -20px;
 
     i {
-      font-size: 20px;
+      font-size: 15px;
       transition: 0.5s;
       color: white;
     }
@@ -529,7 +529,7 @@
   .pledge {
     .pledgeContainer {
       .pledgingCards {
-        width: 95%;
+        width: 100%;
         margin: 0 auto;
 
         .box {
@@ -537,12 +537,13 @@
           margin: 0;
           padding: 0;
           border: white solid 0.5px;
-          width: 65% !important;
+          width: 90% !important;
           border-radius: 19px;
-          margin: 0 auto;
+          // margin: 0 auto;
 
           .product {
-            padding: 5px;
+            padding: 3px;
+            margin: 7px;
             .img {
               .imageCon {
                 height: 150px;
@@ -555,7 +556,7 @@
               }
               .product-like {
                 i {
-                  font-size: 15px;
+                  font-size: 12px;
                 }
               }
             }
@@ -564,10 +565,10 @@
               .pledgeHistory {
                 .record {
                   h2 {
-                    font-size: 11px;
+                    font-size: 10px;
                   }
                   h3 {
-                    font-size: 13px;
+                    font-size: 11px;
                   }
                 }
               }
@@ -575,17 +576,17 @@
                 .price {
                   .priceTag {
                     h3 {
-                      font-size: 11px;
+                      font-size: 10px;
                       font-weight: 800;
                     }
                     h4 {
-                      font-size: 12px;
+                      font-size: 10px;
                     }
                   }
                 }
 
                 button {
-                  font-size: 15px;
+                  font-size: 12px;
                 }
               }
             }

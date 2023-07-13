@@ -73,7 +73,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
   } else if (userWidth >= 500) {
     noOfSlides.current = 2;
   } else if (userWidth >= 320) {
-    noOfSlides.current = 1;
+    noOfSlides.current = 2;
   }
 
   //   console.log(noOfSlides.current);
