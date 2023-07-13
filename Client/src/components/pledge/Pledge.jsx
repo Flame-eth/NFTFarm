@@ -50,6 +50,7 @@ const SamplePrevArrow = (props) => {
 
 const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
   let walletID = user?.walletID;
+  let balance = user?.balance;
   const [showModal, setShowModal] = useState(false);
   const [pledgeID, setPledgeID] = useState();
   const [loadingState, setLoadingState] = useState(false);
@@ -139,6 +140,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
       // console.log("Settled", { data, error });
 
       if (data) {
+        const updatedBalance = Number(balance) + Number(amount);
         axios
           .post(`http://localhost:3000/api/users/pledging/new/${walletID}`, {
             walletID: walletID,
@@ -147,7 +149,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
             pledgePercentage: pledgeArray[pledgeID].percent,
             pledgeDuration: pledgeArray[pledgeID].days,
             pledgeDate: new Date(),
-            yeildDate: new Date(
+            yieldDate: new Date(
               new Date().setDate(
                 new Date().getDate() + pledgeArray[pledgeID].days
               )
@@ -161,6 +163,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
             axios
               .patch(`http://localhost:3000/api/users/update/${walletID}`, {
                 hasPledged: true,
+                balance: updatedBalance,
               })
               .then((res) => {
                 setCurrentUser(res.data.data);
@@ -253,7 +256,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
           // console.log(res.data.data);
           setCurrentUser(res.data.data);
         });
-      showToast("Wallet Connected", "success");
+      // showToast("Wallet Connected", "success");
 
       setShowConnect(false);
       setAmount(0);

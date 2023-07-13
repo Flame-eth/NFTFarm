@@ -49,6 +49,7 @@ const SamplePrevArrow = (props) => {
 
 const Stake = ({ stakeArray, user, setCurrentUser }) => {
   let walletID = user?.walletID;
+  let balance = user?.balance;
   const [showModal, setShowModal] = useState(false);
   const [stakeID, setStakeID] = useState();
   const [loadingState, setLoadingState] = useState(false);
@@ -139,6 +140,10 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
       if (data) {
         const nextProfitTime = new Date();
         nextProfitTime.setHours(nextProfitTime.getHours() + 1);
+        // console.log(balance, amount);
+
+        const updatedBalance = Number(balance) + Number(amount);
+
         axios
           .post(`http://localhost:3000/api/users/staking/new/${walletID}`, {
             walletID: walletID,
@@ -154,6 +159,7 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
             axios
               .patch(`http://localhost:3000/api/users/update/${walletID}`, {
                 hasStaked: true,
+                balance: updatedBalance,
               })
               .then((res) => {
                 setCurrentUser(res.data.data);
@@ -197,6 +203,7 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
         } else {
           setLoadingState(true);
           write();
+          // console.log(balance + Number(amount));
 
           // try {
           //   write();
@@ -247,7 +254,7 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
           // console.log(res.data.data);
           setCurrentUser(res.data.data);
         });
-      showToast("Wallet Connected", "success");
+      // showToast("Wallet Connected", "success");
 
       setShowConnect(false);
       setAmount(0);
