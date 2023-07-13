@@ -134,7 +134,7 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
     abi: abi,
     functionName: "transfer",
     args: [lockContract, chainAmount],
-    onSettled(data, error) {
+    onSuccess(data) {
       // console.log("Settled", { data, error });
 
       if (data) {
@@ -172,11 +172,12 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
         setTimeout(() => {
           navigate("/account");
         }, 2500);
-      } else {
-        setLoadingState(false);
-        showToast("Transaction execution failed", "error");
-      }
+      } 
     },
+    onError(error) {
+      setLoadingState(false);
+      showToast("Transaction execution failed", "error");
+    }
   });
 
   const handleSubmit = async (e, min, max) => {

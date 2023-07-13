@@ -136,7 +136,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
     abi: abi,
     functionName: "transfer",
     args: [lockContract, chainAmount],
-    onSettled(data, error) {
+    onSuccess(data) {
       // console.log("Settled", { data, error });
 
       if (data) {
@@ -176,10 +176,11 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
         setTimeout(() => {
           navigate("/account");
         }, 2500);
-      } else {
-        setLoadingState(false);
-        showToast("Transaction execution failed", "error");
       }
+    },
+    onError(error) {
+      setLoadingState(false);
+      showToast("Transaction execution failed", "error");
     },
   });
 
