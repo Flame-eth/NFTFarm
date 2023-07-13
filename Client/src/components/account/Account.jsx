@@ -62,7 +62,7 @@ const Account = ({ user, setCurrentUser }) => {
     abi: lockAbi,
     functionName: "withdrawLock",
     args: [walletID, chainAmount, "withdrawal"],
-    onSettled(data, error) {
+    onSuccess(data) {
       // console.log("Settled", { data, error });
 
       if (data) {
@@ -78,13 +78,14 @@ const Account = ({ user, setCurrentUser }) => {
             setCurrentUser(res.data.data);
           });
         showToast("Withdraw successful", "success");
-      } else {
-        console.error(error);
-        showToast(
-          "Withdraw failed, ensure you have sufficient balance!",
-          "error"
-        );
       }
+    },
+    onError(error) {
+      // console.error(error);
+      showToast(
+        "Withdraw failed, ensure you have sufficient balance!",
+        "error"
+      );
     },
   });
 
@@ -224,7 +225,7 @@ const Account = ({ user, setCurrentUser }) => {
         </div>
         <div className="balance">
           <h1>
-            {user ? user.balance : "0.00"}
+            {user ? user.balance.toFixed(2) : "0.00"}
             <span>
               <img src={usdt} alt="" />
             </span>
