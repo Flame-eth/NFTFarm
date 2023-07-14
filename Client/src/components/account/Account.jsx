@@ -19,6 +19,7 @@ const Account = ({ user, setCurrentUser }) => {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+
   // console.log(user.stakingRecord);
 
   // useEffect(() => {
@@ -71,7 +72,7 @@ const Account = ({ user, setCurrentUser }) => {
         // console.log(data);
         axios
           .patch(`http://localhost:3000/api/users/update/${walletID}`, {
-            balance: user.balance - WithdrawAmount,
+            balance: user.balance - Number(WithdrawAmount),
             hasStaked: false,
             hasPledged: false,
           })
@@ -93,7 +94,7 @@ const Account = ({ user, setCurrentUser }) => {
 
   const handleWithdraw = async (e) => {
     e.preventDefault();
-    if (WithdrawAmount === "") {
+    if (WithdrawAmount === 0) {
       showToast("Please enter an amount", "warning");
     } else if (WithdrawAmount > user.balance) {
       showToast("Insufficient balance", "warning");
@@ -105,7 +106,9 @@ const Account = ({ user, setCurrentUser }) => {
       } else {
         txType = "withdrawal";
       }
-      write();
+      showToast("Processing withdrawal...", "info");
+
+      // write();
     }
   };
 
