@@ -169,6 +169,7 @@ const Account = ({ user, setCurrentUser }) => {
 
   useEffect(() => {
     let ProfitTime;
+    let interval = null;
     if (user?.hasStaked) {
       ProfitTime =
         user.stakingRecord[user.stakingRecord.length - 1].nextProfitTime;
@@ -204,7 +205,7 @@ const Account = ({ user, setCurrentUser }) => {
     calculateRemainingTime();
 
     // Update the remaining time every second
-    const interval = setInterval(() => {
+    interval = setInterval(() => {
       calculateRemainingTime();
     }, 1000);
 

@@ -141,7 +141,7 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
     onSuccess: async (data) => {
       if (data) {
         const nextProfitTime = new Date();
-        nextProfitTime.setMinutes(nextProfitTime.getMinutes() + 3);
+        nextProfitTime.setMinutes(nextProfitTime.getMinutes() + 1);
 
         const updatedBalance = Number(balance) + Number(amount);
 

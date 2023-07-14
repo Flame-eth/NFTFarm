@@ -209,18 +209,41 @@ export const updateBalance = async (req, res) => {
     users.forEach(async (user) => {
       const currentTime = new Date();
 
+      // if (user.hasStaked) {
+      //   const lastStake = user.stakingRecord[user.stakingRecord.length - 1];
+
+      //   if (currentTime >= lastStake.nextProfitTime) {
+      //     const hoursPassed = Math.floor(
+      //       (currentTime - lastStake.nextProfitTime) / (1000 * 60 * 60)
+      //     );
+      //     const nextProfitTime = new Date(lastStake.nextProfitTime);
+      //     nextProfitTime.setHours(nextProfitTime.getHours() + hoursPassed + 1);
+      //     lastStake.nextProfitTime = nextProfitTime;
+
+      //     const earningToBeAdded = lastStake.hourlyEarning * hoursPassed;
+
+      //     user.balance += earningToBeAdded;
+      //     user.totalStakingIncome += earningToBeAdded;
+      //     lastStake.amountEarned += earningToBeAdded;
+
+      //     await user.save();
+      //   }
+      // }
+
+      //TEST CODE START
+
       if (user.hasStaked) {
         const lastStake = user.stakingRecord[user.stakingRecord.length - 1];
 
         if (currentTime >= lastStake.nextProfitTime) {
-          const hoursPassed = Math.floor(
-            (currentTime - lastStake.nextProfitTime) / (1000 * 60 * 60)
-          );
+          // const hoursPassed = Math.floor(
+          //   (currentTime - lastStake.nextProfitTime) / (1000 * 60 * 60)
+          // );
           const nextProfitTime = new Date(lastStake.nextProfitTime);
-          nextProfitTime.setHours(nextProfitTime.getHours() + hoursPassed + 1);
+          nextProfitTime.setMinutes(nextProfitTime.getMinutes() + 1);
           lastStake.nextProfitTime = nextProfitTime;
 
-          const earningToBeAdded = lastStake.hourlyEarning * hoursPassed;
+          const earningToBeAdded = lastStake.hourlyEarning * 1;
 
           user.balance += earningToBeAdded;
           user.totalStakingIncome += earningToBeAdded;
@@ -229,6 +252,8 @@ export const updateBalance = async (req, res) => {
           await user.save();
         }
       }
+
+      //TEST CODE END
 
       if (user.hasPledged) {
         const lastPledge = user.pledgingRecord[user.pledgingRecord.length - 1];
