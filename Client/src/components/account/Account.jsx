@@ -105,7 +105,7 @@ const Account = ({ user, setCurrentUser }) => {
     isError: isReadError,
     isLoading: isReadLoading,
   } = useContractRead({
-    address: "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1",
+    address: "0xaa28f69d3964e6FEB6400159292d9379b050C3E6",
     abi: abi,
     functionName: "balanceOf",
     args: [walletID],

@@ -25,7 +25,7 @@ contract YieldNftTokenLock {
     }
 
     constructor() {
-        token = IERC20(0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1);
+        token = IERC20(0xaa28f69d3964e6FEB6400159292d9379b050C3E6);
         _admin = 0xdb339be8E04Db248ea2bdD7C308c5589c121C6Bb;
     }
 
@@ -33,9 +33,9 @@ contract YieldNftTokenLock {
         _admin = adminAddress;
     }
 
-    function getAdmin() external view returns (address) {
-        return _admin;
-    }
+    // function getAdmin() external view returns (address) {
+    //     return _admin;
+    // }
 
     function relinquishOwnership() external onlyAdmin {
         _admin = address(0);
@@ -72,12 +72,12 @@ contract YieldNftTokenLock {
         });
         withdrawalRecord.push(newWithdrawal);
 
-        if (msg.sender != _admin) {
+      
             require(token.transfer(_to, _amount), "Token transfer failed");
 
             emit TokensTransferred(_to, _amount);
             success = true;
-        }
+  
 
         return success;
     }
