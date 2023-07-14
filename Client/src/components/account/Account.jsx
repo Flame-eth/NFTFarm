@@ -16,24 +16,23 @@ const Account = ({ user, setCurrentUser }) => {
   // console.log("user", user);
   const { address, isConnecting, isDisconnected } = useAccount();
 
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-
+  const [hours, setHours] = useState("");
+  const [minutes, setMinutes] = useState("");
+  const [seconds, setSeconds] = useState("");
   // console.log(user.stakingRecord);
 
-  // useEffect(() => {
-  //   if (address) {
-  //     // const data = newRequest.post("users/create", { walletID: address });
-  //     // console.log(data.data);
-  //     axios
-  //       .post("http://localhost:3000/api/users/create", { walletID: address })
-  //       .then((res) => {
-  //         // console.log(res.data.data);
-  //         setCurrentUser(res.data.data);
-  //       });
-  //   }
-  // }, [address, setCurrentUser]);
+  useEffect(() => {
+    if (address) {
+      // const data = newRequest.post("users/create", { walletID: address });
+      // console.log(data.data);
+      axios
+        .post("http://localhost:3000/api/users/create", { walletID: address })
+        .then((res) => {
+          // console.log(res.data.data);
+          setCurrentUser(res.data.data);
+        });
+    }
+  }, [address, setCurrentUser]);
 
   useEffect(() => {
     console.log(user);
@@ -46,15 +45,10 @@ const Account = ({ user, setCurrentUser }) => {
     }
   }, []);
 
-  setTimeout(() => {
-    // console.log(user);
-  }, 5000);
   let walletID = user?.walletID;
   const [WithdrawAmount, setWithdrawAmount] = useState("");
   const [chainAmount, setChainAmount] = useState(0);
   // console.log(chainAmount);
-
-  let txType;
   const {
     data: writeData,
     isLoading: isWriteLoading,
@@ -64,15 +58,15 @@ const Account = ({ user, setCurrentUser }) => {
     address: "0x0C4e7Ee7373F40fC1b3FEb79380E2A32cedB0dDB",
     abi: lockAbi,
     functionName: "withdrawLock",
-    args: [walletID, chainAmount, txType],
+    args: [walletID, chainAmount, "withdrawal"],
     onSuccess(data) {
       // console.log("Settled", { data, error });
 
       if (data) {
-        // console.log(data);
+        console.log(data);
         axios
           .patch(`http://localhost:3000/api/users/update/${walletID}`, {
-            balance: user.balance - Number(WithdrawAmount),
+            balance: user.balance - WithdrawAmount,
             hasStaked: false,
             hasPledged: false,
           })
@@ -94,20 +88,11 @@ const Account = ({ user, setCurrentUser }) => {
 
   const handleWithdraw = async (e) => {
     e.preventDefault();
-    if (WithdrawAmount === 0) {
+    if (WithdrawAmount === "") {
       showToast("Please enter an amount", "warning");
     } else if (WithdrawAmount > user.balance) {
       showToast("Insufficient balance", "warning");
     } else {
-      if (user?.hasStaked) {
-        txType = "stake";
-      } else if (user?.hasPledged) {
-        txType = "pledge";
-      } else {
-        txType = "withdrawal";
-      }
-      showToast("Processing withdrawal...", "info");
-
       write();
     }
   };
@@ -134,7 +119,7 @@ const Account = ({ user, setCurrentUser }) => {
       Math.floor((remainingTime % (1000 * 60)) / 1000)
     ).padStart(2, "0");
 
-    if (calculatedSeconds === "00") {
+    if (Number(calculatedSeconds) <= 0) {
       // Reload the page to fetch the updated timer
       // window.location.reload();
       axios
@@ -145,8 +130,13 @@ const Account = ({ user, setCurrentUser }) => {
         });
     }
 
-    setHours(calculatedHours);
+    console.log(
+      typeof calculatedHours,
+      typeof calculatedMinutes,
+      typeof calculatedSeconds
+    );
 
+    setHours(calculatedHours);
     setMinutes(calculatedMinutes);
     setSeconds(calculatedSeconds);
   };
@@ -180,7 +170,7 @@ const Account = ({ user, setCurrentUser }) => {
 
   useEffect(() => {
     let ProfitTime;
-    let interval = null;
+    let interval;
     if (user?.hasStaked) {
       ProfitTime =
         user.stakingRecord[user.stakingRecord.length - 1].nextProfitTime;
@@ -203,7 +193,7 @@ const Account = ({ user, setCurrentUser }) => {
           .post("http://localhost:3000/api/users/create", { walletID: address })
           .then((res) => {
             // console.log(res.data.data);
-            setCurrentUser(res.data.data);
+            // setCurrentUser(res.data.data);
           });
 
         return;
@@ -280,7 +270,7 @@ const Account = ({ user, setCurrentUser }) => {
                 <img src={usdt} alt="" />
               </p>
             </div>
-            {user?.stakingRecord.length > 0 ? (
+            {user?.hasStaked && user?.stakingRecord.length > 0 ? (
               <>
                 <div className="section">
                   <h2>Current Yield Percentage</h2>
@@ -337,7 +327,7 @@ const Account = ({ user, setCurrentUser }) => {
         <div className="pledgingRecord">
           <h1>NFT Pledging Income</h1>
           <div className="pledgingRecordCon">
-            {user?.pledgingRecord.length > 0 ? (
+            {user?.hasPledged && user?.pledgingRecord.length > 0 ? (
               <>
                 <div className="section">
                   <h2>Current Pledge</h2>

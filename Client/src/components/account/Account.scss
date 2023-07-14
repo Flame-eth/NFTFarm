@@ -3,7 +3,7 @@
   height: 100%;
   background: linear-gradient(90deg, #0c0c0c 100%, rgba(0, 0, 0, 0) 60%);
   color: #fff;
-  padding-bottom:70px ;
+  padding-bottom: 70px;
   .navbar {
     background-color: black;
   }
@@ -233,67 +233,78 @@
         }
       }
     }
+
+    .loader {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #000000;
+      opacity: 0.7;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 
-
-
-
 @media (max-width: 768px) {
   .account {
-    .accountCon{
-     .balance{
-      border-radius: 30px;
-        h1{
+    .accountCon {
+      .balance {
+        border-radius: 30px;
+        h1 {
           font-size: 20px;
         }
-        p{
+        p {
           font-size: 15px;
         }
-        form{
-          input{
+        form {
+          input {
             width: 60%;
           }
-          button{
+          button {
             width: 60%;
           }
         }
-     } 
+      }
 
-     .stakingRecord{
-      .stakingRecordCon{
-        border-radius: 30px;
-        .section{
-          padding: 0 20px;
-          h2{
-            font-size: 15px;
-          }
-          p{
-            font-size: 15px;
+      .stakingRecord {
+        .stakingRecordCon {
+          border-radius: 30px;
+          .section {
+            padding: 0 20px;
+            h2 {
+              font-size: 15px;
+            }
+            p {
+              font-size: 15px;
+            }
           }
         }
       }
-     }
 
-     .pledgingRecord{
-      h1{
-        text-align: center;
-        width: 100%;
-        padding:20px 0;
-      }
-      .pledgingRecordCon{
-        border-radius: 30px;
-        .section{
-          padding: 0 20px;
-          h2{
-            font-size: 15px;
-          }
-          p{
-            font-size: 15px;
+      .pledgingRecord {
+        h1 {
+          text-align: center;
+          width: 100%;
+          padding: 20px 0;
+        }
+        .pledgingRecordCon {
+          border-radius: 30px;
+          .section {
+            padding: 0 20px;
+            h2 {
+              font-size: 15px;
+            }
+            p {
+              font-size: 15px;
+            }
           }
         }
       }
-     }
     }
   }
 }
