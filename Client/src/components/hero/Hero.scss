@@ -61,7 +61,7 @@
           // justify-content: center;
           cursor: pointer;
 
-          padding: 0.6em 2em;
+          padding: 0.6em 1em;
           border: none;
           outline: none;
           color: rgb(255, 255, 255);
@@ -74,11 +74,11 @@
           -webkit-user-select: none;
           touch-action: manipulation;
           width: 20%;
-          text-align: center;
+          // text-align: center;
           margin: 20px 0;
           display: flex;
           align-items: center;
-          gap: 20px;
+          gap: 15px;
 
           .icon {
           }
@@ -225,7 +225,7 @@
           }
 
           .heroButton {
-            width: 50%;
+            width: 35%;
             margin: 10px 0;
 
             h1 {

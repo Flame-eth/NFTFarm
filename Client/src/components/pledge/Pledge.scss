@@ -260,6 +260,8 @@
           width: 30%;
           // height: 90%;
 
+          transition: transform 0.3s ease-in-out;
+
           .close {
             display: flex;
             justify-content: flex-end;
@@ -297,6 +299,8 @@
 
           display: flex;
           align-items: center;
+
+          transition: transform 0.3s ease-in-out;
 
           .close {
             display: flex;
@@ -446,6 +450,14 @@
               }
             }
           }
+        }
+
+        .slide-out {
+          transform: translateX(-200%); /* Content slides out to the left */
+        }
+
+        .slide-in {
+          transform: translateX(0); /* Content slides in from the right */
         }
       }
 
@@ -599,7 +611,7 @@
   .pledge {
     .pledgeContainer {
       .pledgingCards {
-        width: 100%;
+        width: 140%;
         margin: 0 auto;
 
         .box {

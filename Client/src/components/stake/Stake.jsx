@@ -85,23 +85,26 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
   } else if (userWidth >= 992) {
     noOfSlides.current = 3;
   } else if (userWidth >= 650) {
-    noOfSlides.current = 2;
+    noOfSlides.current = 3;
   } else if (userWidth >= 500) {
-    noOfSlides.current = 2;
+    noOfSlides.current = 3;
   } else if (userWidth >= 320) {
-    noOfSlides.current = 2;
+    noOfSlides.current = 3;
   }
 
   //   console.log(noOfSlides.current);
 
   const settings = {
     dots: true,
+    // accessibility: false,
+    arrows: false,
+    autoPlay: true,
     infinite: true,
     speed: 500,
     slidesToShow: noOfSlides.current,
     slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+    // nextArrow: <SampleNextArrow />,
+    // prevArrow: <SamplePrevArrow />,
   };
 
   const handleAmount = (e, percentage) => {
@@ -172,12 +175,12 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
         setTimeout(() => {
           navigate("/account");
         }, 2500);
-      } 
+      }
     },
     onError(error) {
       setLoadingState(false);
       showToast("Transaction execution failed", "error");
-    }
+    },
   });
 
   const handleSubmit = async (e, min, max) => {
@@ -337,95 +340,95 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
           </Slider>
           {showModal ? (
             <div className="modal">
-              {showConnect ? (
-                <div className="showConnect">
-                  <div className="close" onClick={handleConnectClose}>
-                    <AiOutlineClose />
-                  </div>
-                  <div className="connect">
-                    <Web3Button
-                      icon="hide"
-                      label="Connect Wallet"
-                      balance="show"
-                    />
-                  </div>
+              <div
+                className={`showConnect ${
+                  showConnect ? "slide-in" : "slide-out"
+                }`}>
+                <div className="close" onClick={handleConnectClose}>
+                  <AiOutlineClose />
                 </div>
-              ) : (
-                <div className="modalContainer">
-                  <div className="close" onClick={handleModal}>
-                    <AiOutlineClose />
-                  </div>
+                <div className="connect">
+                  <Web3Button
+                    icon="hide"
+                    label="Connect Wallet"
+                    balance="show"
+                  />
+                </div>
+              </div>
 
-                  <div className="imageCon">
-                    <img src={stakeArray[stakeID].imgUrl} alt="" />
-                  </div>
-                  <div className="content">
-                    <h1>{stakeArray[stakeID].title}</h1>
-                    <p>{stakeArray[stakeID].desc}</p>
-                    <span>{stake[stakeID].percent}% DAILY EARNING </span>
-                    <div className="price">
-                      <div className="priceTag">
-                        <h3>Minimum Stake</h3>
-                        <h4>
-                          {stakeArray[stakeID].min}
-                          <img src={usdt} alt="" />
-                        </h4>
-                      </div>
-                      <div className="priceTag">
-                        <h3>Maximum Stake</h3>
-                        <h4>
-                          {stakeArray[stakeID].max}
-                          <img src={usdt} alt="" />
-                        </h4>
-                      </div>
+              <div
+                className={`modalContainer ${
+                  showConnect ? "slide-out" : "slide-in"
+                }`}>
+                <div className="close" onClick={handleModal}>
+                  <AiOutlineClose />
+                </div>
+
+                <div className="imageCon">
+                  <img src={stakeArray[stakeID].imgUrl} alt="" />
+                </div>
+                <div className="content">
+                  <h1>{stakeArray[stakeID].title}</h1>
+                  <p>{stakeArray[stakeID].desc}</p>
+                  <span>{stake[stakeID].percent}% DAILY EARNING </span>
+                  <div className="price">
+                    <div className="priceTag">
+                      <h3>Minimum Stake</h3>
+                      <h4>
+                        {stakeArray[stakeID].min}
+                        <img src={usdt} alt="" />
+                      </h4>
+                    </div>
+                    <div className="priceTag">
+                      <h3>Maximum Stake</h3>
+                      <h4>
+                        {stakeArray[stakeID].max}
+                        <img src={usdt} alt="" />
+                      </h4>
                     </div>
                   </div>
-                  <div className="stakeForm">
-                    <form action="">
-                      <div className="inputCon">
-                        <div className="input">
-                          <label htmlFor="">Amount:</label>
-                          <input
-                            type="number"
-                            placeholder="Enter Amount"
-                            onChange={(e) =>
-                              handleAmount(e, stake[stakeID].percent)
-                            }
-                          />
-                        </div>
-                        <div className="input">
-                          <label htmlFor="">Daily Return:</label>
-                          <input
-                            disabled
-                            value={dailyReturn}
-                            type="number"
-                            placeholder="Daily Return"
-                          />
-                        </div>
-                      </div>
-                      <button
-                        onClick={(e) =>
-                          handleSubmit(
-                            e,
-                            stake[stakeID].min,
-                            stake[stakeID].max
-                          )
-                        }
-                        type="submit">
-                        Stake
-                      </button>
-                    </form>
-                  </div>
-
-                  {loadingState ? (
-                    <div className="loader">
-                      <img src={spinner} alt="" />
-                    </div>
-                  ) : (
-                    ""
-                  )}
                 </div>
-              )}
+                <div className="stakeForm">
+                  <form action="">
+                    <div className="inputCon">
+                      <div className="input">
+                        <label htmlFor="">Amount:</label>
+                        <input
+                          type="number"
+                          placeholder="Enter Amount"
+                          onChange={(e) =>
+                            handleAmount(e, stake[stakeID].percent)
+                          }
+                        />
+                      </div>
+                      <div className="input">
+                        <label htmlFor="">Daily Return:</label>
+                        <input
+                          disabled
+                          value={dailyReturn}
+                          type="number"
+                          placeholder="Daily Return"
+                        />
+                      </div>
+                    </div>
+                    <button
+                      onClick={(e) =>
+                        handleSubmit(e, stake[stakeID].min, stake[stakeID].max)
+                      }
+                      type="submit">
+                      Stake
+                    </button>
+                  </form>
+                </div>
+
+                {loadingState ? (
+                  <div className="loader">
+                    <img src={spinner} alt="" />
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
             </div>
           ) : (
             ""
