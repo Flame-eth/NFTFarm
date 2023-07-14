@@ -108,7 +108,7 @@ const Account = ({ user, setCurrentUser }) => {
       }
       showToast("Processing withdrawal...", "info");
 
-      // write();
+      write();
     }
   };
 
