@@ -400,6 +400,7 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
                         <input
                           type="number"
                           placeholder="Enter Amount"
+                          value={amount}
                           onChange={(e) =>
                             handleAmount(e, stake[stakeID].percent)
                           }

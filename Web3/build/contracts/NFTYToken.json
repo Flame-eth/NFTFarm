@@ -123,7 +123,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -166,7 +167,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -179,7 +181,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -240,7 +243,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -253,7 +257,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -266,7 +271,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -286,7 +292,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -299,7 +306,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -15661,12 +15669,13 @@
     "44787": {
       "events": {},
       "links": {},
-      "address": "0xaa28f69d3964e6FEB6400159292d9379b050C3E6",
-      "transactionHash": "0xe7efb54282253b3ed60bb4e710af9ecc20269641f48213af643c08400310813c"
+      "address": "0x29272F1212Ed74F30962F1D2c61238fb87cf3d5F",
+      "transactionHash": "0xf984d4aa2f3bdc964f915fe284d8ef2221bd81d315064bc10022c89206cd8c56"
     }
   },
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-07-14T14:43:56.781Z",
+  "updatedAt": "2023-07-14T15:54:17.787Z",
+  "networkType": "ethereum",
   "devdoc": {
     "events": {
       "Approval(address,address,uint256)": {
