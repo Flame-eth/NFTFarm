@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { showToast } from "../../utils/showToast.js";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/user/user.actions.js";
-import { abi } from "../../contracts/IERC20.json";
+import { abi } from "../../contracts/NFTYToken.json";
 
 import { ethers } from "ethers";
 
@@ -122,7 +122,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
     isError: isReadError,
     isLoading: isReadLoading,
   } = useContractRead({
-    address: "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1",
+    address: "0xaa28f69d3964e6FEB6400159292d9379b050C3E6",
     abi: abi,
     functionName: "balanceOf",
     args: [walletID],
@@ -134,7 +134,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
     isSuccess: isWriteSuccess,
     write,
   } = useContractWrite({
-    address: "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1",
+    address: "0xaa28f69d3964e6FEB6400159292d9379b050C3E6",
     abi: abi,
     functionName: "transfer",
     args: [lockContract, chainAmount],

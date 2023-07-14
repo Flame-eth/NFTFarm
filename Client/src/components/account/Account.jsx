@@ -8,7 +8,7 @@ import { showToast } from "../../utils/showToast";
 import { useAccount, useContractRead, useContractWrite } from "wagmi";
 import axios from "axios";
 import { setCurrentUser } from "../../redux/user/user.actions";
-import { abi } from "../../contracts/IERC20.json";
+import { abi } from "../../contracts/NFTYToken.json";
 import { abi as lockAbi } from "../../contracts/YieldNftTokenLock.json";
 import { ethers } from "ethers";
 

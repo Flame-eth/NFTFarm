@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { showToast } from "../../utils/showToast.js";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/user/user.actions.js";
-import { abi } from "../../contracts/IERC20.json";
+import { abi } from "../../contracts/NFTYToken.json";
 
 import { ethers } from "ethers";
 
@@ -122,7 +122,7 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
     isError: isReadError,
     isLoading: isReadLoading,
   } = useContractRead({
-    address: "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1",
+    address: "0xaa28f69d3964e6FEB6400159292d9379b050C3E6",
     abi: abi,
     functionName: "balanceOf",
     args: [walletID],
@@ -134,51 +134,54 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
     isSuccess: isWriteSuccess,
     write,
   } = useContractWrite({
-    address: "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1",
+    address: "0xaa28f69d3964e6FEB6400159292d9379b050C3E6",
     abi: abi,
     functionName: "transfer",
     args: [lockContract, chainAmount],
-    onSuccess(data) {
-      // console.log("Settled", { data, error });
-
+    onSuccess: async (data) => {
       if (data) {
         const nextProfitTime = new Date();
-        nextProfitTime.setHours(nextProfitTime.getHours() + 1);
-        // console.log(balance, amount);
+        nextProfitTime.setMinutes(nextProfitTime.getMinutes() + 3);
 
         const updatedBalance = Number(balance) + Number(amount);
 
-        axios
-          .post(`http://localhost:3000/api/users/staking/new/${walletID}`, {
-            walletID: walletID,
-            stakingID: stakeID,
-            stakingAmount: amount,
-            stakingPercentage: stake[stakeID].percent,
-            hourlyEarning: dailyReturn / 24,
-            dailyEarning: dailyReturn,
-            stakingStatus: true,
-            nextProfitTime: nextProfitTime,
-          })
-          .then((res) => {
-            axios
-              .patch(`http://localhost:3000/api/users/update/${walletID}`, {
-                hasStaked: true,
-                balance: updatedBalance,
-              })
-              .then((res) => {
-                setCurrentUser(res.data.data);
-              });
-          });
+        try {
+          await axios.post(
+            `http://localhost:3000/api/users/staking/new/${walletID}`,
+            {
+              walletID: walletID,
+              stakingID: stakeID,
+              stakingAmount: amount,
+              stakingPercentage: stake[stakeID].percent,
+              hourlyEarning: dailyReturn / 24,
+              dailyEarning: dailyReturn,
+              stakingStatus: true,
+              nextProfitTime: nextProfitTime,
+            }
+          );
 
-        setLoadingState(false);
-        setShowModal(false);
-        showToast("Staked Successfully. Redirecting...", "success");
-        setTimeout(() => {
-          navigate("/account");
-        }, 2500);
+          await axios
+            .patch(`http://localhost:3000/api/users/update/${walletID}`, {
+              hasStaked: true,
+              balance: updatedBalance,
+            })
+            .then((res) => {
+              setCurrentUser(res.data.data);
+            });
+
+          setLoadingState(false);
+          setShowModal(false);
+          showToast("Staked Successfully. Redirecting...", "success");
+          setTimeout(() => {
+            navigate("/account");
+          }, 2500);
+        } catch (error) {
+          setLoadingState(false);
+          showToast("Database update failed", "error");
+        }
       }
     },
-    onError(error) {
+    onError: (error) => {
       setLoadingState(false);
       showToast("Transaction execution failed", "error");
     },
