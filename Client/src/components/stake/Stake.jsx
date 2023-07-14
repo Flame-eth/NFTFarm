@@ -98,9 +98,10 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
     dots: true,
     // accessibility: false,
     arrows: false,
-    autoPlay: true,
+    autoplay: true,
+
     infinite: true,
-    speed: 500,
+    // speed: 500,
     slidesToShow: noOfSlides.current,
     slidesToScroll: 1,
     // nextArrow: <SampleNextArrow />,

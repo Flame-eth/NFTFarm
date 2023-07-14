@@ -245,7 +245,9 @@ const Account = ({ user, setCurrentUser }) => {
               placeholder="0.00"
               onChange={(e) => {
                 setWithdrawAmount(e.target.value);
+                console.log(e.target.value);
                 setChainAmount(ethers.utils.parseEther(e.target.value));
+                console.log(Number(chainAmount));
               }}
             />
 
