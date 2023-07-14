@@ -193,7 +193,7 @@ const Account = ({ user, setCurrentUser }) => {
           .post("http://localhost:3000/api/users/create", { walletID: address })
           .then((res) => {
             // console.log(res.data.data);
-            // setCurrentUser(res.data.data);
+            setCurrentUser(res.data.data);
           });
 
         return;
