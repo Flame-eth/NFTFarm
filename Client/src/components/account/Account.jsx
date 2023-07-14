@@ -52,6 +52,8 @@ const Account = ({ user, setCurrentUser }) => {
   const [WithdrawAmount, setWithdrawAmount] = useState("");
   const [chainAmount, setChainAmount] = useState(0);
   // console.log(chainAmount);
+
+  let txType;
   const {
     data: writeData,
     isLoading: isWriteLoading,
@@ -61,12 +63,12 @@ const Account = ({ user, setCurrentUser }) => {
     address: "0x0C4e7Ee7373F40fC1b3FEb79380E2A32cedB0dDB",
     abi: lockAbi,
     functionName: "withdrawLock",
-    args: [walletID, chainAmount, "withdrawal"],
+    args: [walletID, chainAmount, txType],
     onSuccess(data) {
       // console.log("Settled", { data, error });
 
       if (data) {
-        console.log(data);
+        // console.log(data);
         axios
           .patch(`http://localhost:3000/api/users/update/${walletID}`, {
             balance: user.balance - WithdrawAmount,
@@ -96,6 +98,13 @@ const Account = ({ user, setCurrentUser }) => {
     } else if (WithdrawAmount > user.balance) {
       showToast("Insufficient balance", "warning");
     } else {
+      if (user?.hasStaked) {
+        txType = "stake";
+      } else if (user?.hasPledged) {
+        txType = "pledge";
+      } else {
+        txType = "withdrawal";
+      }
       write();
     }
   };
@@ -111,7 +120,6 @@ const Account = ({ user, setCurrentUser }) => {
     args: [walletID],
   });
 
-  useEffect(() => {}, [user]);
   const updateTimer = (remainingTime) => {
     const calculatedHours = String(
       Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
