@@ -54,7 +54,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
   const [showModal, setShowModal] = useState(false);
   const [pledgeID, setPledgeID] = useState();
   const [loadingState, setLoadingState] = useState(false);
-  const lockContract = "0xfb26683d0565C4C7a7c0E2576fb5592597f54BCA";
+  const lockContract = "0x0C4e7Ee7373F40fC1b3FEb79380E2A32cedB0dDB";
 
   const [showConnect, setShowConnect] = useState(false);
 
@@ -122,7 +122,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
     isError: isReadError,
     isLoading: isReadLoading,
   } = useContractRead({
-    address: "0xaa28f69d3964e6FEB6400159292d9379b050C3E6",
+    address: "0x29272F1212Ed74F30962F1D2c61238fb87cf3d5F",
     abi: abi,
     functionName: "balanceOf",
     args: [walletID],
@@ -134,7 +134,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
     isSuccess: isWriteSuccess,
     write,
   } = useContractWrite({
-    address: "0xaa28f69d3964e6FEB6400159292d9379b050C3E6",
+    address: "0x29272F1212Ed74F30962F1D2c61238fb87cf3d5F",
     abi: abi,
     functionName: "transfer",
     args: [lockContract, chainAmount],
