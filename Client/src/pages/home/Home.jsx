@@ -13,8 +13,11 @@ import RingLoader from "react-spinners/RingLoader";
 import "./Home.scss";
 import { stake } from "../../constants/stake";
 import { pledge } from "../../constants/pledge";
+import { setReferrer } from "../../redux/user/user.actions";
+import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 
-const Home = () => {
+const Home = ({ user, setReferrer }) => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -22,6 +25,18 @@ const Home = () => {
       setLoading(false);
     }, 3000);
   }, []);
+
+  let { referral_id } = useParams();
+
+  console.log(user);
+
+  useEffect(() => {
+    if (referral_id) {
+      if (referral_id !== "") {
+        setReferrer(referral_id);
+      }
+    }
+  });
 
   window.scrollTo(0, 0);
   return (
@@ -49,4 +64,12 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => ({
+  user: state.user.currentUser,
+});
+
+const mapDispatchToProp = (dispatch) => ({
+  setReferrer: (referrer) => dispatch(setReferrer(referrer)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProp)(Home);

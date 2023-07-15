@@ -18,6 +18,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         referralLink: action.payload,
       };
+    case "SET_REFERRER  ":
+      return {
+        ...state,
+        referrer: action.payload,
+      };
 
     default:
       return state;
