@@ -268,20 +268,21 @@ export const updateBalance = async (req, res) => {
 
           await user.save();
 
-          if (user?.referrer) {
+          if (user.referrer) {
             const firstPopulation = await User.findOne({
               walletID: user?.referrer,
             });
             if (firstPopulation) {
               const earningToAdd = (earningToBeAdded * 30) / 100;
               firstPopulation.firstPopulationIncome += earningToAdd;
-              firstPopulation.balance += earningToAdd;
               const newRecord = {
                 walletID: firstPopulation.walletID,
                 profitType: "Referral Income",
                 amount: earningToAdd,
-                newBalance: user.balance + earningToAdd,
+                newBalance: firstPopulation.balance + earningToAdd,
               };
+              firstPopulation.accountRecord.push(newRecord);
+              firstPopulation.balance += earningToAdd;
               await firstPopulation.save();
             }
 
@@ -291,6 +292,14 @@ export const updateBalance = async (req, res) => {
             if (secondPopulation) {
               const earningToAdd = (earningToBeAdded * 20) / 100;
               secondPopulation.secondPopulationIncome += earningToAdd;
+              const newRecord = {
+                walletID: secondPopulation.walletID,
+                profitType: "Referral Income",
+                amount: earningToAdd,
+                newBalance: secondPopulation.balance + earningToAdd,
+              };
+              secondPopulation.accountRecord.push(newRecord);
+              secondPopulation.balance += earningToAdd;
               await secondPopulation.save();
             }
 
@@ -300,6 +309,15 @@ export const updateBalance = async (req, res) => {
             if (thirdPopulation) {
               const earningToAdd = (earningToBeAdded * 10) / 100;
               thirdPopulation.thirdPopulationIncome += earningToAdd;
+              const newRecord = {
+                walletID: thirdPopulation.walletID,
+                profitType: "Referral Income",
+                amount: earningToAdd,
+                newBalance: thirdPopulation.balance + earningToAdd,
+              };
+              thirdPopulation.accountRecord.push(newRecord);
+              thirdPopulation.balance += earningToAdd;
+
               await thirdPopulation.save();
             }
           }
