@@ -29,6 +29,8 @@ const Home = ({ user, setReferrer }) => {
 
   let { referral_id } = useParams();
 
+  console.log(referral_id);
+
   console.log(user);
 
   useEffect(() => {

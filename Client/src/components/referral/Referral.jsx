@@ -60,7 +60,7 @@ const Referral = ({ user, referralLink, setReferralLink, setCurrentUser }) => {
           <div className="qrcode">
             <QRCodeSVG value={shortLink} />
           </div>
-          <div className="url">{shortLink}</div>
+          <div className="url">{userLink.slice(0, 45) + "..."}</div>
           <CopyToClipboard text={shortLink} onCopy={() => setCopied(true)}>
             <div className="copy">Copy</div>
           </CopyToClipboard>
@@ -74,7 +74,7 @@ const Referral = ({ user, referralLink, setReferralLink, setCurrentUser }) => {
           <h1 style={{ borderRight: "1px solid #fff" }}>Team Size</h1>
           <h1>Team Earning</h1>
         </div>
-        {user.referrer ? (
+        {user?.referrer ? (
           <>
             {" "}
             <div className="population">
