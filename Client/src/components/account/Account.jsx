@@ -57,7 +57,7 @@ const Account = ({ user, setCurrentUser }) => {
     isSuccess: isWriteSuccess,
     write,
   } = useContractWrite({
-    address: "0x0C4e7Ee7373F40fC1b3FEb79380E2A32cedB0dDB",
+    address: "0x9b8E6401fFd46F2395dd33C0205935d0bD44801F",
     abi: lockAbi,
     functionName: "withdrawLock",
     args: [walletID, chainAmount, "withdrawal"],
