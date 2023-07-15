@@ -17,7 +17,7 @@ import { showToast } from "../../utils/showToast";
 const Referral = ({ user, referralLink, setReferralLink, setCurrentUser }) => {
   const [copied, setCopied] = useState(false);
 
-  const userLink = `https://www.yeildnft.com/${user?.walletID}`;
+  const userLink = `https://nft-yeild.vercel.app/${user?.walletID}`;
   const [shortLink, setShortLink] = useState(userLink);
 
   const getShortLink = async () => {

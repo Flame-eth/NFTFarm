@@ -16,6 +16,7 @@ import { pledge } from "../../constants/pledge";
 import { setReferrer } from "../../redux/user/user.actions";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
+import { showToast } from "../../utils/showToast";
 
 const Home = ({ user, setReferrer }) => {
   const [loading, setLoading] = useState(false);
@@ -32,11 +33,13 @@ const Home = ({ user, setReferrer }) => {
 
   useEffect(() => {
     if (referral_id) {
-      if (referral_id !== "") {
+      if (referral_id !== user?.walletID) {
         setReferrer(referral_id);
+      } else if (referral_id === user?.walletID) {
+        showToast("You cannot refer yourself", "error");
       }
     }
-  });
+  }, [referral_id, user?.walletID]);
 
   window.scrollTo(0, 0);
   return (
