@@ -9,7 +9,11 @@ import {
   getUserStakingRecord,
   getUserTotalPledgingIncome,
   getUserTotalStakingIncome,
+  payReferral,
+  updateAccountRecord,
+  updateBalance,
   updatePledgingRecord,
+  updateReferral,
   updateStakingRecord,
   updateUser,
 } from "../controllers/user.controller.js";
@@ -29,5 +33,10 @@ router.get("/staking/income/:walletID", getUserTotalStakingIncome);
 router.get("/pledging/income/:walletID", getUserTotalPledgingIncome);
 router.post("/staking/new/:walletID", updateStakingRecord);
 router.post("/pledging/new/:walletID", updatePledgingRecord);
+
+router.patch("/updateBalance", updateBalance);
+router.patch("/updateReferral", updateReferral);
+router.patch("/payReferral", payReferral);
+router.patch("updateAccountRecord", updateAccountRecord);
 
 export default router;
