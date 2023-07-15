@@ -174,7 +174,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
                     walletID: walletID,
                     profitType: "New Pledge",
                     amount: amount,
-                    balance: updatedBalance,
+                    newBalance: updatedBalance,
                   }
                 );
               })

@@ -170,7 +170,7 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
                       walletID: walletID,
                       profitType: "New Stake",
                       amount: amount,
-                      balance: updatedBalance,
+                      newBalance: updatedBalance,
                     }
                   );
                 })

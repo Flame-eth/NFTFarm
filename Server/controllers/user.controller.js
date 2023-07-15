@@ -230,7 +230,7 @@ export const updateBalance = async (req, res) => {
       //   walletID: user.walletID,
       //   profitType: "Stake Income",
       //   amount: earningToBeAdded,
-      //   balance: user.balance + earningToBeAdded,
+      //   newBalance: user.balance + earningToBeAdded,
       // };
 
       // user.accountRecord.push(newRecord);
@@ -261,7 +261,7 @@ export const updateBalance = async (req, res) => {
             walletID: user.walletID,
             profitType: "Stake Income",
             amount: earningToBeAdded,
-            balance: user.balance + earningToBeAdded,
+            newBalance: user.balance + earningToBeAdded,
           };
 
           user.accountRecord.push(newRecord);
@@ -297,7 +297,7 @@ export const updateBalance = async (req, res) => {
             walletID: user.walletID,
             profitType: "Pledge Income",
             amount: earningToAdd,
-            balance: user.balance + earningToAdd,
+            newBalance: user.balance + earningToAdd,
           };
 
           user.accountRecord.push(newRecord);

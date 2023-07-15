@@ -13,7 +13,7 @@ import { ethers } from "ethers";
 import axios from "axios";
 
 const Account = ({ user, setCurrentUser }) => {
-  // console.log("user", user);
+  console.log("user", user);
   const { address, isConnecting, isDisconnected } = useAccount();
 
   const [hours, setHours] = useState("");
@@ -35,7 +35,7 @@ const Account = ({ user, setCurrentUser }) => {
   }, [address, setCurrentUser]);
 
   useEffect(() => {
-    console.log(user);
+    // console.log(user);
     if (user === null) {
       // console.log(user);
       // showToast("Wallet must be connected to view account records", "warning");
@@ -71,6 +71,17 @@ const Account = ({ user, setCurrentUser }) => {
             balance: user.balance - WithdrawAmount,
             hasStaked: false,
             hasPledged: false,
+          })
+          .then((res) => {
+            axios.patch(
+              `http://localhost:3000/api/users/updateAccountRecord/${walletID}`,
+              {
+                walletID: walletID,
+                profitType: "Withdrawal",
+                amount: WithdrawAmount,
+                newBalance: user.balance - WithdrawAmount,
+              }
+            );
           })
           .then((res) => {
             // console.log(res.data.data);
