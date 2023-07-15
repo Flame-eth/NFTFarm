@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Account.scss";
 import Navbar from "../navbar/Navbar";
-import { usdt } from "../../assets/images";
+import { spinner, usdt } from "../../assets/images";
 import { CgSandClock } from "react-icons/cg";
 import { connect } from "react-redux";
 import { showToast } from "../../utils/showToast";
 import { useAccount, useContractRead, useContractWrite } from "wagmi";
-import axios from "axios";
 import { setCurrentUser } from "../../redux/user/user.actions";
 import { abi } from "../../contracts/NFTYToken.json";
 import { abi as lockAbi } from "../../contracts/YieldNftTokenLock.json";
 import { ethers } from "ethers";
+import axios from "axios";
 
 const Account = ({ user, setCurrentUser }) => {
   // console.log("user", user);
@@ -48,6 +48,8 @@ const Account = ({ user, setCurrentUser }) => {
   let walletID = user?.walletID;
   const [WithdrawAmount, setWithdrawAmount] = useState("");
   const [chainAmount, setChainAmount] = useState(0);
+
+  const [loadingState, setLoadingState] = useState(false);
   // console.log(chainAmount);
   const {
     data: writeData,
@@ -122,19 +124,23 @@ const Account = ({ user, setCurrentUser }) => {
     if (Number(calculatedSeconds) <= 0) {
       // Reload the page to fetch the updated timer
       // window.location.reload();
-      axios
-        .post("http://localhost:3000/api/users/create", { walletID: address })
-        .then((res) => {
-          // console.log(res.data.data);
-          setCurrentUser(res.data.data);
-        });
+      setLoadingState(true);
+      // console.log(loadingState);
+      // showToast("Updating account records", "info");
+      // axios
+      //   .post("http://localhost:3000/api/users/create", { walletID: address })
+      //   .then((res) => {
+      //     // console.log(res.data.data);
+      //     setCurrentUser(res.data.data);
+      //     setLoadingState(false);
+      //   });
     }
 
-    console.log(
-      typeof calculatedHours,
-      typeof calculatedMinutes,
-      typeof calculatedSeconds
-    );
+    // console.log(
+    //   typeof calculatedHours,
+    //   typeof calculatedMinutes,
+    //   typeof calculatedSeconds
+    // );
 
     setHours(calculatedHours);
     setMinutes(calculatedMinutes);
@@ -188,12 +194,15 @@ const Account = ({ user, setCurrentUser }) => {
 
       if (remainingTime <= 0) {
         // Stop the timer and reload the page
+        setLoadingState(true);
+        // showToast("Updating account records", "info");
         clearInterval(interval);
         axios
           .post("http://localhost:3000/api/users/create", { walletID: address })
           .then((res) => {
             // console.log(res.data.data);
             setCurrentUser(res.data.data);
+            setLoadingState(false);
           });
 
         return;
@@ -399,6 +408,13 @@ const Account = ({ user, setCurrentUser }) => {
           </div>
         </div>
         <div className="changeRecord"></div>
+        {loadingState ? (
+          <div className="loader">
+            <img src={spinner} alt="" />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

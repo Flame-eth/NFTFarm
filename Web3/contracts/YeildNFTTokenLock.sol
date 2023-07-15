@@ -25,7 +25,7 @@ contract YieldNftTokenLock {
     }
 
     constructor() {
-        token = IERC20(0xaa28f69d3964e6FEB6400159292d9379b050C3E6);
+        token = IERC20(0x29272F1212Ed74F30962F1D2c61238fb87cf3d5F);
         _admin = 0xdb339be8E04Db248ea2bdD7C308c5589c121C6Bb;
     }
 
