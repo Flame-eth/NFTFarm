@@ -146,9 +146,8 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
         const updatedBalance = Number(balance) + Number(amount);
 
         try {
-          await axios.post(
-            `http://localhost:3000/api/users/staking/new/${walletID}`,
-            {
+          await axios
+            .post(`http://localhost:3000/api/users/staking/new/${walletID}`, {
               walletID: walletID,
               stakingID: stakeID,
               stakingAmount: amount,
@@ -157,16 +156,27 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
               dailyEarning: dailyReturn,
               stakingStatus: true,
               nextProfitTime: nextProfitTime,
-            }
-          );
-
-          await axios
-            .patch(`http://localhost:3000/api/users/update/${walletID}`, {
-              hasStaked: true,
-              balance: updatedBalance,
             })
             .then((res) => {
-              setCurrentUser(res.data.data);
+              axios
+                .patch(`http://localhost:3000/api/users/update/${walletID}`, {
+                  hasStaked: true,
+                  balance: updatedBalance,
+                })
+                .then((res) => {
+                  axios.patch(
+                    `http://localhost:3000/api/users/updateAccountRecord/${walletID}`,
+                    {
+                      walletID: walletID,
+                      profitType: "New Stake",
+                      amount: amount,
+                      balance: updatedBalance,
+                    }
+                  );
+                })
+                .finally((res) => {
+                  setCurrentUser(res.data.data);
+                });
             });
 
           setLoadingState(false);

@@ -168,6 +168,17 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
                 balance: updatedBalance,
               })
               .then((res) => {
+                axios.patch(
+                  `http://localhost:3000/api/users/updateAccountRecord/${walletID}`,
+                  {
+                    walletID: walletID,
+                    profitType: "New Pledge",
+                    amount: amount,
+                    balance: updatedBalance,
+                  }
+                );
+              })
+              .finally((res) => {
                 setCurrentUser(res.data.data);
               });
           });

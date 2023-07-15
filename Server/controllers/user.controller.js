@@ -226,6 +226,15 @@ export const updateBalance = async (req, res) => {
       //     user.totalStakingIncome += earningToBeAdded;
       //     lastStake.amountEarned += earningToBeAdded;
 
+      // const newRecord = {
+      //   walletID: user.walletID,
+      //   profitType: "Stake Income",
+      //   amount: earningToBeAdded,
+      //   balance: user.balance + earningToBeAdded,
+      // };
+
+      // user.accountRecord.push(newRecord);
+
       //     await user.save();
       //   }
       // }
@@ -248,6 +257,14 @@ export const updateBalance = async (req, res) => {
           user.balance += earningToBeAdded;
           user.totalStakingIncome += earningToBeAdded;
           lastStake.amountEarned += earningToBeAdded;
+          const newRecord = {
+            walletID: user.walletID,
+            profitType: "Stake Income",
+            amount: earningToBeAdded,
+            balance: user.balance + earningToBeAdded,
+          };
+
+          user.accountRecord.push(newRecord);
 
           await user.save();
         }
@@ -275,6 +292,15 @@ export const updateBalance = async (req, res) => {
           user.balance += earningToAdd;
           user.totalPledgingIncome += earningToAdd;
           lastPledge.amountEarned += earningToAdd;
+
+          const newRecord = {
+            walletID: user.walletID,
+            profitType: "Pledge Income",
+            amount: earningToAdd,
+            balance: user.balance + earningToAdd,
+          };
+
+          user.accountRecord.push(newRecord);
 
           await user.save();
         }
@@ -365,7 +391,7 @@ export const payReferral = async (req, res) => {
 
 export const updateAccountRecord = async (req, res) => {
   try {
-    const user = await User.findOne({ walletID: req.body.walletID });
+    const user = await User.findOne({ walletID: req.params.walletID });
     user.accountRecord.push(req.body);
     await user.save();
     res.status(200).json({
