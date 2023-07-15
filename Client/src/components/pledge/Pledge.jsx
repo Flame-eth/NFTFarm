@@ -48,7 +48,7 @@ const SamplePrevArrow = (props) => {
   );
 };
 
-const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
+const Pledge = ({ pledgeArray, user, setCurrentUser, referrer }) => {
   let walletID = user?.walletID;
   let balance = user?.balance;
   const [showModal, setShowModal] = useState(false);
@@ -177,6 +177,12 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
                     newBalance: updatedBalance,
                   }
                 );
+              })
+              .then((res) => {
+                axios.patch(`http://localhost:3000/api/users/updateReferral/`, {
+                  walletID: walletID,
+                  referrer: referrer,
+                });
               })
               .finally((res) => {
                 setCurrentUser(res.data.data);
@@ -469,6 +475,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser }) => {
 
 const mapStateToProps = (state) => ({
   user: state.user.currentUser,
+  referrer: state.user.referrer,
 });
 
 const mapDispatchToProps = (dispatch) => ({

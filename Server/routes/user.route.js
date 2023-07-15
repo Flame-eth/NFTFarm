@@ -37,6 +37,6 @@ router.post("/pledging/new/:walletID", updatePledgingRecord);
 router.patch("/updateBalance", updateBalance);
 router.patch("/updateReferral", updateReferral);
 router.patch("/payReferral", payReferral);
-router.patch("/updateAccountRecord", updateAccountRecord);
+router.patch("/updateAccountRecord/:walletID", updateAccountRecord);
 
 export default router;

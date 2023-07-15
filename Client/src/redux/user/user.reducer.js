@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   currentUser: null,
   referralLink: null,
+  referrer: null,
   loading: false,
   error: null,
 };
@@ -18,7 +19,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         referralLink: action.payload,
       };
-    case "SET_REFERRER  ":
+    case "SET_REFERRER":
       return {
         ...state,
         referrer: action.payload,

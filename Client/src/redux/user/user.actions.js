@@ -8,7 +8,7 @@ export const setReferralLink = (link) => ({
   payload: link,
 });
 
-export const setReferrer = (link) => ({
+export const setReferrer = (referrer) => ({
   type: "SET_REFERRER",
-  payload: link,
+  payload: referrer,
 });

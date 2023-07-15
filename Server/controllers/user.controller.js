@@ -312,14 +312,13 @@ export const updateBalance = async (req, res) => {
 };
 
 export const updateReferral = async (req, res) => {
+  const findUser = await User.findOne({ walletID: req.body.walletID });
+  if (!findUser.referrer) {
+    findUser.referrer = req.body?.referrer;
+    await findUser.save();
+  }
+
   try {
-    const findUser = await User.findOne({ walletID: req.body.walletID });
-
-    if (!findUser.referrer) {
-      findUser.referrer = req.body.referrer;
-      await findUser.save();
-    }
-
     const firstPopulation = await User.find({ walletID: findUser.referrer });
 
     if (firstPopulation) {
@@ -350,7 +349,10 @@ export const updateReferral = async (req, res) => {
       data: findUser,
     });
   } catch (error) {
-    console.log(error);
+    res.status(401).json({
+      success: false,
+      error: error,
+    });
   }
 };
 
@@ -386,7 +388,12 @@ export const payReferral = async (req, res) => {
       thirdPopulation.thirdPopulationIncome += earningToAdd;
       await thirdPopulation.save();
     }
-  } catch (error) {}
+  } catch (error) {
+    res.status(401).json({
+      success: false,
+      error: error,
+    });
+  }
 };
 
 export const updateAccountRecord = async (req, res) => {
@@ -400,6 +407,9 @@ export const updateAccountRecord = async (req, res) => {
       data: user,
     });
   } catch (error) {
-    console.log(error);
+    res.status(401).json({
+      success: false,
+      error: error,
+    });
   }
 };

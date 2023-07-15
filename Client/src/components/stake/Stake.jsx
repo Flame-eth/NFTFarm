@@ -47,7 +47,7 @@ const SamplePrevArrow = (props) => {
   );
 };
 
-const Stake = ({ stakeArray, user, setCurrentUser }) => {
+const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
   let walletID = user?.walletID;
   let balance = user?.balance;
   const [showModal, setShowModal] = useState(false);
@@ -162,6 +162,7 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
                 .patch(`http://localhost:3000/api/users/update/${walletID}`, {
                   hasStaked: true,
                   balance: updatedBalance,
+                  referrer: referrer,
                 })
                 .then((res) => {
                   axios.patch(
@@ -171,6 +172,15 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
                       profitType: "New Stake",
                       amount: amount,
                       newBalance: updatedBalance,
+                    }
+                  );
+                })
+                .then((res) => {
+                  axios.patch(
+                    `http://localhost:3000/api/users/updateReferral/`,
+                    {
+                      walletID: walletID,
+                      referrer: referrer,
                     }
                   );
                 })
@@ -456,6 +466,7 @@ const Stake = ({ stakeArray, user, setCurrentUser }) => {
 
 const mapStateToProps = (state) => ({
   user: state.user.currentUser,
+  referrer: state.user.referrer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
