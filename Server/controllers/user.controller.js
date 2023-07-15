@@ -267,6 +267,42 @@ export const updateBalance = async (req, res) => {
           user.accountRecord.push(newRecord);
 
           await user.save();
+
+          if (user?.referrer) {
+            const firstPopulation = await User.findOne({
+              walletID: user?.referrer,
+            });
+            if (firstPopulation) {
+              const earningToAdd = (earningToBeAdded * 30) / 100;
+              firstPopulation.firstPopulationIncome += earningToAdd;
+              firstPopulation.balance += earningToAdd;
+              const newRecord = {
+                walletID: firstPopulation.walletID,
+                profitType: "Referral Income",
+                amount: earningToAdd,
+                newBalance: user.balance + earningToAdd,
+              };
+              await firstPopulation.save();
+            }
+
+            const secondPopulation = await User.findOne({
+              walletID: firstPopulation?.referrer,
+            });
+            if (secondPopulation) {
+              const earningToAdd = (earningToBeAdded * 20) / 100;
+              secondPopulation.secondPopulationIncome += earningToAdd;
+              await secondPopulation.save();
+            }
+
+            const thirdPopulation = await User.findOne({
+              walletID: secondPopulation?.referrer,
+            });
+            if (thirdPopulation) {
+              const earningToAdd = (earningToBeAdded * 10) / 100;
+              thirdPopulation.thirdPopulationIncome += earningToAdd;
+              await thirdPopulation.save();
+            }
+          }
         }
       }
 
@@ -319,7 +355,7 @@ export const updateReferral = async (req, res) => {
   }
 
   try {
-    const firstPopulation = await User.find({ walletID: findUser.referrer });
+    const firstPopulation = await User.find({ walletID: findUser?.referrer });
 
     if (firstPopulation) {
       firstPopulation.firstPopulationCount += 1;
@@ -327,7 +363,7 @@ export const updateReferral = async (req, res) => {
     }
 
     const secondPopulation = await User.find({
-      walletID: firstPopulation.referrer,
+      walletID: firstPopulation?.referrer,
     });
 
     if (secondPopulation) {
@@ -336,7 +372,7 @@ export const updateReferral = async (req, res) => {
     }
 
     const thirdPopulation = await User.find({
-      walletID: secondPopulation.referrer,
+      walletID: secondPopulation?.referrer,
     });
 
     if (thirdPopulation) {
