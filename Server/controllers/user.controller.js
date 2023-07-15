@@ -362,3 +362,18 @@ export const payReferral = async (req, res) => {
     }
   } catch (error) {}
 };
+
+export const updateAccountRecord = async (req, res) => {
+  try {
+    const user = await User.findOne({ walletID: req.body.walletID });
+    user.accountRecord.push(req.body);
+    await user.save();
+    res.status(200).json({
+      success:
+        "Account record updated successfully. Balance has been updated accordingly.",
+      data: user,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

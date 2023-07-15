@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 import { PledgeSchema } from "./pledging.model.js";
 import { StakingSchema } from "./staking.model.js";
+import { ProfitSchema } from "./profit.model.js";
 
 const UserSchema = new Schema({
   walletID: {
@@ -18,6 +19,7 @@ const UserSchema = new Schema({
   },
   stakingRecord: [StakingSchema],
   pledgingRecord: [PledgeSchema],
+  accountRecord: [ProfitSchema],
 
   totalStakingIncome: {
     type: Number,
