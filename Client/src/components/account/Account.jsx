@@ -423,7 +423,7 @@ const Account = ({ user, setCurrentUser }) => {
           <div className="accountRecordCon">
             {user.accountRecord.length > 0 ? (
               <div className="section">
-                <table>
+                <table className="table">
                   <thead>
                     <tr>
                       <th>Profit Type</th>
@@ -438,7 +438,7 @@ const Account = ({ user, setCurrentUser }) => {
                         <td>{record.profitType}</td>
                         <td>{record.amount}</td>
                         <td>{record.newBalance}</td>
-                        <td>{record.date}</td>
+                        <td>{new Date(record.createdAt).toLocaleString()}</td>
                       </tr>
                     ))}
                   </tbody>
