@@ -102,11 +102,19 @@ const Account = ({ user, setCurrentUser }) => {
 
   const handleWithdraw = async (e) => {
     e.preventDefault();
+    const lastPledge = user?.pledgingRecord[user?.pledgingRecord.length - 1];
+
+    const matureTime = new Date(lastPledge?.yieldDate).getTime();
+    const currentTime = new Date().getTime();
     if (WithdrawAmount === "") {
       showToast("Please enter an amount", "warning");
+    } else if (WithdrawAmount < 10) {
+      showToast("Minimum withdrawal amount is 10 USDT", "warning");
     } else if (WithdrawAmount > user.balance) {
       showToast("Insufficient balance", "warning");
-    } else {
+    } else if (lastPledge && matureTime > currentTime) {
+      showToast("Pledge is not matured yet", "warning");
+    } else if (user?.hasStaked) {
       write();
     }
   };
@@ -427,7 +435,7 @@ const Account = ({ user, setCurrentUser }) => {
           </div>
         </div>
         <div className="accountRecord">
-          <h1>Account Record</h1>
+          <h1>Recent Account Record</h1>
           <div className="accountRecordCon">
             {user?.accountRecord.length > 0 ? (
               <div className="section">
@@ -444,8 +452,8 @@ const Account = ({ user, setCurrentUser }) => {
                     {displayedRecords.map((record) => (
                       <tr key={record._id}>
                         <td>{record.profitType}</td>
-                        <td>{record.amount}</td>
-                        <td>{record.newBalance}</td>
+                        <td>{record.amount.toFixed(2)}</td>
+                        <td>{record.newBalance.toFixed(2)}</td>
                         <td>{new Date(record.createdAt).toLocaleString()}</td>
                       </tr>
                     ))}

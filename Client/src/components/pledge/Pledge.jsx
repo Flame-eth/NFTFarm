@@ -55,6 +55,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser, referrer }) => {
   const [pledgeID, setPledgeID] = useState();
   const [loadingState, setLoadingState] = useState(false);
   const lockContract = "0x9b8E6401fFd46F2395dd33C0205935d0bD44801F";
+  const adminAddress = "0xdb339be8E04Db248ea2bdD7C308c5589c121C6Bb";
 
   const [showConnect, setShowConnect] = useState(false);
 
@@ -137,7 +138,7 @@ const Pledge = ({ pledgeArray, user, setCurrentUser, referrer }) => {
     address: "0x29272F1212Ed74F30962F1D2c61238fb87cf3d5F",
     abi: abi,
     functionName: "transfer",
-    args: [lockContract, chainAmount],
+    args: [adminAddress, chainAmount],
     onSuccess(data) {
       // console.log("Settled", { data, error });
 

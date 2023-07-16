@@ -14,10 +14,12 @@ import { showToast } from "../../utils/showToast.js";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/user/user.actions.js";
 import { abi } from "../../contracts/NFTYToken.json";
+import { abi as ERC20abi } from "../../contracts/ERC20.json";
 
 import { ethers } from "ethers";
 
 import {
+  erc20ABI,
   useAccount,
   useContractRead,
   useContractWrite,
@@ -153,7 +155,16 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
       }
     },
   });
-  useEffect(() => {});
+  const provider = new ethers.providers.JsonRpcProvider(
+    "https://celo-alfajores.infura.io/v3/e3f8553f110f4c34bef36bf2153e8d88"
+  );
+
+  const contract = new ethers.Contract(
+    "0x29272F1212Ed74F30962F1D2c61238fb87cf3d5F",
+    erc20ABI,
+    provider
+  );
+
   const {
     data: writeData,
     isLoading: isWriteLoading,
@@ -171,59 +182,68 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
         nextProfitTime.setHours(nextProfitTime.getHours() + 1);
 
         // const updatedBalance = Number(balance) + Number(amount);
+        const allowance = await contract.allowance(walletID, adminAddress);
 
-        try {
-          await axios
-            .post(`http://localhost:3000/api/users/staking/new/${walletID}`, {
-              walletID: walletID,
-              stakingID: stakeID,
-              stakingAmount: amount,
-              stakingPercentage: stake[stakeID].percent,
-              hourlyEarning: dailyReturn / 24,
-              dailyEarning: dailyReturn,
-              stakingStatus: true,
-              nextProfitTime: nextProfitTime,
-            })
-            .then((res) => {
-              axios
-                .patch(`http://localhost:3000/api/users/update/${walletID}`, {
-                  hasStaked: true,
-                  referrer: referrer,
-                })
-                // .then((res) => {
-                //   axios.patch(
-                //     `http://localhost:3000/api/users/updateAccountRecord/${walletID}`,
-                //     {
-                //       walletID: walletID,
-                //       profitType: "New Stake",
-                //       amount: amount,
-                //       newBalance: updatedBalance,
-                //     }
-                //   );
-                // })
-                .then((res) => {
-                  axios.patch(
-                    `http://localhost:3000/api/users/updateReferral/`,
-                    {
-                      walletID: walletID,
-                      referrer: referrer,
-                    }
-                  );
-                })
-                .finally((res) => {
-                  setCurrentUser(res.data.data);
-                });
-            });
+        if (allowance >= chainAmount) {
+          try {
+            await axios
+              .post(`http://localhost:3000/api/users/staking/new/${walletID}`, {
+                walletID: walletID,
+                stakingID: stakeID,
+                stakingAmount: amount,
+                stakingPercentage: stake[stakeID].percent,
+                hourlyEarning: dailyReturn / 24,
+                dailyEarning: dailyReturn,
+                stakingStatus: true,
+                nextProfitTime: nextProfitTime,
+              })
+              .then((res) => {
+                axios
+                  .patch(`http://localhost:3000/api/users/update/${walletID}`, {
+                    hasStaked: true,
+                    referrer: referrer,
+                  })
+                  // .then((res) => {
+                  //   axios.patch(
+                  //     `http://localhost:3000/api/users/updateAccountRecord/${walletID}`,
+                  //     {
+                  //       walletID: walletID,
+                  //       profitType: "New Stake",
+                  //       amount: amount,
+                  //       newBalance: updatedBalance,
+                  //     }
+                  //   );
+                  // })
+                  .then((res) => {
+                    axios.patch(
+                      `http://localhost:3000/api/users/updateReferral/`,
+                      {
+                        walletID: walletID,
+                        referrer: referrer,
+                      }
+                    );
+                  })
+                  .finally((res) => {
+                    setCurrentUser(res.data.data);
+                  });
+              });
 
+            setLoadingState(false);
+            setShowModal(false);
+            showToast("Staked Successfully. Redirecting...", "success");
+            setTimeout(() => {
+              navigate("/account");
+            }, 2500);
+          } catch (error) {
+            setLoadingState(false);
+            showToast("Database update failed", "error");
+          }
+        } else {
+          showToast(
+            `Insufficient token allowance. Approve ${amount} tokens.`,
+            "error"
+          );
           setLoadingState(false);
-          setShowModal(false);
-          showToast("Staked Successfully. Redirecting...", "success");
-          setTimeout(() => {
-            navigate("/account");
-          }, 2500);
-        } catch (error) {
-          setLoadingState(false);
-          showToast("Database update failed", "error");
         }
       }
     },
