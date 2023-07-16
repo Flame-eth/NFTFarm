@@ -421,13 +421,33 @@ const Account = ({ user, setCurrentUser }) => {
         <div className="accountRecord">
           <h1>Account Record</h1>
           <div className="accountRecordCon">
-            {
-              user.accountRecord.length > 0 ? (
-
-              ) :
-              ("No account record"")
-            }
-            </div>
+            {user.accountRecord.length > 0 ? (
+              <div className="section">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Profit Type</th>
+                      <th>Amount</th>
+                      <th>New Balance</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {user.accountRecord.map((record) => (
+                      <tr key={record._id}>
+                        <td>{record.profitType}</td>
+                        <td>{record.amount}</td>
+                        <td>{record.newBalance}</td>
+                        <td>{record.date}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              "No account record"
+            )}
+          </div>
         </div>
         {loadingState ? (
           <div className="loader">
