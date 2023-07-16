@@ -295,88 +295,88 @@ export const updateBalance = async (req, res) => {
 
       //TEST CODE START
 
-      if (user.hasStaked) {
-        const lastStake = user.stakingRecord[user.stakingRecord.length - 1];
+      // if (user.hasStaked) {
+      //   const lastStake = user.stakingRecord[user.stakingRecord.length - 1];
 
-        if (currentTime >= lastStake.nextProfitTime) {
-          // const hoursPassed = Math.floor(
-          //   (currentTime - lastStake.nextProfitTime) / (1000 * 60 * 60)
-          // );
-          const nextProfitTime = new Date(lastStake.nextProfitTime);
-          nextProfitTime.setMinutes(nextProfitTime.getMinutes() + 1);
-          lastStake.nextProfitTime = nextProfitTime;
+      //   if (currentTime >= lastStake.nextProfitTime) {
+      //     // const hoursPassed = Math.floor(
+      //     //   (currentTime - lastStake.nextProfitTime) / (1000 * 60 * 60)
+      //     // );
+      //     const nextProfitTime = new Date(lastStake.nextProfitTime);
+      //     nextProfitTime.setMinutes(nextProfitTime.getMinutes() + 1);
+      //     lastStake.nextProfitTime = nextProfitTime;
 
-          const earningToBeAdded = lastStake.hourlyEarning * 1;
+      //     const earningToBeAdded = lastStake.hourlyEarning * 1;
 
-          user.balance += earningToBeAdded;
-          user.totalStakingIncome += earningToBeAdded;
-          lastStake.amountEarned += earningToBeAdded;
-          const newRecord = {
-            walletID: user.walletID,
-            profitType: "Stake Income",
-            amount: earningToBeAdded,
-            newBalance: user.balance + earningToBeAdded,
-          };
+      //     user.balance += earningToBeAdded;
+      //     user.totalStakingIncome += earningToBeAdded;
+      //     lastStake.amountEarned += earningToBeAdded;
+      //     const newRecord = {
+      //       walletID: user.walletID,
+      //       profitType: "Stake Income",
+      //       amount: earningToBeAdded,
+      //       newBalance: user.balance + earningToBeAdded,
+      //     };
 
-          user.accountRecord.push(newRecord);
+      //     user.accountRecord.push(newRecord);
 
-          await user.save();
+      //     await user.save();
 
-          if (user.referrer) {
-            const firstPopulation = await User.findOne({
-              walletID: user?.referrer,
-            });
-            if (firstPopulation) {
-              const earningToAdd = (earningToBeAdded * 30) / 100;
-              firstPopulation.firstPopulationIncome += earningToAdd;
-              const newRecord = {
-                walletID: firstPopulation.walletID,
-                profitType: "Referral Income",
-                amount: earningToAdd,
-                newBalance: firstPopulation.balance + earningToAdd,
-              };
-              firstPopulation.accountRecord.push(newRecord);
-              firstPopulation.balance += earningToAdd;
-              await firstPopulation.save();
-            }
+      //     if (user.referrer) {
+      //       const firstPopulation = await User.findOne({
+      //         walletID: user?.referrer,
+      //       });
+      //       if (firstPopulation) {
+      //         const earningToAdd = (earningToBeAdded * 30) / 100;
+      //         firstPopulation.firstPopulationIncome += earningToAdd;
+      //         const newRecord = {
+      //           walletID: firstPopulation.walletID,
+      //           profitType: "Referral Income",
+      //           amount: earningToAdd,
+      //           newBalance: firstPopulation.balance + earningToAdd,
+      //         };
+      //         firstPopulation.accountRecord.push(newRecord);
+      //         firstPopulation.balance += earningToAdd;
+      //         await firstPopulation.save();
+      //       }
 
-            const secondPopulation = await User.findOne({
-              walletID: firstPopulation?.referrer,
-            });
-            if (secondPopulation) {
-              const earningToAdd = (earningToBeAdded * 20) / 100;
-              secondPopulation.secondPopulationIncome += earningToAdd;
-              const newRecord = {
-                walletID: secondPopulation.walletID,
-                profitType: "Referral Income",
-                amount: earningToAdd,
-                newBalance: secondPopulation.balance + earningToAdd,
-              };
-              secondPopulation.accountRecord.push(newRecord);
-              secondPopulation.balance += earningToAdd;
-              await secondPopulation.save();
-            }
+      //       const secondPopulation = await User.findOne({
+      //         walletID: firstPopulation?.referrer,
+      //       });
+      //       if (secondPopulation) {
+      //         const earningToAdd = (earningToBeAdded * 20) / 100;
+      //         secondPopulation.secondPopulationIncome += earningToAdd;
+      //         const newRecord = {
+      //           walletID: secondPopulation.walletID,
+      //           profitType: "Referral Income",
+      //           amount: earningToAdd,
+      //           newBalance: secondPopulation.balance + earningToAdd,
+      //         };
+      //         secondPopulation.accountRecord.push(newRecord);
+      //         secondPopulation.balance += earningToAdd;
+      //         await secondPopulation.save();
+      //       }
 
-            const thirdPopulation = await User.findOne({
-              walletID: secondPopulation?.referrer,
-            });
-            if (thirdPopulation) {
-              const earningToAdd = (earningToBeAdded * 10) / 100;
-              thirdPopulation.thirdPopulationIncome += earningToAdd;
-              const newRecord = {
-                walletID: thirdPopulation.walletID,
-                profitType: "Referral Income",
-                amount: earningToAdd,
-                newBalance: thirdPopulation.balance + earningToAdd,
-              };
-              thirdPopulation.accountRecord.push(newRecord);
-              thirdPopulation.balance += earningToAdd;
+      //       const thirdPopulation = await User.findOne({
+      //         walletID: secondPopulation?.referrer,
+      //       });
+      //       if (thirdPopulation) {
+      //         const earningToAdd = (earningToBeAdded * 10) / 100;
+      //         thirdPopulation.thirdPopulationIncome += earningToAdd;
+      //         const newRecord = {
+      //           walletID: thirdPopulation.walletID,
+      //           profitType: "Referral Income",
+      //           amount: earningToAdd,
+      //           newBalance: thirdPopulation.balance + earningToAdd,
+      //         };
+      //         thirdPopulation.accountRecord.push(newRecord);
+      //         thirdPopulation.balance += earningToAdd;
 
-              await thirdPopulation.save();
-            }
-          }
-        }
-      }
+      //         await thirdPopulation.save();
+      //       }
+      //     }
+      //   }
+      // }
 
       //TEST CODE END
 
