@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoute from "./routes/user.route.js";
+import transactionRoute from "./routes/transaction.route.js";
 import cron from "node-cron";
 import { updateBalance } from "./controllers/user.controller.js";
 
@@ -62,6 +63,7 @@ app.use((err, req, res, next) => {
 });
 
 app.use("/api/users", userRoute);
+app.use("/api/transactions", transactionRoute);
 
 cron.schedule("* * * * *", () => {
   // Task to be executed
