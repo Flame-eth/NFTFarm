@@ -72,8 +72,8 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
 
   const handleConnectClose = () => {
     setShowConnect(!showConnect);
-    setAmount(0);
-    setChainAmount(0);
+    setAmount();
+    setChainAmount();
     setDailyReturn(0);
   };
   let noOfSlides = useRef();
@@ -116,6 +116,15 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
     // console.log(chainAmount);
 
     setDailyReturn(e.target.value * (percentage / 100));
+    if (
+      e.target.value == "" ||
+      e.target.value == 0 ||
+      e.target.value == null ||
+      e.target.value == undefined ||
+      e.target.value == "NaN"
+    ) {
+      setDailyReturn(0);
+    }
   };
 
   const {
@@ -129,6 +138,22 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
     args: [walletID],
   });
 
+  const {
+    data: allowanceData,
+    isError: allowanceError,
+    isLoading: allowanceLoading,
+  } = useContractRead({
+    address: "0x29272F1212Ed74F30962F1D2c61238fb87cf3d5F",
+    abi: abi,
+    functionName: "allowance",
+    args: [walletID, adminAddress],
+    onSuccess: async (data) => {
+      if (data) {
+        // console.log(data);
+      }
+    },
+  });
+  useEffect(() => {});
   const {
     data: writeData,
     isLoading: isWriteLoading,
@@ -145,7 +170,7 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
         // nextProfitTime.setMinutes(nextProfitTime.getMinutes() + 1);
         nextProfitTime.setHours(nextProfitTime.getHours() + 1);
 
-        const updatedBalance = Number(balance) + Number(amount);
+        // const updatedBalance = Number(balance) + Number(amount);
 
         try {
           await axios
@@ -240,7 +265,7 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
 
   useEffect(() => {
     if (!showModal) {
-      setAmount(0);
+      setAmount();
       setDailyReturn(0);
     }
   }, [showModal]);
@@ -260,9 +285,9 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
       // showToast("Wallet Connected", "success");
 
       setShowConnect(false);
-      setAmount(0);
+      setAmount();
       setDailyReturn(0);
-      setChainAmount(0);
+      setChainAmount();
     }
   }, [address, setCurrentUser]);
 
