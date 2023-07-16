@@ -232,32 +232,6 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
           setLoadingState(true);
           write();
           // console.log(balance + Number(amount));
-
-          // try {
-          //   write();
-          //   setLoadingState(true);
-
-          //   if (isWriteLoading) {
-          //     setLoadingState(true);
-          //   } else {
-          //     setLoadingState(false);
-          //     showToast("Something went wrong", "error");
-          //   }
-
-          //   if (isWriteSuccess) {
-          //     setLoadingState(false);
-          //     setShowModal(false);
-          //     showToast("Staked Successfully", "success");
-          //   } else {
-          //     setLoadingState(false);
-          //     setShowModal(false);
-          //     showToast("Transaction failed", "error");
-          //   }
-          // } catch (error) {
-          //   setLoadingState(false);
-          //   setShowModal(false);
-          //   showToast("An error occurred", "error");
-          // }
         }
       }
     }
