@@ -85,6 +85,14 @@ const Account = ({ user, setCurrentUser }) => {
             );
           })
           .then((res) => {
+            axios.post(`http://localhost:3000/api/transactions/create/`, {
+              walletID: walletID,
+              transactionType: "Stake Profit Withdrawal",
+              amount: WithdrawAmount,
+              status: "Completed",
+            });
+          })
+          .then((res) => {
             // console.log(res.data.data);
             setCurrentUser(res.data.data);
           });
@@ -116,6 +124,13 @@ const Account = ({ user, setCurrentUser }) => {
       showToast("Pledge is not matured yet", "warning");
     } else if (user?.hasStaked) {
       write();
+    } else if (user?.hasPledged) {
+      axios.post(`http://localhost:3000/api/transactions/create/`, {
+        walletID: walletID,
+        transactionType: "Pledge Withdrawal",
+        amount: WithdrawAmount,
+        status: "Pending",
+      });
     }
   };
 

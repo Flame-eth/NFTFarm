@@ -185,6 +185,14 @@ const Pledge = ({ pledgeArray, user, setCurrentUser, referrer }) => {
                   referrer: referrer,
                 });
               })
+              .then((res) => {
+                axios.post(`http://localhost:3000/api/transactions/create/`, {
+                  walletID: walletID,
+                  transactionType: "New Pledge",
+                  amount: amount,
+                  status: "Completed",
+                });
+              })
               .finally((res) => {
                 setCurrentUser(res.data.data);
               });

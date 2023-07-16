@@ -223,6 +223,17 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
                       }
                     );
                   })
+                  .then((res) => {
+                    axios.post(
+                      `http://localhost:3000/api/transactions/create/`,
+                      {
+                        walletID: walletID,
+                        transactionType: "Stake Allowance",
+                        amount: amount,
+                        status: "Completed",
+                      }
+                    );
+                  })
                   .finally((res) => {
                     setCurrentUser(res.data.data);
                   });
