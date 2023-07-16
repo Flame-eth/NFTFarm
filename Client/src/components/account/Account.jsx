@@ -12,6 +12,7 @@ import { abi as lockAbi } from "../../contracts/YieldNftTokenLock.json";
 import { ethers } from "ethers";
 import axios from "axios";
 
+
 const Account = ({ user, setCurrentUser }) => {
   console.log("user", user);
   const { address, isConnecting, isDisconnected } = useAccount();
@@ -236,6 +237,13 @@ const Account = ({ user, setCurrentUser }) => {
     };
   }, [user]);
 
+  let displayedRecords;
+  if (user?.accountRecord.length > 7) {
+    displayedRecords = user.accountRecord.slice(-7).reverse();
+  } else {
+    displayedRecords = user?.accountRecord.slice().reverse();
+  }
+
   return (
     <div className="account">
       <div className="navbar">
@@ -421,7 +429,7 @@ const Account = ({ user, setCurrentUser }) => {
         <div className="accountRecord">
           <h1>Account Record</h1>
           <div className="accountRecordCon">
-            {user.accountRecord.length > 0 ? (
+            {user?.accountRecord.length > 0 ? (
               <div className="section">
                 <table className="table">
                   <thead>
@@ -433,7 +441,7 @@ const Account = ({ user, setCurrentUser }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {user.accountRecord.map((record) => (
+                    {displayedRecords.map((record) => (
                       <tr key={record._id}>
                         <td>{record.profitType}</td>
                         <td>{record.amount}</td>
@@ -445,7 +453,10 @@ const Account = ({ user, setCurrentUser }) => {
                 </table>
               </div>
             ) : (
-              "No account record"
+              <div className="">
+                <h2>No account record</h2>
+                <GiEmptyHourglass size={100} />
+              </div>
             )}
           </div>
         </div>
