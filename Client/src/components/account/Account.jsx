@@ -418,7 +418,17 @@ const Account = ({ user, setCurrentUser }) => {
             )}
           </div>
         </div>
-        <div className="changeRecord"></div>
+        <div className="accountRecord">
+          <h1>Account Record</h1>
+          <div className="accountRecordCon">
+            {
+              user.accountRecord.length > 0 ? (
+
+              ) :
+              ("No account record"")
+            }
+            </div>
+        </div>
         {loadingState ? (
           <div className="loader">
             <img src={spinner} alt="" />
