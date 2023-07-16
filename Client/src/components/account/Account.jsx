@@ -11,7 +11,7 @@ import { abi } from "../../contracts/NFTYToken.json";
 import { abi as lockAbi } from "../../contracts/YieldNftTokenLock.json";
 import { ethers } from "ethers";
 import axios from "axios";
-
+import { GiEmptyHourglass } from "react-icons/gi";
 
 const Account = ({ user, setCurrentUser }) => {
   console.log("user", user);
@@ -453,7 +453,13 @@ const Account = ({ user, setCurrentUser }) => {
                 </table>
               </div>
             ) : (
-              <div className="">
+              <div
+                className=""
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}>
                 <h2>No account record</h2>
                 <GiEmptyHourglass size={100} />
               </div>
