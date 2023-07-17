@@ -17,7 +17,7 @@ export const pledge = [
   {
     id: "22",
     title: "BoredApe",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    desc: "A Bored Ape exuding regal elegance and confidence. This NFT represents the embodiment of strength and leadership.",
     imgUrl: pledge1,
     creator: "1000",
     creatorImg: avatar1,
@@ -32,7 +32,7 @@ export const pledge = [
   {
     id: "23",
     title: "BoredApe",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    desc: "A Bored Ape with a stoic expression, hinting at the wisdom and depth within. Dive into the profound world of this NFT and uncover its hidden stories.",
     imgUrl: pledge2,
     creator: "5000",
     creatorImg: avatar2,
@@ -47,7 +47,7 @@ export const pledge = [
   {
     id: "24",
     title: "BoredApe",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    desc: "A Bored Ape with a mischievous grin, ready to unleash its playful spirit upon the world. This NFT captures the essence of curiosity and adventure",
     imgUrl: pledge3,
     creator: "10000",
     creatorImg: avatar3,
@@ -62,7 +62,7 @@ export const pledge = [
   {
     id: "25",
     title: "BoredApe",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    desc: "An enchanting Bored Ape adorned with vibrant accessories, radiating a contagious energy that draws you into its captivating gaze",
     imgUrl: pledge4,
     creator: "50000",
     creatorImg: avatar4,
@@ -77,7 +77,7 @@ export const pledge = [
   {
     id: "26",
     title: "BoredApe",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    desc: "An artistic masterpiece featuring a Bored Ape surrounded by mesmerizing patterns and intricate details. It's a visual feast for the eyes and a testament to artistic creativity.",
     imgUrl: pledge5,
     creator: "100000",
     creatorImg: avatar5,
@@ -92,7 +92,7 @@ export const pledge = [
   {
     id: "27",
     title: "BoredApe",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    desc: "A Bored Ape depicted in a dreamlike landscape, symbolizing the power of imagination and the escape from everyday monotony. Let this NFT transport you to a world of fantasy and wonder.",
     imgUrl: pledge6,
     creator: "200000",
     creatorImg: avatar10,
