@@ -67,36 +67,52 @@ const Account = ({ user, setCurrentUser }) => {
 
       if (data) {
         console.log(data);
-        axios
-          .patch(`http://localhost:3000/api/users/update/${walletID}`, {
-            balance: user.balance - WithdrawAmount,
-            hasStaked: false,
-            hasPledged: false,
-          })
-          .then((res) => {
-            axios.patch(
-              `http://localhost:3000/api/users/updateAccountRecord/${walletID}`,
-              {
+        try {
+          axios
+            .patch(`http://localhost:3000/api/users/update/${walletID}`, {
+              balance: user.balance - WithdrawAmount,
+              hasStaked: false,
+              hasPledged: false,
+            })
+            .then((res) => {
+              axios.patch(
+                `http://localhost:3000/api/users/updateAccountRecord/${walletID}`,
+                {
+                  walletID: walletID,
+                  profitType: "Withdrawal",
+                  amount: WithdrawAmount,
+                  newBalance: user.balance - WithdrawAmount,
+                }
+              );
+            })
+            .then((res) => {
+              axios.post(`http://localhost:3000/api/transactions/create/`, {
                 walletID: walletID,
-                profitType: "Withdrawal",
+                transactionType: "Stake Profit Withdrawal",
                 amount: WithdrawAmount,
-                newBalance: user.balance - WithdrawAmount,
-              }
-            );
-          })
-          .then((res) => {
-            axios.post(`http://localhost:3000/api/transactions/create/`, {
-              walletID: walletID,
-              transactionType: "Stake Profit Withdrawal",
-              amount: WithdrawAmount,
-              status: "Completed",
+                status: "Completed",
+              });
+            })
+            .then((res) => {
+              axios
+                .post("http://localhost:3000/api/users/create", {
+                  walletID: address,
+                })
+                .then((res) => {
+                  // console.log(res.data.data);
+                  setCurrentUser(res.data.data);
+                });
+            })
+            .then((res) => {
+              showToast("Withdraw successful", "success");
+              setWithdrawAmount("");
             });
-          })
-          .then((res) => {
-            // console.log(res.data.data);
-            setCurrentUser(res.data.data);
-          });
-        showToast("Withdraw successful", "success");
+        } catch (error) {
+          showToast(
+            "Withdraw failed, ensure you have sufficient balance and try again!",
+            "error"
+          );
+        }
       }
     },
     onError(error) {
@@ -137,6 +153,10 @@ const Account = ({ user, setCurrentUser }) => {
         amount: WithdrawAmount,
         status: "Pending",
       });
+      showToast(
+        "Withdrawal request submitted. It will be processed within 24 hours",
+        "info"
+      );
     }
   };
 

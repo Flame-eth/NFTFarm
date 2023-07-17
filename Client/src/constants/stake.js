@@ -16,8 +16,8 @@ import {
 export const stake = [
   {
     id: "01",
-    title: "Exe dream hight",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    title: "Ethereal Symphony",
+    desc: "A mesmerizing fusion of colors and shapes, capturing the essence of imagination. Let the ethereal symphony of this artwork transport you to otherworldly realms.",
     imgUrl: stake1,
     creator: "100",
     creatorImg: avatar1,

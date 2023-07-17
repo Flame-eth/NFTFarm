@@ -194,7 +194,14 @@ const Pledge = ({ pledgeArray, user, setCurrentUser, referrer }) => {
                 });
               })
               .finally((res) => {
-                setCurrentUser(res.data.data);
+                axios
+                  .post("http://localhost:3000/api/users/create", {
+                    walletID: address,
+                  })
+                  .then((res) => {
+                    // console.log(res.data.data);
+                    setCurrentUser(res.data.data);
+                  });
               });
           });
 
