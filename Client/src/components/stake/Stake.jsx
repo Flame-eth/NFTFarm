@@ -190,7 +190,7 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
           try {
             await axios
               .post(
-                `https://nftfarm-production.up.railway.app/api/users/staking/new/${walletID}`,
+                `https://brown-bighorn-sheep-shoe.cyclic.app/api/users/staking/new/${walletID}`,
                 {
                   walletID: walletID,
                   stakingID: stakeID,
@@ -205,7 +205,7 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
               .then((res) => {
                 axios
                   .patch(
-                    `https://nftfarm-production.up.railway.app/api/users/update/${walletID}`,
+                    `https://brown-bighorn-sheep-shoe.cyclic.app/api/users/update/${walletID}`,
                     {
                       hasStaked: true,
                       referrer: referrer,
@@ -213,7 +213,7 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
                   )
                   // .then((res) => {
                   //   axios.patch(
-                  //     `https://nftfarm-production.up.railway.app/api/users/updateAccountRecord/${walletID}`,
+                  //     `https://brown-bighorn-sheep-shoe.cyclic.app/api/users/updateAccountRecord/${walletID}`,
                   //     {
                   //       walletID: walletID,
                   //       profitType: "New Stake",
@@ -224,7 +224,7 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
                   // })
                   .then((res) => {
                     axios.patch(
-                      `https://nftfarm-production.up.railway.app/api/users/updateReferral/`,
+                      `https://brown-bighorn-sheep-shoe.cyclic.app/api/users/updateReferral/`,
                       {
                         walletID: walletID,
                         referrer: referrer,
@@ -233,7 +233,7 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
                   })
                   .then((res) => {
                     axios.post(
-                      `https://nftfarm-production.up.railway.app/api/transactions/create/`,
+                      `https://brown-bighorn-sheep-shoe.cyclic.app/api/transactions/create/`,
                       {
                         walletID: walletID,
                         transactionType: "Stake Allowance",
@@ -245,7 +245,7 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
                   .finally((res) => {
                     axios
                       .post(
-                        "https://nftfarm-production.up.railway.app/api/users/create",
+                        "https://brown-bighorn-sheep-shoe.cyclic.app/api/users/create",
                         {
                           walletID: address,
                         }
@@ -326,7 +326,7 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
       // const data = newRequest.post("users/create", { walletID: address });
       // console.log(data.data);
       axios
-        .post("https://nftfarm-production.up.railway.app/api/users/create", {
+        .post("https://brown-bighorn-sheep-shoe.cyclic.app/api/users/create", {
           walletID: address,
         })
         .then((res) => {
