@@ -29,8 +29,8 @@ export const stake = [
 
   {
     id: "02",
-    title: "walking on air",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    title: "Transcendent Horizon",
+    desc: "Embark on a journey through transcendent horizons where reality intertwines with the surreal. Explore the depths of this digital masterpiece and discover hidden dimensions.",
     imgUrl: stake2,
     creator: "5000",
     creatorImg: avatar2,
@@ -42,8 +42,8 @@ export const stake = [
 
   {
     id: "03",
-    title: "scarecrow in daylight",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    title: "Whimsical Dreamscape",
+    desc: "Step into a whimsical dreamscape, where vibrant hues dance with imaginative forms. Lose yourself in this captivating artwork and let your dreams take flight.",
     imgUrl: stake3,
     creator: "20000",
     creatorImg: avatar3,
@@ -55,8 +55,8 @@ export const stake = [
 
   {
     id: "04",
-    title: "Neon cube NFTx",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    title: "Mystic Illumination",
+    desc: "Experience the mystic illumination emanating from this enchanting artwork. Delve into its intricate patterns and let the ethereal glow guide you to newfound inspiration.",
     imgUrl: stake4,
     creator: "50000",
     creatorImg: avatar4,
@@ -68,8 +68,8 @@ export const stake = [
 
   {
     id: "05",
-    title: "Fly on high",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    title: "Celestial Fusion",
+    desc: "Witness the celestial fusion of cosmic energy and earthly elements in this awe-inspiring artwork. Allow its harmonious composition to elevate your spirit.",
     imgUrl: stake5,
     creator: "100000",
     creatorImg: avatar5,
@@ -81,8 +81,8 @@ export const stake = [
 
   {
     id: "06",
-    title: "Liquid wave",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    title: "Abstract Rhapsody",
+    desc: "Prepare for epic collisions of imagination and creativity. This artwork brings together diverse elements in a harmonious symphony, igniting sparks of inspiration.",
     imgUrl: stake6,
     creator: "200000",
     creatorImg: avatar6,
