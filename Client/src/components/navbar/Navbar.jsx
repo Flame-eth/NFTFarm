@@ -30,7 +30,9 @@ const Navbar = ({ user, setCurrentUser }) => {
       // const data = newRequest.post("users/create", { walletID: address });
       // console.log(data.data);
       axios
-        .post("http://localhost:3000/api/users/create", { walletID: address })
+        .post("https://nftfarm-production.up.railway.app/api/users/create", {
+          walletID: address,
+        })
         .then((res) => {
           // console.log(res.data.data);
           setCurrentUser(res.data.data);

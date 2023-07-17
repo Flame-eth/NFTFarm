@@ -145,32 +145,38 @@ const Pledge = ({ pledgeArray, user, setCurrentUser, referrer }) => {
       if (data) {
         const updatedBalance = Number(balance) + Number(amount);
         axios
-          .post(`http://localhost:3000/api/users/pledging/new/${walletID}`, {
-            walletID: walletID,
-            pledgeID: pledgeID,
-            pledgeAmount: amount,
-            pledgePercentage: pledgeArray[pledgeID].percent,
-            pledgeDuration: pledgeArray[pledgeID].days,
-            pledgeDate: new Date(),
-            yieldDate: new Date(
-              new Date().setDate(
-                new Date().getDate() + pledgeArray[pledgeID].days
-              )
-            ),
-            dailyEarning: totalReturn / pledgeArray[pledgeID].days,
-            targetEarning: totalReturn,
-            amountEarned: 0,
-            pledgeStatus: true,
-          })
+          .post(
+            `https://nftfarm-production.up.railway.app/api/users/pledging/new/${walletID}`,
+            {
+              walletID: walletID,
+              pledgeID: pledgeID,
+              pledgeAmount: amount,
+              pledgePercentage: pledgeArray[pledgeID].percent,
+              pledgeDuration: pledgeArray[pledgeID].days,
+              pledgeDate: new Date(),
+              yieldDate: new Date(
+                new Date().setDate(
+                  new Date().getDate() + pledgeArray[pledgeID].days
+                )
+              ),
+              dailyEarning: totalReturn / pledgeArray[pledgeID].days,
+              targetEarning: totalReturn,
+              amountEarned: 0,
+              pledgeStatus: true,
+            }
+          )
           .then((res) => {
             axios
-              .patch(`http://localhost:3000/api/users/update/${walletID}`, {
-                hasPledged: true,
-                balance: updatedBalance,
-              })
+              .patch(
+                `https://nftfarm-production.up.railway.app/api/users/update/${walletID}`,
+                {
+                  hasPledged: true,
+                  balance: updatedBalance,
+                }
+              )
               .then((res) => {
                 axios.patch(
-                  `http://localhost:3000/api/users/updateAccountRecord/${walletID}`,
+                  `https://nftfarm-production.up.railway.app/api/users/updateAccountRecord/${walletID}`,
                   {
                     walletID: walletID,
                     profitType: "New Pledge",
@@ -180,24 +186,33 @@ const Pledge = ({ pledgeArray, user, setCurrentUser, referrer }) => {
                 );
               })
               .then((res) => {
-                axios.patch(`http://localhost:3000/api/users/updateReferral/`, {
-                  walletID: walletID,
-                  referrer: referrer,
-                });
+                axios.patch(
+                  `https://nftfarm-production.up.railway.app/api/users/updateReferral/`,
+                  {
+                    walletID: walletID,
+                    referrer: referrer,
+                  }
+                );
               })
               .then((res) => {
-                axios.post(`http://localhost:3000/api/transactions/create/`, {
-                  walletID: walletID,
-                  transactionType: "New Pledge",
-                  amount: amount,
-                  status: "Completed",
-                });
+                axios.post(
+                  `https://nftfarm-production.up.railway.app/api/transactions/create/`,
+                  {
+                    walletID: walletID,
+                    transactionType: "New Pledge",
+                    amount: amount,
+                    status: "Completed",
+                  }
+                );
               })
               .finally((res) => {
                 axios
-                  .post("http://localhost:3000/api/users/create", {
-                    walletID: address,
-                  })
+                  .post(
+                    "https://nftfarm-production.up.railway.app/api/users/create",
+                    {
+                      walletID: address,
+                    }
+                  )
                   .then((res) => {
                     // console.log(res.data.data);
                     setCurrentUser(res.data.data);
@@ -287,7 +302,9 @@ const Pledge = ({ pledgeArray, user, setCurrentUser, referrer }) => {
       // const data = newRequest.post("users/create", { walletID: address });
       // console.log(data.data);
       axios
-        .post("http://localhost:3000/api/users/create", { walletID: address })
+        .post("https://nftfarm-production.up.railway.app/api/users/create", {
+          walletID: address,
+        })
         .then((res) => {
           // console.log(res.data.data);
           setCurrentUser(res.data.data);

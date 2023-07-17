@@ -187,25 +187,31 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
         if (allowance >= chainAmount) {
           try {
             await axios
-              .post(`http://localhost:3000/api/users/staking/new/${walletID}`, {
-                walletID: walletID,
-                stakingID: stakeID,
-                stakingAmount: amount,
-                stakingPercentage: stake[stakeID].percent,
-                hourlyEarning: dailyReturn / 24,
-                dailyEarning: dailyReturn,
-                stakingStatus: true,
-                nextProfitTime: nextProfitTime,
-              })
+              .post(
+                `https://nftfarm-production.up.railway.app/api/users/staking/new/${walletID}`,
+                {
+                  walletID: walletID,
+                  stakingID: stakeID,
+                  stakingAmount: amount,
+                  stakingPercentage: stake[stakeID].percent,
+                  hourlyEarning: dailyReturn / 24,
+                  dailyEarning: dailyReturn,
+                  stakingStatus: true,
+                  nextProfitTime: nextProfitTime,
+                }
+              )
               .then((res) => {
                 axios
-                  .patch(`http://localhost:3000/api/users/update/${walletID}`, {
-                    hasStaked: true,
-                    referrer: referrer,
-                  })
+                  .patch(
+                    `https://nftfarm-production.up.railway.app/api/users/update/${walletID}`,
+                    {
+                      hasStaked: true,
+                      referrer: referrer,
+                    }
+                  )
                   // .then((res) => {
                   //   axios.patch(
-                  //     `http://localhost:3000/api/users/updateAccountRecord/${walletID}`,
+                  //     `https://nftfarm-production.up.railway.app/api/users/updateAccountRecord/${walletID}`,
                   //     {
                   //       walletID: walletID,
                   //       profitType: "New Stake",
@@ -216,7 +222,7 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
                   // })
                   .then((res) => {
                     axios.patch(
-                      `http://localhost:3000/api/users/updateReferral/`,
+                      `https://nftfarm-production.up.railway.app/api/users/updateReferral/`,
                       {
                         walletID: walletID,
                         referrer: referrer,
@@ -225,7 +231,7 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
                   })
                   .then((res) => {
                     axios.post(
-                      `http://localhost:3000/api/transactions/create/`,
+                      `https://nftfarm-production.up.railway.app/api/transactions/create/`,
                       {
                         walletID: walletID,
                         transactionType: "Stake Allowance",
@@ -236,9 +242,12 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
                   })
                   .finally((res) => {
                     axios
-                      .post("http://localhost:3000/api/users/create", {
-                        walletID: address,
-                      })
+                      .post(
+                        "https://nftfarm-production.up.railway.app/api/users/create",
+                        {
+                          walletID: address,
+                        }
+                      )
                       .then((res) => {
                         // console.log(res.data.data);
                         setCurrentUser(res.data.data);
@@ -315,7 +324,9 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
       // const data = newRequest.post("users/create", { walletID: address });
       // console.log(data.data);
       axios
-        .post("http://localhost:3000/api/users/create", { walletID: address })
+        .post("https://nftfarm-production.up.railway.app/api/users/create", {
+          walletID: address,
+        })
         .then((res) => {
           // console.log(res.data.data);
           setCurrentUser(res.data.data);

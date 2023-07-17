@@ -27,7 +27,9 @@ const Account = ({ user, setCurrentUser }) => {
       // const data = newRequest.post("users/create", { walletID: address });
       // console.log(data.data);
       axios
-        .post("http://localhost:3000/api/users/create", { walletID: address })
+        .post("https://nftfarm-production.up.railway.app/api/users/create", {
+          walletID: address,
+        })
         .then((res) => {
           // console.log(res.data.data);
           setCurrentUser(res.data.data);
@@ -69,14 +71,17 @@ const Account = ({ user, setCurrentUser }) => {
         console.log(data);
         try {
           axios
-            .patch(`http://localhost:3000/api/users/update/${walletID}`, {
-              balance: user.balance - WithdrawAmount,
-              hasStaked: false,
-              hasPledged: false,
-            })
+            .patch(
+              `https://nftfarm-production.up.railway.app/api/users/update/${walletID}`,
+              {
+                balance: user.balance - WithdrawAmount,
+                hasStaked: false,
+                hasPledged: false,
+              }
+            )
             .then((res) => {
               axios.patch(
-                `http://localhost:3000/api/users/updateAccountRecord/${walletID}`,
+                `https://nftfarm-production.up.railway.app/api/users/updateAccountRecord/${walletID}`,
                 {
                   walletID: walletID,
                   profitType: "Withdrawal",
@@ -86,18 +91,24 @@ const Account = ({ user, setCurrentUser }) => {
               );
             })
             .then((res) => {
-              axios.post(`http://localhost:3000/api/transactions/create/`, {
-                walletID: walletID,
-                transactionType: "Stake Profit Withdrawal",
-                amount: WithdrawAmount,
-                status: "Completed",
-              });
+              axios.post(
+                `https://nftfarm-production.up.railway.app/api/transactions/create/`,
+                {
+                  walletID: walletID,
+                  transactionType: "Stake Profit Withdrawal",
+                  amount: WithdrawAmount,
+                  status: "Completed",
+                }
+              );
             })
             .then((res) => {
               axios
-                .post("http://localhost:3000/api/users/create", {
-                  walletID: address,
-                })
+                .post(
+                  "https://nftfarm-production.up.railway.app/api/users/create",
+                  {
+                    walletID: address,
+                  }
+                )
                 .then((res) => {
                   // console.log(res.data.data);
                   setCurrentUser(res.data.data);
@@ -121,12 +132,15 @@ const Account = ({ user, setCurrentUser }) => {
         "Withdraw failed, ensure you have sufficient balance and try again!",
         "error"
       );
-      axios.post(`http://localhost:3000/api/transactions/create/`, {
-        walletID: walletID,
-        transactionType: "Stake Profit Withdrawal",
-        amount: WithdrawAmount,
-        status: "Failed",
-      });
+      axios.post(
+        `https://nftfarm-production.up.railway.app/api/transactions/create/`,
+        {
+          walletID: walletID,
+          transactionType: "Stake Profit Withdrawal",
+          amount: WithdrawAmount,
+          status: "Failed",
+        }
+      );
     },
   });
 
@@ -147,12 +161,15 @@ const Account = ({ user, setCurrentUser }) => {
     } else if (user?.hasStaked) {
       write();
     } else if (user?.hasPledged) {
-      axios.post(`http://localhost:3000/api/transactions/create/`, {
-        walletID: walletID,
-        transactionType: "Pledge Withdrawal",
-        amount: WithdrawAmount,
-        status: "Pending",
-      });
+      axios.post(
+        `https://nftfarm-production.up.railway.app/api/transactions/create/`,
+        {
+          walletID: walletID,
+          transactionType: "Pledge Withdrawal",
+          amount: WithdrawAmount,
+          status: "Pending",
+        }
+      );
       showToast(
         "Withdrawal request submitted. It will be processed within 24 hours",
         "info"
@@ -189,7 +206,7 @@ const Account = ({ user, setCurrentUser }) => {
       // console.log(loadingState);
       // showToast("Updating account records", "info");
       // axios
-      //   .post("http://localhost:3000/api/users/create", { walletID: address })
+      //   .post("https://nftfarm-production.up.railway.app/api/users/create", { walletID: address })
       //   .then((res) => {
       //     // console.log(res.data.data);
       //     setCurrentUser(res.data.data);
@@ -259,7 +276,9 @@ const Account = ({ user, setCurrentUser }) => {
         // showToast("Updating account records", "info");
         clearInterval(interval);
         axios
-          .post("http://localhost:3000/api/users/create", { walletID: address })
+          .post("https://nftfarm-production.up.railway.app/api/users/create", {
+            walletID: address,
+          })
           .then((res) => {
             // console.log(res.data.data);
             setCurrentUser(res.data.data);
