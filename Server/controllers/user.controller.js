@@ -208,6 +208,7 @@ export const updateBalance = async (req, res) => {
 
     users.forEach(async (user) => {
       const currentTime = new Date();
+      // console.log(currentTime);
 
       if (user.hasStaked) {
         const lastStake = user.stakingRecord[user.stakingRecord.length - 1];
@@ -216,11 +217,18 @@ export const updateBalance = async (req, res) => {
           const hoursPassed = Math.floor(
             (currentTime - lastStake.nextProfitTime) / (1000 * 60 * 60)
           );
+          // console.log(hoursPassed);
           const nextProfitTime = new Date(lastStake.nextProfitTime);
           nextProfitTime.setHours(nextProfitTime.getHours() + hoursPassed + 1);
           lastStake.nextProfitTime = nextProfitTime;
 
-          const earningToBeAdded = lastStake.hourlyEarning * hoursPassed;
+          let earningToBeAdded;
+
+          if (hoursPassed > 1) {
+            earningToBeAdded = lastStake.hourlyEarning * hoursPassed;
+          } else {
+            earningToBeAdded = lastStake.hourlyEarning;
+          }
 
           user.balance += earningToBeAdded;
           user.totalStakingIncome += earningToBeAdded;
@@ -395,7 +403,12 @@ export const updateBalance = async (req, res) => {
           lastPledge.nextProfitTime = nextProfitTime;
 
           const hourlyEarning = lastPledge.dailyEarning / 24;
-          const earningToAdd = hourlyEarning * hoursPassed;
+          let earningToAdd;
+          if (hoursPassed > 1) {
+            earningToAdd = hourlyEarning * hoursPassed;
+          } else {
+            earningToAdd = hourlyEarning;
+          }
 
           user.balance += earningToAdd;
           user.totalPledgingIncome += earningToAdd;

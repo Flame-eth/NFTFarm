@@ -102,9 +102,15 @@ const Account = ({ user, setCurrentUser }) => {
     onError(error) {
       // console.error(error);
       showToast(
-        "Withdraw failed, ensure you have sufficient balance!",
+        "Withdraw failed, ensure you have sufficient balance and try again!",
         "error"
       );
+      axios.post(`http://localhost:3000/api/transactions/create/`, {
+        walletID: walletID,
+        transactionType: "Stake Profit Withdrawal",
+        amount: WithdrawAmount,
+        status: "Failed",
+      });
     },
   });
 
@@ -159,7 +165,7 @@ const Account = ({ user, setCurrentUser }) => {
     if (Number(calculatedSeconds) <= 0) {
       // Reload the page to fetch the updated timer
       // window.location.reload();
-      setLoadingState(true);
+      // setLoadingState(true);
       // console.log(loadingState);
       // showToast("Updating account records", "info");
       // axios
@@ -467,8 +473,8 @@ const Account = ({ user, setCurrentUser }) => {
                     {displayedRecords.map((record) => (
                       <tr key={record._id}>
                         <td>{record.profitType}</td>
-                        <td>{record.amount.toFixed(2)}</td>
-                        <td>{record.newBalance.toFixed(2)}</td>
+                        <td>{record.amount.toFixed(4)}</td>
+                        <td>{record.newBalance.toFixed(4)}</td>
                         <td>{new Date(record.createdAt).toLocaleString()}</td>
                       </tr>
                     ))}
