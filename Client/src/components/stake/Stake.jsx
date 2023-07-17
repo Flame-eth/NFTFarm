@@ -184,6 +184,8 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
         // const updatedBalance = Number(balance) + Number(amount);
         const allowance = await contract.allowance(walletID, adminAddress);
 
+        console.log(allowance, chainAmount);
+
         if (allowance >= chainAmount) {
           try {
             await axios
