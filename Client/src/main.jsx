@@ -36,7 +36,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <WagmiConfig config={wagmiConfig}>
       <Provider store={store}>
         {/* <BrowserRouter> */}
-          <App />
+        <App />
         {/* </BrowserRouter> */}
       </Provider>
     </WagmiConfig>
