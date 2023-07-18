@@ -24,6 +24,7 @@ import {
   useContractWrite,
   usePrepareContractWrite,
 } from "wagmi";
+
 import axios from "axios";
 import { Web3Button } from "@web3modal/react";
 

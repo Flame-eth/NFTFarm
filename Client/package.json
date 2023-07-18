@@ -2,12 +2,12 @@
   "name": "client",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.js"
   },
   "dependencies": {
     "@thirdweb-dev/react": "^3.14.8",
@@ -17,6 +17,7 @@
     "axios": "^1.4.0",
     "dotenv": "^16.3.1",
     "ethers": "^5.7.2",
+    "express": "^4.18.2",
     "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
