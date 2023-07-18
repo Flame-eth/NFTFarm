@@ -67,7 +67,7 @@ const Navbar = ({ user, setCurrentUser }) => {
               </Link>
             </li> */}
               <li>
-                <Link className="navLink" to="/account">
+                <Link className="navLink" to="account">
                   Account
                 </Link>
               </li>
