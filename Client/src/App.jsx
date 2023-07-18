@@ -30,7 +30,7 @@ function App() {
           element: <Home />,
         },
         {
-          path: "/account",
+          path: "account",
           element: <AccountPage />,
         },
         {
