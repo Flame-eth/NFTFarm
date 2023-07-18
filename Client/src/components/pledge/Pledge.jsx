@@ -339,63 +339,61 @@ const Pledge = ({ pledgeArray, user, setCurrentUser, referrer }) => {
               const ID = index;
               //   console.log(ID);
               return (
-                <>
-                  <div className="box" key={index}>
-                    <div className="product">
-                      <div className="img">
-                        <span className="discount">{pledge.percent} % </span>
-                        <div className="imageCon">
-                          <img src={pledge.imgUrl} alt="" />
+                <div className="box" key={index}>
+                  <div className="product">
+                    <div className="img">
+                      <span className="discount">{pledge.percent} % </span>
+                      <div className="imageCon">
+                        <img src={pledge.imgUrl} alt="" />
+                      </div>
+                    </div>
+                    <div className="product-details">
+                      <h3>{pledge.title}</h3>
+                      <div className="pledgeHistory">
+                        <div className="record">
+                          <h2>Pledge Duration</h2>
+                          <h3>{pledge.days} days</h3>
+                        </div>
+                        <div className="record">
+                          <h2>Total People</h2>
+                          <h3>{pledge.people}</h3>
                         </div>
                       </div>
-                      <div className="product-details">
-                        <h3>{pledge.title}</h3>
-                        <div className="pledgeHistory">
-                          <div className="record">
-                            <h2>Pledge Duration</h2>
-                            <h3>{pledge.days} days</h3>
+
+                      <div className="text">
+                        <div className="price">
+                          <div className="priceTag">
+                            <h3>MINIMUM</h3>
+                            <h4>
+                              {pledge.min}
+                              <img src={usdt} alt="" />
+                            </h4>
                           </div>
-                          <div className="record">
-                            <h2>Total People</h2>
-                            <h3>{pledge.people}</h3>
+                          <div className="priceTag">
+                            <h3>MAXIMUM</h3>
+                            <h4>
+                              {pledge.max}
+                              <img src={usdt} alt="" />
+                            </h4>
                           </div>
                         </div>
 
-                        <div className="text">
-                          <div className="price">
-                            <div className="priceTag">
-                              <h3>MINIMUM</h3>
-                              <h4>
-                                {pledge.min}
-                                <img src={usdt} alt="" />
-                              </h4>
-                            </div>
-                            <div className="priceTag">
-                              <h3>MAXIMUM</h3>
-                              <h4>
-                                {pledge.max}
-                                <img src={usdt} alt="" />
-                              </h4>
-                            </div>
-                          </div>
-
-                          <button
-                            onClick={() => {
-                              setPledgeID(ID);
-                              if (pledgeID == index) {
-                                setShowModal(!showModal);
-                              } else {
-                                setShowModal(true);
-                              }
-                            }}>
-                            <i className="fa fa-plus"></i>
-                            <span>Start Using</span>
-                          </button>
-                        </div>
+                        <button
+                          onClick={() => {
+                            setPledgeID(ID);
+                            if (pledgeID == index) {
+                              setShowModal(!showModal);
+                            } else {
+                              setShowModal(true);
+                            }
+                          }}>
+                          <i className="fa fa-plus"></i>
+                          <span>Start Using</span>
+                        </button>
                       </div>
                     </div>
                   </div>
-                </>
+                </div>
               );
             })}
           </Slider>

@@ -363,53 +363,51 @@ const Stake = ({ stakeArray, user, setCurrentUser, referrer }) => {
               const ID = index;
               //   console.log(ID);
               return (
-                <>
-                  <div className="box" key={index}>
-                    <div className="product">
-                      <div className="img">
-                        <span className="discount">{stake.percent} % </span>
-                        <div className="imageCon">
-                          <img src={stake.imgUrl} alt="" />
-                        </div>
+                <div className="box" key={index}>
+                  <div className="product">
+                    <div className="img">
+                      <span className="discount">{stake.percent} % </span>
+                      <div className="imageCon">
+                        <img src={stake.imgUrl} alt="" />
                       </div>
-                      <div className="product-details">
-                        <h3>{stake.title}</h3>
+                    </div>
+                    <div className="product-details">
+                      <h3>{stake.title}</h3>
 
-                        <div className="text">
-                          <div className="price">
-                            <div className="priceTag">
-                              <h3>MINIMUM</h3>
-                              <h4>
-                                {stake.min}
-                                <img src={usdt} alt="" />
-                              </h4>
-                            </div>
-                            <div className="priceTag">
-                              <h3>MAXIMUM</h3>
-                              <h4>
-                                {stake.max}
-                                <img src={usdt} alt="" />
-                              </h4>
-                            </div>
+                      <div className="text">
+                        <div className="price">
+                          <div className="priceTag">
+                            <h3>MINIMUM</h3>
+                            <h4>
+                              {stake.min}
+                              <img src={usdt} alt="" />
+                            </h4>
                           </div>
-
-                          <button
-                            onClick={() => {
-                              setStakeID(ID);
-                              if (stakeID == index) {
-                                setShowModal(!showModal);
-                              } else {
-                                setShowModal(true);
-                              }
-                            }}>
-                            <i className="fa fa-plus"></i>
-                            <span>Start Using</span>
-                          </button>
+                          <div className="priceTag">
+                            <h3>MAXIMUM</h3>
+                            <h4>
+                              {stake.max}
+                              <img src={usdt} alt="" />
+                            </h4>
+                          </div>
                         </div>
+
+                        <button
+                          onClick={() => {
+                            setStakeID(ID);
+                            if (stakeID == index) {
+                              setShowModal(!showModal);
+                            } else {
+                              setShowModal(true);
+                            }
+                          }}>
+                          <i className="fa fa-plus"></i>
+                          <span>Start Using</span>
+                        </button>
                       </div>
                     </div>
                   </div>
-                </>
+                </div>
               );
             })}
           </Slider>

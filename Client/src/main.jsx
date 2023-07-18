@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.scss";
-import { BrowserRouter } from "react-router-dom";
+// import { Router as BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { Web3NetworkSwitch } from "@web3modal/react";
@@ -35,9 +35,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <>
     <WagmiConfig config={wagmiConfig}>
       <Provider store={store}>
-        <BrowserRouter>
+        {/* <BrowserRouter> */}
           <App />
-        </BrowserRouter>
+        {/* </BrowserRouter> */}
       </Provider>
     </WagmiConfig>
 
@@ -51,7 +51,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         "--w3m-background-color": "#1a1a1a",
         "--w3m-z-index": "99999999999999999999999",
         "--w3m-logo-image-url": "../logo.png",
-        // "--w3m-color-overlay": "#1a1a1a",  
+        // "--w3m-color-overlay": "#1a1a1a",
       }}
     />
 
