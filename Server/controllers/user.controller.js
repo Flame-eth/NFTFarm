@@ -1,4 +1,6 @@
 import User from "../models/user.model.js";
+import ethers from "ethers"; // import ethers.js library
+import { abi } from "../utils/ERC20.json";
 
 export const getUser = async (req, res, next) => {
   try {
@@ -202,6 +204,24 @@ export const updateStakingRecord = async (req, res, next) => {
   }
 };
 
+async function fetchUSDTBalance(address) {
+  const usdtContractAddress = "0x29272F1212Ed74F30962F1D2c61238fb87cf3d5F";
+  const provider = new ethers.providers.JsonRpcProvider(
+    "https://celo-alfajores.infura.io/v3/e3f8553f110f4c34bef36bf2153e8d88"
+  );
+
+  const contract = new ethers.Contract(usdtContractAddress, abi, provider);
+
+  try {
+    const balance = await contract.balanceOf(address);
+    return balance.toString();
+    // console.log(`USDT balance for ${address}: ${balance.toString()}`);
+  } catch (error) {
+    // console.error("Error fetching USDT balance:", error);
+    return error;
+  }
+}
+
 export const updateBalance = async (req, res) => {
   try {
     const users = await User.find({});
@@ -301,6 +321,23 @@ export const updateBalance = async (req, res) => {
             }
           }
         }
+
+        const balance = await fetchUSDTBalance(user.walletID);
+        try {
+          if (
+            balance >= lastStake.minAmount &&
+            balance <= lastStake.maxAmount
+          ) {
+            user.hasStaked = true;
+            lastStake.stakingStatus = true;
+            lastStake.dailyEarning =
+              balance * (lastStake.stakingPercentage / 100);
+            lastStake.hourlyEarning =
+              (balance * (lastStake.stakingPercentage / 100)) / 24;
+
+            await user.save();
+          }
+        } catch (error) {}
       }
 
       //TEST CODE START
