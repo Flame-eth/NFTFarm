@@ -1,6 +1,6 @@
 import User from "../models/user.model.js";
-import ethers from "ethers"; // import ethers.js library
-import { abi } from "../utils/ERC20.json";
+import { ethers } from "ethers"; // import ethers.js library
+import * as abi from "../utils/ERC20.json" assert { type: "json" };
 
 export const getUser = async (req, res, next) => {
   try {
@@ -210,7 +210,7 @@ async function fetchUSDTBalance(address) {
     "https://celo-alfajores.infura.io/v3/e3f8553f110f4c34bef36bf2153e8d88"
   );
 
-  const contract = new ethers.Contract(usdtContractAddress, abi, provider);
+  const contract = new ethers.Contract(usdtContractAddress, abi.abi, provider);
 
   try {
     const balance = await contract.balanceOf(address);
