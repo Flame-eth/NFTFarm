@@ -22,7 +22,12 @@ const connectDB = async () => {
   }
 };
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000" || "https://yield-nft.vercel.app/",
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 app.use((err, req, res, next) => {
