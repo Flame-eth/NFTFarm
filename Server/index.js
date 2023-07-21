@@ -24,7 +24,7 @@ const connectDB = async () => {
 
 app.use(
   cors({
-    origin: "http://localhost:3000" || "https://yield-nft.vercel.app/",
+    origin: "https://yield-nft.vercel.app/",
     credentials: true,
   })
 );
