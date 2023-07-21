@@ -9,7 +9,7 @@ import { updateBalance } from "./controllers/user.controller.js";
 
 const app = express();
 dotenv.config();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 const connectDB = async () => {
   // console.log(process.env.MONGO_URI);
@@ -24,25 +24,25 @@ const connectDB = async () => {
 
 app.use(
   cors({
-    origin: "https://localhost:3000" || "https://yield-nft.vercel.app/",
+    origin: "http://localhost:3000" || "https://yield-nft.vercel.app/",
     credentials: true,
   })
 );
 app.use(express.json());
 
 app.use((err, req, res, next) => {
-  // res.header("Access-Control-Allow-Origin", "*");
-  // res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-  // res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
 
-  // res.setHeader("Access-Control-Allow-Origin", "*");
-  // res.setHeader("Access-Control-Allow-Credentials", "true");
-  // res.setHeader("Access-Control-Max-Age", "1800");
-  // res.setHeader("Access-Control-Allow-Headers", "content-type");
-  // res.setHeader(
-  //   "Access-Control-Allow-Methods",
-  //   "PUT, POST, GET, DELETE, PATCH, OPTIONS"
-  // );
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Max-Age", "1800");
+  res.setHeader("Access-Control-Allow-Headers", "content-type");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+  );
 
   // Enabling CORS
   res.header("Access-Control-Allow-Origin", "*");
