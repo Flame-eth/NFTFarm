@@ -23,11 +23,13 @@ const connectDB = async () => {
 };
 
 app.use(
-  cors()
-  //   {
-  //   origin: "https://yield-nft.vercel.app" || "http://localhost:3000",
-  //   credentials: true,
-  // }
+  cors({
+    origin:
+      "https://yield-nft.vercel.app" ||
+      "http://localhost:3000" ||
+      "https://yield-nft-flame-eth.vercel.app",
+    credentials: true,
+  })
 );
 app.use(express.json());
 app.use("/api/users", userRoute);
