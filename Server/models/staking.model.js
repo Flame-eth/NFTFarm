@@ -40,11 +40,9 @@ const StakingSchema = new Schema({
   },
   minAmount: {
     type: String || Number,
-    required: true,
   },
   maxAmount: {
     type: String || Number,
-    required: true,
   },
   nextProfitTime: {
     type: Date,
