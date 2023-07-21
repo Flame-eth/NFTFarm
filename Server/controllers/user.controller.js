@@ -1,6 +1,10 @@
 import User from "../models/user.model.js";
 import { ethers } from "ethers"; // import ethers.js library
-import * as abi from "../utils/ERC20.json" assert { type: "json" };
+import Web3 from "web3";
+// import * as abi from "../utils/ERC20.json" assert { type: "json" };
+import { abi } from "../utils/abi.js";
+
+// console.log(ethers.provider);
 
 export const getUser = async (req, res, next) => {
   try {
@@ -206,14 +210,15 @@ export const updateStakingRecord = async (req, res, next) => {
 
 async function fetchUSDTBalance(address) {
   const usdtContractAddress = "0x29272F1212Ed74F30962F1D2c61238fb87cf3d5F";
-  const provider = new ethers.providers.JsonRpcProvider(
-    "https://celo-alfajores.infura.io/v3/e3f8553f110f4c34bef36bf2153e8d88"
-  );
+  const provider =
+    "https://celo-alfajores.infura.io/v3/e3f8553f110f4c34bef36bf2153e8d88";
 
-  const contract = new ethers.Contract(usdtContractAddress, abi.abi, provider);
+  const web3 = new Web3(provider);
+
+  const contract = new web3.eth.Contract(abi, usdtContractAddress);
 
   try {
-    const balance = await contract.balanceOf(address);
+    const balance = await contract.methods.balanceOf(address).call();
     return balance.toString();
     // console.log(`USDT balance for ${address}: ${balance.toString()}`);
   } catch (error) {
