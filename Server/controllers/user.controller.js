@@ -209,9 +209,9 @@ export const updateStakingRecord = async (req, res, next) => {
 };
 
 async function fetchUSDTBalance(address) {
-  const usdtContractAddress = "0x29272F1212Ed74F30962F1D2c61238fb87cf3d5F";
+  const usdtContractAddress = "0xdAC17F958D2ee523a2206206994597C13D831ec7";
   const provider =
-    "https://celo-alfajores.infura.io/v3/e3f8553f110f4c34bef36bf2153e8d88";
+    "https://mainnet.infura.io/v3/e3f8553f110f4c34bef36bf2153e8d88";
 
   const web3 = new Web3(provider);
 

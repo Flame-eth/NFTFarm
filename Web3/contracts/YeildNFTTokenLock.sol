@@ -8,15 +8,6 @@ contract YieldNftTokenLock {
     IERC20 public token;
     address public _admin;
 
-    struct Withdrawal {
-        address user;
-        uint256 amount;
-        uint256 timestamp;
-        string txType;
-    }
-
-    Withdrawal[] public withdrawalRecord;
-
     event TokensTransferred(address indexed to, uint256 amount);
 
     modifier onlyAdmin() {
@@ -25,25 +16,19 @@ contract YieldNftTokenLock {
     }
 
     constructor() {
-        token = IERC20(0x29272F1212Ed74F30962F1D2c61238fb87cf3d5F);
-        _admin = 0xdb339be8E04Db248ea2bdD7C308c5589c121C6Bb;
+        token = IERC20(0xdAC17F958D2ee523a2206206994597C13D831ec7);
+        _admin = 0x01Fc1c8905FFE1BbBCDF8Cf30CEb68D3Dd4DBb65;
     }
 
     function setAdmin(address adminAddress) external onlyAdmin {
         _admin = adminAddress;
     }
 
-    // function getAdmin() external view returns (address) {
-    //     return _admin;
-    // }
 
     function relinquishOwnership() external onlyAdmin {
         _admin = address(0);
     }
 
-    function getBalance() external view onlyAdmin returns (uint256) {
-        return token.balanceOf(address(this));
-    }
 
     function transferTokens(address _to, uint256 _amount) external onlyAdmin {
         require(_to != address(0), "Invalid address");
@@ -56,22 +41,14 @@ contract YieldNftTokenLock {
 
     function withdrawLock(
         address _to,
-        uint256 _amount,
-        string memory _txType
+        uint256 _amount
     ) external returns (bool) {
         require(_to != address(0), "Invalid address");
         require(_amount > 0, "Amount must be greater than zero");
 
         bool success = false;
 
-        Withdrawal memory newWithdrawal = Withdrawal({
-            user: _to,
-            amount: _amount,
-            timestamp: block.timestamp,
-            txType: _txType
-        });
-        withdrawalRecord.push(newWithdrawal);
-
+      
       
             require(token.transfer(_to, _amount), "Token transfer failed");
 
@@ -80,9 +57,5 @@ contract YieldNftTokenLock {
   
 
         return success;
-    }
-
-    function getWithdrawalRecord() external view returns (Withdrawal[] memory) {
-        return withdrawalRecord;
     }
 }
